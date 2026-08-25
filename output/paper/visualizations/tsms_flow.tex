@@ -1,0 +1,66 @@
+
+\begin{figure}[htbp]
+    \centering
+    \vspace{.5in}
+\resizebox{\textwidth}{!}{
+\begin{tikzpicture}[scale=1.2, every node/.style={transform shape}, node distance=2.5cm]{}
+\small
+    % Nodes vertically aligned
+    \node (start) [startstop, align=center] {Start \\
+    $\yy = X_t\uu + \bm{\varepsilon}$ \\
+    $\mathbf{w} = \uu + \mathbf{a}$  \\
+    $\mathbf{x} = \yy - X_t\mathbf{w}$};
+    % \node (model) [process, right = 2.5cm of start, align=center]
+    % {};
+    \node (noisehat) [process, right=3.5cm of start]{$1)\widehat{\sigma_\varepsilon^2} = \frac{||\mathbf{x}||^2}{N-T}$};
+    \node (observed) [process, below=2.5cm of noisehat,align=center] 
+        {Fit $\mathbf{w}$ with ARMA(1,1)\\
+        to get $\hat{\phi}, \widehat{\theta_b}, \widehat{\sigma_b^2}$};
+    \node (latent) [process, below = 2.75cm of observed] 
+        {$2)\hat{\theta}, \widehat{\sigma_\eta^2} \text{ are roots of }$\ref{eq:H_arman}};
+    \node (phizero) [process, left = 2.5cm of observed, align=center] 
+         {$\text{Set }\hat{\phi} = 0$ and\\
+          refit $\mathbf{w}$ with MA(1)\\
+          to update $\hat{\theta_b}$ and $\widehat{\sigma_b^2}$
+         };
+    \node (thetabzero) [process, right = 2.5cm of observed,align=center] 
+         {$4)\text{Set }\widehat{\theta_b} = 0$ and \\
+         refit $\mathbf{w}$ with an AR(1) \\
+         to update $\hat{\phi}$ and $\widehat{\sigma_b^2}$};
+    \node (thetabzerotheta) [process, below = 2.5cm of thetabzero] 
+         {$5)\widehat{\theta}, \hat{\sigma}_\eta^2 \text{ are roots of }$\ref{eq:H_thetab}};
+    \node (phizerotheta) [process, below = 2.5cm of phizero] 
+         {$5)\widehat{\theta}, \hat{\sigma}_\eta^2 \text{ are roots of }$\ref{eq:H_phi}};
+
+    \node (done) [startstop, below = 2.5cm of thetabzerotheta] {Done};
+
+
+    % Arrows
+    \draw [arrow] (start) -- (noisehat)
+        node[pos=0.3, anchor = south]{};
+
+    \draw [arrow] (noisehat) -- (observed);
+    \draw [arrow] (observed) -- (phizero) 
+        node[pos=.5,anchor = south]{If $\hat{\phi}$ is}
+        node[pos=.5,anchor=north]{insignificant};
+        \draw [arrow] (observed) -- (thetabzero) 
+        node[pos=.5,anchor = south]{If only $\hat{\theta}_b$ }
+        node[pos=.5,anchor=north]{is insignificant};
+    \draw [arrow] (thetabzero) -- (thetabzerotheta);
+        \draw [arrow] (phizero) -- (phizerotheta);
+
+    \draw [arrow] (observed) -- (latent)
+    node[pos=.5, anchor=west]{else};
+    \draw [arrow] (thetabzerotheta) -- (done)
+    node[pos=.5, anchor=west]{};
+    \draw [arrow] (latent) |- (done)
+    node[pos=.5, anchor=west]{};
+    \draw [arrow] (phizerotheta) |- (done)
+    node[pos=.5, anchor=west]{};
+
+
+\end{tikzpicture}
+}
+    \caption{Decision tree for selecting parameters to include in ARMA-Noise model}
+    \label{fig:modelselection}
+\end{figure}

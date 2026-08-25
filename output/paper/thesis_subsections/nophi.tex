@@ -1,0 +1,71 @@
+\subsection{$\phi = 0, \theta \neq 0$}
+
+Let's begin with the case that the 
+
+$w_t = (1 + \theta_b)b_t, \qquad b_t \sim N(0,\sigma_b^2)$
+
+$$\sqrt{T}\left[\left(\begin{array}{c}
+     \hat{\theta}_b \\
+      \hat{\sigma}_b^2 \\
+      \hat{\sigma}_a^2
+\end{array}\right) - \left((\begin{array}{c}
+    {\theta}_b \\
+      {\sigma}_b^2 \\
+     {\sigma}_a^2
+\end{array}\right) \right] -> N(0,\Sigma_o),\qquad \Sigma_o = \left[\begin{array}{ccc}
+    (1-\theta_b^2) & 0 & 0 \\
+    0 & 2\sigma_b^2 & 0 \\
+    0 & 0 & 2\sigma_a^2(n-1)^{-1}
+\end{array}\right]$$
+
+$$ (1 + \theta_bB)b_t = (1 + \theta B) \eta_t + a_t $$
+
+$$\sigma_{a*}^2 - \sigma_a^2 = 0$$
+
+$$ (1 + \theta_b^2)\sigma_b^2 - (1 + \theta^2)\sigma_\eta^2 - \sigma_a^2 = 0$$
+
+$$ \theta_b\sigma_b^2 - \theta\sigma_\eta^2 = 0 $$
+
+$$ \frac{\partial H}{\partial \xi_1} = \left[\begin{array}{ccc}
+    1 & 0 & 0 \\
+    0 & -2\theta\sigma_\eta^2 & -(1 + \theta^2) \\
+    0 & -\sigma_\eta^2 & -\theta
+\end{array}\right] $$
+
+$$ \frac{\partial H}{\partial \xi_0} = \left[\begin{array}{ccc}
+    0 & 0 & -1 \\
+    2\theta_b\sigma_b^2 & (1 + \theta_b^2) & -1 \\
+    \sigma_b^2 & \theta_b & 0
+\end{array}\right] $$
+
+
+% The consideration to come out of this is that $\mathbf{w}$ resembling an AR(1) process does not necessarily suggest that $\uu$ is an ARMA process of the same order. namely if $\frac{\theta}{\phi} = \frac{\sigma_a}{\sigma_\eta^2}$. 
+
+
+
+
+% Case 1: $\hat{\phi}$ and $\hat{\theta}_b$ are significant, as is $\hat{\theta}$ once it's calculated. In this case the model remains as is.
+
+% Case 2: $\hat{\phi}$ and $\hat{\theta}_b$ are significant, but $\hat{\theta}$ is not. To inform how inference informs model selection in this case, let's explore how the inclusion of an MA term interacts with the estimation of $\phi$ and $\sigma_\eta^2$ in the event that the true MA term $\theta = 0$.
+
+% Let's look at how Equation \ref{eq:H} changes under these circumstances:
+
+\begin{equation}
+    \label{eq:w-y-a_notheta}
+    (1 - \phi B)^{-1}(1 + \theta_bB)b_t = (1-\phi B)^{-1}\eta_t + a_t 
+\end{equation}
+\begin{equation}
+    \label{eq:w-y-a_notheta2}
+    (1 + \theta_bB)b_t = \eta_t + (1 - \phi B)a_t 
+\end{equation}
+\begin{equation}
+    \label{eq:H_notheta1}
+    (1 + \theta_b^2)\sigma_b^2 = \sigma_\eta^2 + (1 + \phi^2)\sigma_a^2 
+\end{equation}
+\begin{equation}
+    \label{eq:H_notheta1}
+    \theta_b\sigma_b^2 = -\phi\sigma_a^2 
+\end{equation}
+
+
+

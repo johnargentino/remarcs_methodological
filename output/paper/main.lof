@@ -1,0 +1,22 @@
+\contentsline {figure}{\numberline {1}{\ignorespaces Realization of ARE model with parameters defined in Table \ref {tab:sample_are}}}{5}{figure.caption.5}%
+\contentsline {figure}{\numberline {2}{\ignorespaces A realization of a repeatedly observed AR(1) time series with added noise}}{7}{figure.caption.6}%
+\contentsline {figure}{\numberline {3}{\ignorespaces A Sample Latent Time Series (blue) and Daily Averages of Observed Data (red)}}{8}{figure.caption.7}%
+\contentsline {figure}{\numberline {4}{\ignorespaces Average estimates for $\phi $ after fitting $\hat {\mathbf {u}} = \mathbf {u}+ \mathbf {a}$ with an AR(1) model and an ARMA(1,1) model. The results were produced by 100 realizations with $T = 1000$, $\sigma _\eta ^2 = \sigma _a^2$. The disparity between the accuracy of the two means grows with the relative magnitude of $\sigma _a^2$ with respect to $\sigma _\eta ^2$.}}{9}{figure.caption.8}%
+\contentsline {figure}{\numberline {5}{\ignorespaces Flowchart of algorithm steps for estimating model parameters}}{13}{figure.caption.9}%
+\contentsline {figure}{\numberline {6}{\ignorespaces Decision tree for selecting parameters to include in ARMA-Noise model}}{17}{figure.caption.10}%
+\contentsline {figure}{\numberline {7}{\ignorespaces A realization of an INAR(2) process with parameters $\alpha = 0.3$, $\beta = 0.8$, $\lambda = 50$}}{22}{figure.caption.11}%
+\contentsline {figure}{\numberline {8}{\ignorespaces Sample Sizes $\{N_t = (t)M_{t+1} + 1\}$, where $M_t \overset {\text {i.i.d.}}{\sim } \text {Ber}(\frac {t}{2(t-1)})$ and resulting white noise $\{A_t = N_t^{-1}\DOTSB \sum@ \slimits@ _{i=1}^{N_t}\varepsilon _{ti}\}$ }}{24}{figure.caption.12}%
+\contentsline {figure}{\numberline {9}{\ignorespaces Rates at which point estimates for $\tau _o$ fall within confidence regions based on true values}}{25}{figure.caption.13}%
+\contentsline {figure}{\numberline {10}{\ignorespaces Rates at which point estimates for $\tau _l$ fall within confidence regions based on sample estimates}}{26}{figure.caption.14}%
+\contentsline {figure}{\numberline {11}{\ignorespaces Empirical confidences with which model parameters fall within confidence regions generated after model convergence}}{27}{figure.caption.15}%
+\contentsline {figure}{\numberline {12}{\ignorespaces A realization of a REMARCS model before and after fitting}}{28}{figure.caption.17}%
+\contentsline {figure}{\numberline {13}{\ignorespaces Confidence regions for time series parameter estimates of latent ARMA(1,1) process}}{29}{figure.caption.18}%
+\contentsline {figure}{\numberline {14}{\ignorespaces Observations and fitted values from a REMARCS model with a latent AR(1) time series}}{30}{figure.caption.21}%
+\contentsline {figure}{\numberline {15}{\ignorespaces Confidence regions for time series parameter estimates of latent ARMA(1,1) process}}{31}{figure.caption.23}%
+\contentsline {figure}{\numberline {16}{\ignorespaces Confidence interval for $\phi $ after restricting model}}{31}{figure.caption.24}%
+\contentsline {figure}{\numberline {17}{\ignorespaces Simulated REMARCS Model Before and After Fitting}}{32}{figure.caption.26}%
+\contentsline {figure}{\numberline {18}{\ignorespaces Confidence regions for observable and latent moving average parameters before restricting REMARCS model with $\theta _b = 0$ }}{33}{figure.caption.28}%
+\contentsline {figure}{\numberline {19}{\ignorespaces Confidence regions for observable and latent moving average parameters after restricting REMARCS model with $\theta _b = 0$}}{33}{figure.caption.29}%
+\contentsline {figure}{\numberline {20}{\ignorespaces Realization of a REMARCS Model in which the sum of the latent time series and aggregated cross-sectional noise is an AR(1) process}}{34}{figure.caption.31}%
+\contentsline {figure}{\numberline {21}{\ignorespaces Inference on ARMA parameters of REMARCS model in which $\theta _b = 0$ with restricted model}}{35}{figure.caption.33}%
+\contentsline {figure}{\numberline {22}{\ignorespaces Inference on ARMA parameters of REMARCS model in which $\theta _b = 0$ with restricted model}}{35}{figure.caption.34}%

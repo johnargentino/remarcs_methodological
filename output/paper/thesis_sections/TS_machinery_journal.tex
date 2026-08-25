@@ -1,0 +1,45 @@
+\section{Time Series Fundamentals}
+
+
+
+
+We begin by introducing some machinery and notation from time series analysis before detailing existing methods. Unless otherwise stated, all results in this chapter are from Brockwell and Davis (1991) \citep{BrockwellDavis1991}. If $\{X_t\}_{t=1}^T$ is a time series such that Var$(X_t) < \infty$ $\forall$ $t$, then the autocovariance function (ACVF) $\gamma_X(\cdot,\cdot)$ is defined by $\gamma_X(r,s) = \text{Cov}(X_r,X_s), \qquad r,s \in \{t\}$ 
+
+
+
+
+
+
+For \emph{weakly stationary} time series, the ACVF can be more simply parameterized as $\gamma_X(h):= \text{Cov}(X_t,X_{t+h})$. The autocorrelation function (ACF) $\rho_X(h)$ of a stationary time series is then defined as $\rho_X(h) = \gamma_X(h)/\gamma_X(0)$.
+
+
+A time series is \emph{strictly stationary} if:
+
+
+\begin{itemize}
+    \item[] $(X_{t_1},...X_{t_k})' \overset{d}{=} (X_{t_1 + h},...X_{t_k + h})$ for all $k \in \mathbb{N}$ and $t_1,...,t_k,h \in \mathbb{Z}$
+\end{itemize}
+
+For the purposes of this paper, ``stationary'' will refer to the weak variety. 
+ 
+
+A time series is said to be white noise with mean $0$ and variance $\sigma^2$ if and only if:
+
+\begin{equation}
+    \label{eq:wn}
+    \gamma_X(h) = \begin{cases}
+        \sigma^2, & h = 0 \\
+        0, & h \neq 0
+    \end{cases}
+\end{equation}
+
+
+
+% The ACVF is estimated with the Sample Auto-Covariance Function (ACVF), defined by:
+
+% \begin{equation}
+%     \label{eq:smpl_acvf}
+%     \hat{\gamma}_X(h):= n^{-1}\sum_{j=1}^{n-h}(x_{j+h}-\bar{x})(x_j-\bar{x}), \qquad 0 \leq h \leq n-1
+% \end{equation}
+
+% The choice of dividing by $n$ and not $(n-h)$ in Equation \ref{eq:smpl_acvf} ensures that the $n \times n$ matrix $\hat{\Gamma}$, the $i,j$ entry of which is $\hat{\gamma}_X(i-j)$, is always nonsingular. The Sample Auto-Correlation Function (SACF) is then defined as $\hat{\rho}_X(h) = \hat{\gamma}_X(h)/\hat{\gamma}_X(0)$

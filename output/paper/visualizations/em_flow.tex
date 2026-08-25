@@ -1,0 +1,71 @@
+\begin{figure}[htbp]
+    \centering
+    \vspace{.5in}
+\resizebox{\textwidth}{!}{
+\begin{tikzpicture}[scale=1.2, every node/.style={transform shape}, node distance=2.5cm]{}
+\small
+    % Nodes vertically aligned
+    \node (start) [startstop] {$\mathbf{y} = X_f\beta + X_r\mathbf{b} + X_t\mathbf{u} + \varepsilon$};
+    \node (step1) [process, right=1.5cm of start] 
+        {Fit ME Model to $\yy$};
+    \node (step2) [process, below = 1.5cm of start] 
+        {$\mathbf{z}:= \yy - X_f\hat{\beta} - X_r\hat{\mathbf{b}}$};
+    \node (step3) [process, below = 3cm of step2] 
+        {${\mathbf{w}}_t = n^{-1}\sum_{i=1}^{n} \mathbf{z}_{it}$};
+    
+    % Parallel branch
+    \node (step4a) [process, below = 5.5cm of step1] 
+        {${\mathbf{x}} =  \mathbf{z} - X_t\mathbf{w}$};
+    \node (step5a) [process, below = 3cm of step4a] 
+        {$\hat{\sigma}_a^{2} = \frac{||\mathbf{x}||^2\sum n_t^{-1}}{(N-T)T}$};
+    
+    \node (step4b) [process, below = 3cm of step3] 
+        {$(\hat{\theta}_*, \hat{\phi}, \hat{\sigma}_*^2)$};
+    
+    \node (step5b) [process, below  = 3cm of step5a] 
+        {$H(\theta,\sigma_\eta^2)$};
+    
+    \node (step7) [process, above right = 1cm and 1cm of step5b] 
+        {$(\hat{\theta}, \hat{\sigma}_\eta^2)$};
+    
+    % % Merge after parallel
+    \node (step8) [process, above = 3cm of step7] 
+        {Calculate $\hat{\beta}_{GLS}^{(k)}$ and $\mathbb{E}(\mathbf{b}|\mathbf{y})$};
+    
+    \node (checkll) [decision, above = 3cm of step8] 
+        {Likelihood converged?};
+    \node (done) [startstop, above = 3.5cm of checkll] {Done};
+    
+    % Arrows
+    \draw [arrow] (start) -- (step1)
+        node[pos=0.5, anchor = south]{$k = 1$};
+    \draw [arrow] (step1) |- (step2) node[pos=0.5, anchor = south]{};
+    \draw [arrow] (step2) -- (step3)
+        node[pos=.5,anchor = east]{Calculate}
+        node[pos=.5,anchor=west]{Daily Averages};
+    \draw [arrow] (step3) -- (step4a) 
+        node[pos=.5,anchor = south]{}
+        node[pos=.5,anchor=north]{};
+    \draw [arrow] (step3) -- (step4b) 
+        node[pos=0.5, anchor = east]{(fit ARMA}
+        node[pos=.5,anchor=west]{to $\mathbf{w}$)};
+    \draw [arrow] (step4a) -- (step5a);
+    \draw [arrow] (step5a) -- (step5b);
+    \draw [arrow] (step4b) |- (step5b);
+    \draw [arrow] (step5b) -| (step7)
+        node[pos=.6,anchor = east]{Solve for}
+        node[pos=.6,anchor = west]{roots};
+    \draw [arrow] (step7) -- (step8)
+        node[pos=.5, anchor = east]{Update}
+        node[pos=.5, anchor = west]{$(\hat{\GG},\hat{\Omega})$};
+    \draw [arrow] (step8) -- (checkll)
+        node[pos=0.5, right]{$k = k+1$};
+    \draw [arrow] (checkll) -- (done)
+        node[pos=.75, anchor = west]{Yes};
+    \draw [arrow] (checkll) |- (step2) 
+        node[pos=.6, anchor = south]{No};
+\end{tikzpicture}
+}
+    \caption{Flowchart of algorithm steps for estimating model parameters}
+    \label{fig:modelflow}
+\end{figure}

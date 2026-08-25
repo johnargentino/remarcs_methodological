@@ -1,0 +1,192 @@
+\section{Model Selection}
+
+
+\textcolor{blue}{Add description of how process is repeated if any initial fixed effect components are deemed insignificant after model convergence}
+
+
+\textcolor{blue}{turn empirical confidence results into heat maps}
+
+\textcolor{blue}{likelihood ratio test}
+
+
+
+
+
+
+
+
+
+Before outlining the methodology for model selection, let us motivate the procedure thereof by looking at the implications of setting certain parameters equal to zero.
+
+{$\phi = \theta = 0$}
+
+$w_t \sim WN(0,\sigma_b^2), \qquad \sigma_b^2 = \sigma_\eta^2 + \sigma_a^2$
+
+$$\Sigma_o = \left[\begin{array}{cc}
+    2\sigma_b^2 & 0 \\
+    0 & \frac{2\sigma_a^4}{n-1}
+\end{array}\right]$$
+
+$$G = \left[\begin{array}{cc}
+    1 & -1 
+\end{array}\right]$$
+
+$$ \sqrt{T}(\hat{\sigma}_\eta^2 - \sigma_\eta^2) ... N\left[0,2\left(\sigma_b^4 - \frac{\sigma_a^4}{n-1}\right)\right] $$
+
+{$\theta_b = 0$}
+While we have established that an ARMA(1,1) process plus white noise is an ARMA(1,1) process with different MA and variance parameters, it is worth establishing the conditions under which the resulting MA parameter is zero. For that we will aim to re-express the ACVF of an ARMA-Noise(1,1) Model as that of an AR(1) process:
+
+Setting Equation \ref{eq:acvf_ar} equal to Equation \ref{eq:acvf_arma}, but with $\sigma_\varepsilon^2$ added to the lag 0 case of the latter, we obtain the following:
+
+$$ \frac{\sigma_*^2}{1-\phi^2} = \sigma_\eta^2(1 + \frac{(\phi + \theta)^2}{1 - \phi^2}) + \sigma_\varepsilon^2 $$
+
+$$ \frac{\phi\sigma_*^2}{1-\phi^2} = \sigma_\eta^2(\phi + \theta + \frac{\phi(\phi + \theta)^2}{1 - \phi^2}) $$
+
+Let us express $\sigma_\varepsilon^2$ as $c\sigma_\eta^2$. Multiplying the first equation by $\phi$ and setting the two equal to each other gives us:
+
+$$ \sigma_\eta^2(\phi + \theta + \frac{\phi(\phi + \theta)^2}{1 - \phi^2}) = \phi\sigma_\eta^2(1 + \frac{(\phi + \theta)^2}{1 - \phi^2} + c)$$
+
+$$ \phi + \theta + \frac{\phi(\phi + \theta)^2}{1 - \phi^2} = \phi + \frac{\phi(\phi + \theta)^2}{1 - \phi^2} + \phi c$$
+
+$$ \theta  =  \phi c$$
+
+In the event of this occurence, let's see what the resulting parameter $\sigma_b^2$ is in terms of the original parameters.
+
+If the parameter $\theta_b$ is not statistically different from $0$, that is evidence that the ratio $\frac{\theta}{\phi}$ is similar to $\frac{\sigma_a^2}{\sigma_\eta^2}$. We can therefore restrict $\hat{\theta}_b = 0$ and redefine $\hat{\theta} = \hat{\phi}\hat{\sigma}_a^2\hat{\sigma}_\eta^{-2}$ 
+
+$$w_t = y_t + a_t$$
+
+$$(1-\phi B)^{-1}b_t = (1 - \phi B)^{-1}(1 + \theta_* B)\eta_t + a_t, \qquad \theta_* = \phi\sigma_a^2 / \sigma_\eta^2$$
+
+$$ b_t = (1 + \theta_*B)\eta_t + (1 - \phi B)a_t $$
+
+$$ \sigma_b^2 = (1 + \theta_*^2)\sigma_\eta^2 + (1 + \phi^2)\sigma_a^2 $$
+
+$$ \sigma_b^2 = (1 + \frac{\phi^2\sigma_a^4}{\sigma_\eta^4})\sigma_\eta^2 + (1 + \phi^2)\sigma_a^2 $$
+
+$$ \sigma_b^2 = \sigma_\eta^2 + \frac{\phi^2\sigma_a^4}{\sigma_\eta^2} + (1 + \phi^2)\sigma_a^2 $$
+
+$$ 0 = \sigma_\eta^4 + \phi^2\sigma_a^4 + (1 + \phi^2)\sigma_a^2\sigma_\eta^2 - \sigma_b^2\sigma_\eta^2 = H $$
+
+$$ 0 = (\sigma_\eta^2)^2 + 
+(\sigma_\eta^2)((1 + \phi^2)\sigma_a^2 - \sigma_b^2) +
+\phi^2\sigma_a^4 = H $$
+
+$$ \xi_o = (\phi, \sigma_b^2, \sigma_a^2),\qquad \xi_l= (\phi_*,\theta,\sigma_\eta^2)$$
+
+This equation is quadratic in $\sigma_\eta^2$, giving twosolutions
+
+$$\frac{\partial H}{\partial \sigma_\eta^2} = 2\sigma_\eta^2 + (1 + \phi^2)\sigma_a^2 = \sigma_b^2$$
+
+$$\frac{\partial H}{\partial\phi} = 2\phi \sigma_a^4 + 2\phi\sigma_a^2\sigma_\eta^2 $$
+
+$$\frac{\partial H}{\partial }$$
+
+
+{$\theta = 0$}
+
+Even if $\uu$ is strictly an AR(1) process, adding noise produces an ARMA(1,1) process. 
+
+$$ w_t = u_t + a_t $$
+$$ (1 - \phi B)^{-1}(1 + \theta_bB)b_t = (1 - \phi B)^{-1} \eta_t + a_t $$
+
+$$ (1 + \theta_bB)b_t = \eta_t + (1 - \phi B)a_t $$
+
+$$ (1 + \theta_b^2)\sigma_b^2 = \sigma_\eta^2 + (1 + \phi^2)\sigma_a^2 $$
+
+$$ {\sigma}_\eta^2 = (1 + {\theta}_b^2){\sigma}_b^2 - (1 + {\phi}^2){\sigma}_a^2 = H $$
+
+$$ \hat{\sigma}_\eta^2 = (1 + \hat{\theta}_b^2)\hat{\sigma}_b^2 - (1 + \hat{\phi}^2)\hat{\sigma}_a^2 $$
+
+$$ \frac{\partial H_\eta}{\partial \phi} = -2\phi\sigma_a^2$$
+
+$$ \frac{\partial H_\eta}{\partial \theta_b} = 2\theta_b\sigma_b^2$$
+
+$$ \frac{\partial H_\eta}{\partial \sigma_b^2} = 1 + \theta_b^2$$
+
+$$ \frac{\partial H_\eta}{\partial \sigma_a^2} = -(1 + \phi^2)$$
+
+{$\phi$ = 0}
+
+$w_t = (1 + \theta_b)b_t, \qquad b_t \sim N(0,\sigma_b^2)$
+
+$$\sqrt{T}\left[\left(\begin{array}{c}
+     \hat{\theta}_b \\
+      \hat{\sigma}_b^2 \\
+      \hat{\sigma}_a^2
+\end{array}\right) - \left((\begin{array}{c}
+    {\theta}_b \\
+      {\sigma}_b^2 \\
+     {\sigma}_a^2
+\end{array}\right) \right] -> N(0,\Sigma_o),\qquad \Sigma_o = \left[\begin{array}{ccc}
+    (1-\theta_b^2) & 0 & 0 \\
+    0 & 2\sigma_b^2 & 0 \\
+    0 & 0 & 2\sigma_a^2(n-1)^{-1}
+\end{array}\right]$$
+
+$$ (1 + \theta_bB)b_t = (1 + \theta B) \eta_t + a_t $$
+
+$$\sigma_{a*}^2 - \sigma_a^2 = 0$$
+
+$$ (1 + \theta_b^2)\sigma_b^2 - (1 + \theta^2)\sigma_\eta^2 - \sigma_a^2 = 0$$
+
+$$ \theta_b\sigma_b^2 - \theta\sigma_\eta^2 = 0 $$
+
+$$ \frac{\partial H}{\partial \xi_1} = \left[\begin{array}{ccc}
+    1 & 0 & 0 \\
+    0 & -2\theta\sigma_\eta^2 & -(1 + \theta^2) \\
+    0 & -\sigma_\eta^2 & -\theta
+\end{array}\right] $$
+
+$$ \frac{\partial H}{\partial \xi_0} = \left[\begin{array}{ccc}
+    0 & 0 & -1 \\
+    2\theta_b\sigma_b^2 & (1 + \theta_b^2) & -1 \\
+    \sigma_b^2 & \theta_b & 0
+\end{array}\right] $$
+
+
+The consideration to come out of this is that $\mathbf{w}$ resembling an AR(1) process does not necessarily suggest that $\uu$ is an ARMA process of the same order. namely if $\frac{\theta}{\phi} = \frac{\sigma_a}{\sigma_\eta^2}$. 
+
+Proof:
+
+Let us look at a few different cases and their respective implications on model selection.
+
+Case 1: $\hat{\phi}$ and $\hat{\theta}_b$ are significant, as is $\hat{\theta}$ once it's calculated. In this case the model remains as is.
+
+Case 2: $\hat{\phi}$ and $\hat{\theta}_b$ are significant, but $\hat{\theta}$ is not. To inform how inference informs model selection in this case, let's explore how the inclusion of an MA term interacts with the estimation of $\phi$ and $\sigma_\eta^2$ in the event that the true MA term $\theta = 0$.
+
+Let's look at how Equation \ref{eq:H} changes under these circumstances:
+
+\begin{equation}
+    \label{eq:w-y-a_notheta}
+    (1 - \phi B)^{-1}(1 + \theta_bB)b_t = (1-\phi B)^{-1}\eta_t + a_t 
+\end{equation}
+\begin{equation}
+    \label{eq:w-y-a_notheta2}
+    (1 + \theta_bB)b_t = \eta_t + (1 - \phi B)a_t 
+\end{equation}
+\begin{equation}
+    \label{eq:H_notheta1}
+    (1 + \theta_b^2)\sigma_b^2 = \sigma_\eta^2 + (1 + \phi^2)\sigma_a^2 
+\end{equation}
+\begin{equation}
+    \label{eq:H_notheta1}
+    \theta_b\sigma_b^2 = -\phi\sigma_a^2 
+\end{equation}
+
+Note that the second equation now only includes variables that are estimable from $\mathbf{w}$. Because we only now have one variable to estimate, $\sigma_\eta^2$, we only need the first equation. We can then give the following expression:
+
+\begin{equation}
+    \label{var_eta_hat_no_theta}
+    \hat{\sigma}_\eta^2 = (1 + \hat{\theta}_b^2)\hat{\sigma}_b^2 - (1 + \hat{\phi}^2)\hat{\sigma}_a^2 
+\end{equation}
+
+
+
+Let's look at a single example: $\phi = .5$, $\theta = 0$, $\sigma_\eta^2 = 1$, $\sigma_\varepsilon^2 = 1$, $n = 2$, $T = 1000$. While the time series $\uu$ is an AR(1) time series, the time series $\mathbf{w} = \uu + \mathbf{a}$ is an ARMA(1,1) time series with parameters $\phi = .5, \theta_b \approx-0.16, \sigma_b^2 \approx 1.59$. 
+
+Case 5: $\phi = 0$, $\theta = 0$
+
+In this case $\uu \sim N(\mathbf{0},\sigma_\eta^2I_T)$ and $\mathbf{a}\sim W(\mathbf{0}, \sigma_\varepsilon^2n^{-1}I_T)$. $\sigma_a^2$ is estimated just as before, with deviations $\mathbf{x}$. If Equation ---- yields es
+
+\textcolor{blue}{decision trees for model selection and section on likelihood comparison}

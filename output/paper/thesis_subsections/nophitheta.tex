@@ -1,0 +1,13 @@
+\subsection{$\phi = \theta = 0$}
+
+In this case, $\uu$ is nothing more than white noise parameterized by $\sigma_\eta^2$. It is still necessary to tease this variance apart from $\sigma_\varepsilon^2$, as it will be responsible for correlation between residuals corresponding to the same time step. In this case, $w_t \sim WN(0,\sigma_b^2),$ with $\sigma_b^2 = \sigma_\eta^2 + \sigma_a^2$. As such Equation \ref{eq:acvf_w=armaplusnoise} reduces to the following:
+
+$$ \sigma_b^2 = \sigma_\eta^2 + \sigma_a^2 $$
+
+What with $\sigma_b^2$ being estimable with $T^{-1}||\mathbf{w||^2}$ and $\sigma_a^2$ estimable as before, we have the following estimate for $\sigma_\eta^2$:
+
+$$ \hat{\sigma}_\eta^2 = \hat{\sigma}_b^2 - \hat{\sigma}_a^2 $$
+
+The two terms of the right hand side being independent, our normalized estimate for $\sigma_\eta^2$ has the following asymptotic distribution.
+
+$$ \sqrt{T}(\hat{\sigma}_\eta^2 - \sigma_\eta^2) ... N\left[0,2\left(\sigma_b^4 - \frac{\sigma_a^4}{n-1}\right)\right] $$

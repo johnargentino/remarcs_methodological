@@ -1,0 +1,15 @@
+\section{Introduction}
+\pagestyle{headings}
+\pagenumbering{arabic}
+
+Mobile phone surveys are an increasingly popular method for tracking household food security that is employed by aid organizations like the World Food Programme. Improving sampling capabilities and enabling real-time tracking of consumption and coping metrics, these surveys are conducted daily in an array of countries. Drawn with a random sampling strategy to select participants, samples do not necessarily overlap day to day, but are conducted at a frequency that often results in temporal correlation in the collected responses that hinders inference when using linear regression. While there already exist methods for analyzing data in which samples are surveyed repeatedly or aggregated at the time-step level, models that account for individual-level effects and population-level shocks are scarce. Those that do exist model temporal fluctuations with a latent time series that is recursively estimated and used to update parameter estimates via an EM algorithm, but these methods do not properly account for how cross-sectional noise impacts analysis. We correct this shortcoming by incorporating methods for analyzing data that are the result of multiple noisy observations of each element of a time series, known as an ARMA-Noise model. 
+
+We go on to establish that the use of an EM algorithm that factors the likelihood equation by conditioning on an estimate of a latent ARMA process incorrectly assumes that the resulting deviations will have a covariance structure conducive to standard fixed effect regression. We therefore replace the EM algorithm with one that recursively estimates variance parameters with an ARMA-Noise model and uses them to calculate GLS estimators for regression parameters. Confidence regions for time series parameters are generated via the Delta Method due to their latent nature. The respective implications of varying orders of the latent time ARMA process inform a decision rule for model selection.
+
+While the newly incorporated method for fitting time series parameters corrects the bias that previously existed, it imposes a constant sample size at the time-step level, an unrealistic requirement in real-life surveying contexts. We therefore explored the extent to which ARMA-Noise modeling methods could be generalized to accommodate varying sample sizes. 
+
+% Given the size of the datasets motivating this work, computational methods were developed to expedite the process. These methods leverage the relationship between the spectral decompositions of the covariance matrices of the observed data and latent time series. 
+
+With the proposed method fully developed, we test on simulated data and illustrate how model selection might be performed on a realization from a restricted model. We also include a case study on household survey data from Honduras that shows the method's potential to decorrelate residuals. The results of our analysis support the method as a viable option for modeling RCS survey data related to food security and other contexts.
+
+

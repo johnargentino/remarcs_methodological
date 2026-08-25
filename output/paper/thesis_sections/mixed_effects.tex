@@ -1,0 +1,14 @@
+\section{Considerations for Mixed Effects Models}
+
+Because the dataset in question includes categorical variables for governorate (\emph{adm1}) and district (\emph{adm2}), with 22 and 231 levels (resp.), a fixed effects model that uses all variables is out of the question. As a result, it would be desirable to generalize the approach previously detailed to mixed effects models, in which categorical variables with many levels can be treated as random effects.
+
+The model to be fit is now expressed as follows:
+
+\begin{equation}
+    \label{eq:mixed_effects_ts}
+    \yy_{ti} = x_f\beta + x_r\mathbf{b} + x_t\uu + \varepsilon, \qquad \varepsilon \sim N(\mathbf{0},\sigma_\varepsilon^2I)
+\end{equation}
+
+In this model the vector $\mathbf{b}$ corresponds to the random effects of each governorate and district. 
+
+Let's briefly summarize how mixed effects models are fit to establish any ramifications for integrating such a model along with a time series into our EM algorithm.

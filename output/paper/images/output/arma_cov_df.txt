@@ -1,0 +1,16 @@
+% latex table generated in R 4.4.2 by xtable 1.8-4 package
+% Thu Apr 16 21:13:47 2026
+\begin{table}[ht]
+\centering
+\begin{tabular}{lrrr}
+  \hline
+Parameter & True Value & Estimate Mean & Sig. Freq. \\ 
+  \hline
+phi & 0.500 & 0.494 & 1.000 \\ 
+  theta & 0.500 & 0.001 & 0.040 \\ 
+  Intercept & 43.000 & 43.017 & 1.000 \\ 
+  Slope & -0.001 & -0.001 & 0.860 \\ 
+  Covariate & 0.250 & 0.216 & 0.110 \\ 
+   \hline
+\end{tabular}
+\end{table}

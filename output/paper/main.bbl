@@ -1,0 +1,33 @@
+\begin{thebibliography}{1}
+
+\bibitem{box1976time}
+George E.~P. Box and Gwilym~M. Jenkins.
+\newblock {\em Time Series Analysis: Forecasting and Control}.
+\newblock Holden-Day, San Francisco, CA, second edition, 1976.
+
+\bibitem{BrockwellDavis1991}
+Peter~J. Brockwell and Richard~A. Davis.
+\newblock {\em Time Series: Theory and Methods}.
+\newblock Springer Series in Statistics. Springer, New York, 2 edition, 1991.
+
+\bibitem{diprete1990multilevel}
+Thomas~A. DiPrete and David~B. Grusky.
+\newblock Multilevel analysis of trends with an application to the study of income inequality in the united states.
+\newblock {\em American Sociological Review}, 55(3):438--451, 1990.
+
+\bibitem{WongMiller1990}
+Wing keung Wong and Robert~B. Miller.
+\newblock Repeated time series analysis of arima-noise models.
+\newblock {\em Journal of Business \& Economic Statistics}, 8(2):243--250, 1990.
+
+\bibitem{modugno2015multilevel}
+Lucia Modugno, Silvia Cagnone, and Simone Giannerini.
+\newblock A multilevel model with autoregressive components for the analysis of tribal art prices.
+\newblock {\em Journal of Applied Statistics}, 42(10):2141--2158, 2015.
+
+\bibitem{scott1974repeatedsurveys}
+A.~J. Scott and T.~M.~F. Smith.
+\newblock Analysis of repeated surveys using time series methods.
+\newblock {\em Journal of the American Statistical Association}, 69(347):674--678, 1974.
+
+\end{thebibliography}

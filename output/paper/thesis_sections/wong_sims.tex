@@ -1,0 +1,11 @@
+\section{Wong Simulations}
+
+\input{images/output/t_conf_o_4_3}
+\input{images/output/e_conf_o_4_3}
+\input{images/output/t_conf_l_4_3}
+\input{images/output/e_conf_l_3_2}
+
+To verify that such a method generates results consistent with theoretical confidence levels, we look at the results of simulating 1,000 realizations of an ARMA-Noise model with $T = 100,000$, $n = 2$, $\sigma_\eta^2 = 1$, $\sigma_\varepsilon^2 = 1$, each for combinations of $\phi$ and $\theta$ designated by the first two columns of the table below. For each realization, estimates were fit to simulated data and used to generate confidence regions at the $\alpha = .05$ level. The final column indicates the fraction of simulations that resulted in confidence regions that successfully captured the true time series parameters.
+
+
+At first glance it appears that confidence region estimation under-performs for more extreme values of $\theta$. We look at simulations under such extreme conditions now for time series of length 1,000,000

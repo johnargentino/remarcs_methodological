@@ -1,0 +1,145 @@
+\section{Parameter Estimation for ARMA processes}
+
+Maximum likelihood estimation for the parameters of an ARMA process are calculated using the one-step predictors $\hat{X}_{t+1} = \mathbb{E}(X_{t+1}|X_t,...,X_1)$, which are calculated using the Innovations Algorithm. Initial values for parameters estimated numerically are obtained with either the Durbin-Levinson or Yule-Walker Algorithms, depending on the order of the model in question.
+
+
+
+
+
+
+
+
+
+
+
+
+
+Doing so is a numerical process that is greatly facilitated by good initial estimates, which can be calculated with such methods as the Durbin-Levinson Algorithm, the Innovations Algorithm, and/or the Yule-Walker Algorithm depending on the order of the time series \citep{BrockwellDavis1991}. The asymptotic behavior of the Maximum Likelihood Estimator and its implications on inference are discussed in the next section.
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+% We can re-express this equation for $p = q =1 $ using the backwards operator $B$:
+
+% $$ (1-\phi B)X_t = (1 + \theta B)Z_t $$
+
+
+
+% Because we are imposing that the time series is causal, we have:
+
+% $$ X_t = \sum_{j=0}^\infty \psi_jZ_{t-j} $$
+
+% We therefore can express $\gamma_X(h)$ as:
+
+% $$ \gamma_X(h) = \sigma^2\sum_{j=0}^\infty \psi_j\psi_{j+|h|} $$
+
+% Because $\psi(B):= \sum_{j=0}^\infty\psi_jB^j = \theta(B)/\phi(B) $, we can produce a system of equations by equating coefficients of $B^j$:
+
+% $$ \phi (B) \psi (B) = \theta(B) $$
+
+% For our restricted $p=q=1$ case, this reduces to:
+
+% $$ (1-\phi B)\sum_{j=0}^\infty \psi_j B^j = (1 + \theta B), $$
+
+% and the resulting system is:
+
+% $$ \begin{cases}
+%     \psi_0 = 1 \\
+%     \psi_1 - \phi \psi_0 = \theta \\
+%     \psi_2 - \phi\psi_1 = 0 \\
+%     \psi_3 - \phi \psi_2 = 0 \\
+%     \hspace{.25in}\vdots
+% \end{cases} $$
+
+% From this we get the following successive set of equations for $\{\psi_j\}$
+% $$ \begin{cases}
+%     \psi_0 = 1 \\
+%     \psi_1 = \phi + \theta \\
+%     \psi_2  =  \phi(\phi + \theta)  \\
+%     \psi_3 = \phi^2 (\phi + \theta) = 0 \\
+%     \hspace{.25in}\vdots
+% \end{cases} $$
+
+% Now because we have two parameters $(\phi,\theta)$ to estimate , we will need a system of two equations, and thereby require estimates for $\psi_1$ and $\psi_2$. From the above system of equations it is clear that with these estimates $\hat{\psi}_1, \hat{\psi}_2$ we can solve for $\phi$ and $\theta$. All that remains is to actually find said estimates. We use the following estimates:
+
+% $$ \begin{cases}
+%     \hat{\psi}_1 = \hat{\theta}_{21} \\
+%     \hat{\psi}_2 = \hat{\theta}_{22},
+% \end{cases} $$
+
+% where $\hat{\theta}_{21}, \hat{\theta}_{22}$ are given by the Innovations Algorithm \citep{BrockwellDavis1991} (Definition 8.3.1), and given explicitly below:
+% $$ \begin{cases}
+%     \hat{\nu}_0 = \hat{\gamma}(0) \\
+%      \hat{\theta}_{11} =  \hat{\nu}_0^{-1}\left[ \hat{\gamma}(1) \right] \\
+%      \hat{\nu}_1 = \hat{\gamma}(0) - \hat{\theta}_{11}^2 \hat{\nu}_0 \\
+%      \hat{\theta}_{22} = \hat{\nu}_0^{-1}\left[\hat{\gamma}(2) \right] \\
+%      \hat{\theta}_{21} = \hat{\nu}_1^{-1}\left[ \hat{\gamma}(1) - \hat{\theta}_{22}\hat{\theta}_{11}\hat{\nu}_0 \right] \\
+%      \hat{\nu}_2 = \hat{\gamma}(0) - \hat{\theta}_{22}^2\hat{\nu}_0 - \hat{\theta}_{21}^2\hat{\nu}_1
+% \end{cases} $$
+
+
+
+
+
+% Estimates for $\psi_1,..., \psi_{p+q}$ are obtained using estimates $\hat{\theta}_{m1},...,\hat{\theta}_{m,p+q}$ from the Innovations Algorithm (See Appendix). Replacing $\psi_j$ with $\hat{\theta}_{mj}$ in the equation above we obtain:
+
+% $$ \hat{\theta}_{mj} = \theta_j + \sum_{i=1}^{\text{min}(j,p)} \phi_i \hat{\theta}_{m,j-i}, \qquad j = 1,2,...,p + q $$
+
+% This reduces in the $p=q=1$ case to\textcolor{blue}{Check $\hat{\theta}_{20} = 1$}:
+
+
+% $$ \begin{cases}
+%     \hat{\theta}_{21} = \theta + \phi \\
+%     \hat{\theta}_{22} = \phi 
+% \end{cases} $$
+
+% We can then solve for $\hat{\bm{\phi}}$ using the equation:
+
+% \begin{equation}
+%     \left[ \begin{array}{c}
+%          \hat{\theta}_{m,q+1}  \\
+%           \hat{\theta}_{m,q+2} \\
+%           \vdots \\
+%           \hat{\theta}_{m,q+p}
+%     \end{array} \right] = \left[ \begin{array}{cccc}
+%         \hat{\theta}_{m,q} & \hat{\theta}_{m,q-1} & \cdots & \hat{\theta}_{m,q+1-p} \\
+%         \hat{\theta}_{m,q+1} &\hat{\theta}_{m,q} & \cdots & \hat{\theta}_{m,q+2-p} \\
+%          \vdots& \vdots & & \vdots \\
+%          \hat{\theta}_{m,q+p-1}& \hat{\theta}_{m,q+p-2} & \cdots & \hat{\theta}_{m,q}
+%     \end{array} \right] \left[ \begin{array}{c}
+%          \phi_1 \\
+%          \phi_2 \\
+%          \vdots \\
+%          \phi_p
+          
+%     \end{array} \right]
+% \end{equation}
+
+% In the $p = q = 1$ case this reduces to:
+% \begin{equation}
+%          \hat{\theta}_{2,2} /     \hat{\theta}_{2,1}  =:          \hat{\phi} 
+% \end{equation}
+
+% After solving this system, $\hat{\bm{\theta}}$ is found from:
+
+% $$ \hat{\theta} = \hat{\theta}_{mj} - \sum_{i=1}^{\text{min}(j,p)}\hat{\phi}_i\hat{\theta}_{m,j-i}, \qquad j = 1,2,...,q,  $$
+
+% which reduces to:
+
+% $$ \hat{\theta}_{21} - \hat{\phi} $$
+
+
+% Once these steps are complete, innovation variance can be estimated with $\widehat{\sigma^2} = \hat{v}_2$. Pre-compiled R packages like \emph{arima} can be used to fit these models, and are able to handle missing time steps that tend to occur in repeated survey settings. Let's now look at the asymptotic distributions of these estimators for the purposes of inference.

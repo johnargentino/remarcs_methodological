@@ -1,0 +1,65 @@
+
+
+$$ \hat{\beta} = (X_f'X_f)^{-1}X_f'(\yy - X_t\uu)  $$
+
+$$ \text{Var}(\hat{\beta}) = (X_f'X_f)^{-1}X_f'(\Omega - X_t\Gamma X_t'\Omega^{-1}X_t\Gamma X_t')X_f(X_f'X_f)^{-1} $$
+
+$$ \text{Var}(\hat{\beta}) = (X_f'X_f)^{-1}X_f'(\Omega - (\Omega - \sigma_\varepsilon^2I)\Omega^{-1}(\Omega - \sigma_\varepsilon^2))X_f(X_f'X_f)^{-1} $$
+
+$$ \text{Var}(\hat{\beta}) = (X_f'X_f)^{-1}X_f'(\Omega - (I - \sigma_\varepsilon^2\Omega^{-1})(\Omega - \sigma_\varepsilon^2))X_f(X_f'X_f)^{-1} $$
+
+$$ \text{Var}(\hat{\beta}) = (X_f'X_f)^{-1}X_f'(\Omega - (\Omega - \sigma_\varepsilon^2I - \sigma_\varepsilon^2I + \sigma_\varepsilon^4\Omega^{-1}))X_f(X_f'X_f)^{-1} $$
+
+$$ \text{Var}(\hat{\beta}) = (X_f'X_f)^{-1}X_f'( \sigma_\varepsilon^2I + \sigma_\varepsilon^2I - \sigma_\varepsilon^4\Omega^{-1})X_f(X_f'X_f)^{-1} $$
+
+$$ \text{Var}(\hat{\beta}) = \sigma_\varepsilon^2(X_f'X_f)^{-1}X_f' (2I - \sigma_\varepsilon^2\Omega^{-1})X_f(X_f'X_f)^{-1} $$
+
+$$ \text{Var}(\hat{\beta}) = 2\sigma_\varepsilon^2(X_f'X_f)^{-1}  - \sigma_\varepsilon^4(X_f'X_f)^{-1}X_f'\Omega^{-1}X_f(X_f'X_f)^{-1} $$
+
+
+Improving computing time of $\hat{\beta}_{GLS}$:
+
+$$\Omega^{-1} =  
+   n^{-1} X_t P (n^{1/2}\sigma_\eta^2\Lambda + \sigma_\varepsilon^2I_T)^{-1}P'X_t' + \sigma_\varepsilon^{-2}Q
+   Q'$$
+
+  $$\hat{\beta}_{GLS} = (X_f'\Omega^{-1}X_f)^{-1} X_f'\Omega^{-1}\yy$$
+
+\subsection{AR Noise }
+
+Multiplying out the shared demoninator yields:
+
+$$\begin{cases}
+    \sigma^2(1 - \phi ^ 2 + (\phi + \theta)^2) =  \sigma_\eta^2 + \sigma_a^2(1 - \phi ^ 2) \\
+    \sigma^2(\phi - \phi^3 + \theta - \phi^2\theta + \phi(\phi + \theta)^2) = \sigma_\eta^2\phi
+\end{cases} $$
+
+After expanding we get:
+
+$$\begin{cases}
+    \sigma^2(1 - \phi ^ 2 + (\phi^2 + 2\phi\theta + \theta^2)) =  \sigma_\eta^2 + \sigma_a^2(1 - \phi ^ 2) \\
+    \sigma^2(\phi - \phi^3 + \theta - \phi^2\theta + (\phi^3 + 2\phi^2\theta + \phi\theta^2)) = \sigma_\eta^2\phi
+\end{cases} $$
+
+The expressions simplify after combining like terms:
+
+$$\begin{cases}
+    \sigma^2(1  + 2\phi\theta + \theta^2) =  \sigma_\eta^2 + \sigma_a^2(1 - \phi ^ 2) \\
+    \sigma^2(\phi  + \theta + \phi^2\theta + \phi\theta^2) = \sigma_\eta^2\phi
+\end{cases} $$
+
+Setting the second equation equal to $\sigma^2$ and substituting into the first yields:
+
+$$\begin{cases}
+    \sigma_\eta^2\phi   (1  + 2\phi\theta + \theta^2) =  \sigma_\eta^2(\phi  + \theta + \phi^2\theta + \phi\theta^2) + \sigma_a^2(1 - \phi ^ 2)(\phi  + \theta + \phi^2\theta + \phi\theta^2) \\
+    \sigma^2 = \sigma_\eta^2\phi/(\phi  + \theta + \phi^2\theta + \phi\theta^2) 
+\end{cases} $$
+
+The first equation can now be rearranged into one that's quadratic for $\theta$:
+$$ \theta^2(\sigma_\eta^2\phi - \sigma_\eta^2\phi - \sigma_a^2(1-\phi^2)\phi) + \theta(2\sigma_\eta^2\phi^2 - \sigma_\eta^2(1 + \phi^2) - \sigma_a^2(1-\phi^2)(1 +\phi^2)) + (\sigma_\eta^2\phi - \sigma_\eta^2\phi - \sigma_a^2\phi(1-\phi^2))
+= 0 $$
+
+Eliminating terms that cancel and negating the the whole equation produces:
+
+$$ \theta^2 \underset{a}{\underbrace{( \sigma_a^2(1-\phi^2)\phi)}} + \theta \underset{b}{\underbrace{ (\sigma_\eta^2(1-\phi^2) + \sigma_a^2(1-\phi^4))}} + \underset{c}{\underbrace{( \sigma_a^2\phi(1-\phi^2))}}
+= 0 $$

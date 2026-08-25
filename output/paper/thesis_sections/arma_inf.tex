@@ -1,0 +1,46 @@
+\section{Inference for ARMA Processes}
+
+For an MA(1) process parameterized by $\theta$ and $\sigma_\eta^2$, the normalized MLE has the following asymptotic distribution:
+
+
+\begin{equation}
+    \label{avar_ma1}
+    \sqrt{T}(\hat{\theta} - \theta) \xrightarrow{d}N(0,\sigma_\theta^2),\qquad \sigma_\theta^2 = 1 - \theta^2
+\end{equation}
+
+For an AR(1) process parameterized by $\phi$ and $\sigma_\eta^2$, the asymptotics are similar:
+
+\begin{equation}
+    \label{avar_ma1}
+    \sqrt{T}(\hat{\phi} - \phi) \xrightarrow{d} N(0,\sigma_\phi^2),\qquad \sigma_\phi^2 = 1 - \phi^2
+\end{equation}
+ 
+For an ARMA(1,1) process parameterized by $\phi$, $\theta$, and $\sigma_\eta^2$, we see asymptotic covariance in the normalized estimate:
+
+
+
+$$ \sqrt{T}\left[\left(\begin{array}{c}
+     \hat{\phi}  \\
+      \hat{\theta}
+\end{array}\right)-\left(\begin{array}{c}
+     \phi  \\
+     \theta
+\end{array}\right)\right] \xrightarrow{d} N(\mathbf{0},\Sigma_{\phi,\theta})$$
+
+\begin{equation}
+\label{eq:Sigma_phitheta}
+\Sigma_{\phi,\theta} = \frac{1 + \phi\theta_b}{(\phi + \theta_b)^{2}} \left[ \begin{array}{cc}
+    {(1 - \phi^2)(1 + \phi\theta_b)} & {-(1 - \theta_b^2)(1 - \phi^2)} \\
+    {-(1 - \theta_b^2)(1 - \phi^2)} & {(1 - \theta_b^2)(1 + \phi\theta_b)}  
+\end{array} \right] 
+\end{equation}
+
+In each of these cases, the normalized estimate for the variance parameter $\sigma_\eta^2$ is asymptotically independent of any AR or MA parameters. While this may not be immediately obvious, recall that the maximum likelihood estimators for $\phi$ and $\theta$ are based on $S(\phi,\theta)$, a statistic independent of $\sigma_\eta^2$. The estimator $\hat{\sigma}_\eta^2 = T^{-1}S(\hat{\phi},\hat{\theta})$  has the following  asymptotic distribution:
+
+$$ \sqrt{T}(\hat{\sigma}_\eta^2 - \sigma_\eta^2) \xrightarrow{d} N(0,2\sigma_\eta^4)$$
+
+These asymptotic covariance matrices enable the construction of confidence regions centered at parameter estimates. With this machinery in place, we next review some of the methods that already exist for analyzing repeated cross-sectional data.
+
+
+
+

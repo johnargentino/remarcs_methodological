@@ -1,0 +1,52 @@
+\begin{itemize}
+    \item Estimate parameters for ARMA(1,1) process 
+    \item Generate confidence region based on estimates
+    \item 
+\end{itemize}
+
+\section{Effect of Regression on Model Selection}
+
+If we look at an ARMA(1,1) process with an added standard linear regression model:
+
+$$ \mathbf{z} = X_f\beta + X_t\uu + \varepsilon = X_f\beta + \yy $$
+
+In the standard ARMA-Noise setting, we don't have explicit observations of $\uu$ but we do have explicit observations of $\yy$. In the ARMAN regression setting we don't have observations of $\yy$, but rather an estimate based on extracting the linear components of the model.
+
+In a standard linear regression setting:
+$$ \yy = X_f\beta + \varepsilon $$
+$$ X_f'\yy = X_f'X_f\beta + X_f'\varepsilon $$
+
+$$ \beta = (X_f'X_f)^{-1}X_f'(\yy - \varepsilon) $$
+$$ \hat{\beta }= (X_f'X_f)^{-1}X_f'(\yy) $$
+
+$$ \text{Var}(\hat{\beta}) = \sigma_\varepsilon^2(X_f'X_f)^{-1} $$
+
+
+$$ \hat{\beta }= (X_f'X_f)^{-1}X_f'(X_f\beta + X_t\uu + \varepsilon) $$
+$$ \hat{\beta }= (X_f'X_f)^{-1}X_f'X_f\beta + (X_f'X_f)^{-1}X_f'X_t\uu + (X_f'X_f)^{-1}X_f'\varepsilon $$
+$$ \hat{\beta }= \beta + (X_f'X_f)^{-1}X_f'X_t\uu + (X_f'X_f)^{-1}X_f'\varepsilon $$
+$$\text{Var}(\hat{\beta}) = (X_f'X_f)^{-1}X_f'X_t\GG X_t'X_f(X_f'X_f)^{-1} + \sigma_\varepsilon^2(X_f'X_f)^{-1}$$
+This means that the starting point for fitting the ARMA-Noise model is $\mathbf{v} := \yy - X_f\hat{\beta} = X_t\uu + X_f(\beta-\hat{\beta}) + \varepsilon$
+
+$\yy - X_f\hat{\beta}$ is therefore not a true ARMA-Noise process but rather a time series with the following covariance matrix:
+
+$$ \text{Var}(\mathbf{v}) = \text{Var}(X_t\uu - X_f\hat{\beta} + \varepsilon) = \text{Var}(X_t\uu - X_f(\beta + (X_f'X_f)^{-1}X_f'X_t\uu + (X_f'X_f)^{-1}X_f'\varepsilon) + \varepsilon) $$
+
+$$ \text{Var}(\mathbf{v}) = \text{Var}(X_t\uu - X_f(X_f'X_f)^{-1}X_f'X_t\uu - X_f(X_f'X_f)^{-1}X_f'\varepsilon + \varepsilon) $$
+
+$$ \text{Var}(\mathbf{v}) = \text{Var}((X_t - X_f(X_f'X_f)^{-1}X_f'X_t)\uu + (I_N - X_f(X_f'X_f)^{-1}X_f')\varepsilon) $$
+
+$$ \text{Var}(\mathbf{v}) = \text{Var}((X_t - X_f(X_f'X_f)^{-1}X_f'X_t)\uu + (I_N - X_f(X_f'X_f)^{-1}X_f')\varepsilon) $$
+
+$$ \text{Var}(\mathbf{v}) = V_1 + V_2 $$
+
+$$V_1 = ((X_t - X_f(X_f'X_f)^{-1}X_f'X_t)\GG (X_t' - X_t'X_f(X_f'X_f)^{-1}X_f') $$
+
+$$V_2 = \sigma_\varepsilon^2(I_N - X_f(X_f'X_f)^{-1}X_f')(I_N - X_f(X_f'X_f)^{-1}X_f')) $$
+
+$$ V_1 = X_t \GG  X_t' - X_t \GG X_t'X_f(X_f'X_f)^{-1}X_f' - X_f(X_f'X_f)^{-1}X_f'X_t \GG X_t' + X_f(X_f'X_f)^{-1}X_f'X_t \GG X_t'X_f(X_f'X_f)^{-1}X_f' $$
+
+$$ V_2 = \sigma_\varepsilon^2 (I_N - X_f(X_f'X_f)^{-1}X_f') $$
+
+
+

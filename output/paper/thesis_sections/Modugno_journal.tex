@@ -1,0 +1,17 @@
+\section{Autoregressive Random Effects Models}
+
+One model that has been developed to analyze RCS data with autocorrelated errors is the Autoregressive Random Effects (ARE) Model \citep{modugno2015multilevel}. Treating observations as the sum of a fixed effects model and an AR(1) time series, ARE models are fit with a recursive process that splits the log likelihood function of the model into two terms and then utilizes an EM algorithm for parameter estimates. This conditional splitting is convenient, as $\uu \sim N(\mathbf{0},\GG)$ and $\yy|\uu \sim N(X_f\beta + \uu, \sigma_\varepsilon^2I_N)$. Furthermore, the choice of imposing an AR(1) structure on $\uu$ lends itself to a concise representation of the determinant and inverse of $\GG$:
+In the absence of an explicit observation of $\uu$, its estimate is repeatedly calculated and used to update parameter estimates. Its estimation is therefore a key part of this algorithm, and is given by its expectation, conditioned on $\yy$.
+
+
+
+
+\begin{itemize}
+    \item[1)] Calculate initial parameter estimates; 
+    \item[2)] Estimate $\uu$ with $\mathbb{E}(\uu|\yy)$;
+    \item[3)] Apply $\hat{\uu}$ with an AR(1) likelihood to update $\hat{\xi}_2$ and fit $\yy - X_t\hat{\uu}$ with a fixed effects model to update $\hat{\xi}_1$;
+    \item[4)] Calculate and store $l_1(\hat{\xi}_1)$ and $l_2(\hat{\xi}_2)$;
+    \item[5)] Repeat steps 2-4 until convergence criteria are met.
+\end{itemize}
+
+The drawbacks of this method lie in its treatment of the latent time series estimate $\hat{\mathbf{u}}$ as an AR(1) process and the vector $\mathbf{y} - X_t\hat{\mathbf{u}}$ as the realization of a fixed effects model with independent noise. 

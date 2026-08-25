@@ -1,0 +1,47 @@
+
+
+
+%  A simple approach for this type of analysis is to aggregate the response variable by day and fit a time series model that incorporates daily covariates (for example, the proportions of respondents from specified geographic regions or the fraction of respondents that are internally displaced persons, or IDPs). However, there are many limitations to this aggregated analysis, not the least of which is the inability to accurately account for interactions among these factors at the household level. 
+
+% Alternative methods for analyzing repeated surveys have long been available, with early developments explicitly modeling changes in parameters over time ~\citep{ScottSmith74,Scott77, Jones80, Tam} and further extensions developed by~\citet{Wong} and~\citet{Staudenmayer}. Multilevel models, first applied to repeated surveys by~\citet{DiPrete}, avoid the need for aggregation by fitting regression models with parameters that are permitted to vary over time. In other specifications, fixed effects may be held constant while a time series is introduced for daily random effects~\citep{Modugno}, and some more computationally intensive approaches account for autocorrelation in longer repeated surveys by combining multilevel modeling with an additional time series for small-scale temporal variation~\citep{Lebo}. When the primary objective is to estimate the statistical significance of model covariates throughout a time period of interest in a large and diverse geographic area, both spatial and temporal sources of variation must be considered. As such, we have developed a novel algorithm for the rigorous analysis of de-identified household level data that applies a hybrid modeling approach to account for regional and demographic variability in addition to temporal autocorrelation. Our methodology enables the fitting of easily interpretable regression models that fully leverage food security survey data without the loss of information inherent in aggregate analyses. 
+
+
+
+ 
+
+
+
+
+\section{How Additional White Noise Alters ARMA Processes}
+
+To illustrate the pitfall in fitting the second level of this model with an AR(1) process, let's examine the best case scenario:
+perfect estimation of fixed effect parameters (i.o.w. $\hat{\beta} = \beta$). If $n_t=n$  $\forall$ $t$, we then have:
+
+$$ \hat{\uu} = n^{-1}X_t'(X_t\uu + \varepsilon) = \uu + \mathbf{a}, \qquad a_t = n^{-1}\sum_{i=1}^{n}\varepsilon_{ti} $$
+
+Being an AR(1) process, the covariance of $u_t$ and $u_{t\pm h}$, for any value of $t$, is as follows:
+\begin{equation}
+    \label{eq:acvf_ar1}
+    \gamma_\uu(h) = \frac{\phi^{|h|}\sigma_\eta^2}{1-\phi^2}
+\end{equation}
+
+By virtue of the independence of $\{\eta_t\}$ and $\{a_t\}$, the autocovariance function (ACVF) of $\hat{\uu}$ is slightly, but consequently, different than that of $\uu$:
+
+\begin{equation}
+    \gamma_{\uu + \mathbf{a}}(h) = \begin{cases}
+    \gamma_\uu(0) + \frac{\sigma_\varepsilon^2}{n}, & h = 0\\
+    \gamma_\uu(h), & |h| >0
+
+    
+    
+\end{cases} 
+\end{equation}
+
+The fact that $\frac{\gamma_{\uu + \mathbf{a}}(1)}{\gamma_{\uu + \mathbf{a}}(0)} \neq \frac{\gamma_{\uu + \mathbf{a}}(2)}{\gamma_{\uu + \mathbf{a}}(1)}$ precludes $\mathbf{\hat{\uu}} = \uu + \mathbf{a}$ from being an AR(1) process, but as we will show later, its ACVF is compatible with that of an ARMA(1,1) process parameterized by $(\phi,\theta_b, \sigma_b^2)$. While the AR term $\phi$ goes unchanged by the added noise, its estimates will be irredeemably biased if fit with an AR(1) model (Figure \ref{fig:ar_bias}).
+\begin{figure}
+    \centering
+    \includegraphics[width=\linewidth]{images/output/ar_bias.pdf}
+    \caption{Average estimates for $\phi$ after $\mathbf{w} = \uu + \mathbf{a}$ with an AR(1) model and an ARMA(1,1) model. In this 100 realizations with $T = 1000$, $\sigma_\eta^2 = \sigma_a^2$. The disparity between the accuracy of the two means grows with the relative magnitude of $\sigma_a^2$ with respect to $\sigma_\eta^2$.}
+    \label{fig:ar_bias} 
+\end{figure}
+To understand how we might better analyze a realization of the model $X_t\uu + \bm{\varepsilon}$, let's take a more in-depth look at how added noise impacts the ACVF of an AR process.

@@ -1,0 +1,21 @@
+\section{Impacts of time series estimation error on confidence regions for regression parameters}
+
+We've already looked at the implications of perfectly estimating $\beta$ to improve how Level 2 parameters are estimated. Let's now go in the other direction, assuming perfect estimation of $\xi_2$ to investigate the implications  on fitting $\hat{\beta}$. This hypothetical is somewhat contrived, as we could only isolate $X_t\uu + \bm{\varepsilon}$ in the event that $\beta$ was estimated perfectly, in which case we would have no need to estimate it again. To that end, let's assume that our algorithm of choice perfectly estimates $\beta$ on a particular update, but doesn't ``know'' it. It then perfectly fits $\hat{\xi}_2$ using the method outlined by Wong, and the question becomes whether $\beta$ is a ``stable'' estimate.
+
+In the event that $\xi_2$ is perfectly estimated, all parameter estimates $\hat{\xi}$ are plugged into the conditional expectation formula given in Equation \ref{eq:u_hat}. Even with perfect parameter estimates, $\hat{\uu}$ will still deviate from $\uu$, as $\text{Var}(\hat{\uu} - \uu) = \GG - \GG X_t' \Omega ^ {-1} X_t\GG$. As a result, $\widehat{X_f\beta + \varepsilon} = \yy - X_t\hat{\uu}$ will not be the sum of fixed effects and white noise as the current algorithm supposes. Were we to treat $\yy - X_t\hat{\uu}$ as such, our resulting estimate for $\beta$ would be the standard OLS estimate $\hat{\beta} = (X_f'X_f) ^ {-1}X_f'(\yy - X_t\hat{\uu})$
+
+However, the inevitable error in $\hat{\uu}$ would endow $\hat{\beta}$ not with the implied $\text{Var}(\hat{\beta}) = (X_f'X_f)^{-1}\sigma_\varepsilon^2$, but rather the following covariance matrix:
+\begin{equation}
+    \label{eq:var_beta_modugno}
+     \text{Var}(\hat{\beta}) = 2\sigma_\varepsilon^2(X_f'X_f) ^ {-1} - \sigma_\varepsilon^2(X_f'X_f) ^ {-1} X_f' (\Omega^{-1} ) X_f ( X_f' X_f ) ^ {-1} =: \Sigma_\beta 
+\end{equation}
+
+As convenient as it might be to subtract corresponding entries of $\hat{\uu}$ from $\yy$ and treat the resulting difference as a fixed effects model with independent noise, the resulting confidence regions would be incorrect. 
+
+% \textcolor{blue}{Add simulations showing the failure of this confidence region to perform well}
+
+As the best-case scenario of estimating and extracting the latent time series will still yield temporal correlation in the data, albeit reduced, we must turn to a more nuanced treatment of residual covariance. A natural choice is the GLS estimator of $\beta$, which we will see challenges the necessity of using $\hat{\uu}$ in the estimation of $\beta$ at all.
+
+
+
+As we now have a viable method (courtesy of Wong and Miller) for estimating all the parameters necessary to estimate $\Omega$, an analog of the above equation with sample estimates will be our estimator for $\beta$, and confidence intervals will be based on a sample estimate of its covariance matrix $\text{Var}(\hat{\beta}_\text{GLS}) = (X_f'\Omega^{-1}X_f)^{-1}$. With all these considerations in mind, we are now ready to propose our method for fitting these types of models.
