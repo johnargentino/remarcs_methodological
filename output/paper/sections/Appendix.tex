@@ -63,3 +63,205 @@ Eliminating terms that cancel and negating the the whole equation produces:
 
 $$ \theta^2 \underset{a}{\underbrace{( \sigma_a^2(1-\phi^2)\phi)}} + \theta \underset{b}{\underbrace{ (\sigma_\eta^2(1-\phi^2) + \sigma_a^2(1-\phi^4))}} + \underset{c}{\underbrace{( \sigma_a^2\phi(1-\phi^2))}}
 = 0 $$
+
+$$X_f = \left[\begin{array}{ccc}
+    \mathbf{1}_n & \mathbf{1}_n & \mathbf{x}_1 \\
+    \mathbf{1}_n & \mathbf{2}_n & \mathbf{x}_2 \\
+    \vdots & \vdots & \vdots \\
+    \mathbf{1}_n & \mathbf{T}_n & \mathbf{x}_T
+    \end{array}\right] ,\qquad X_t = \left[\begin{array}{ccc}
+    \ddots & & \mathbf{0}  \\
+     & \mathbf{1}_n & \\
+     \mathbf{0} & & \ddots
+\end{array}\right] $$
+
+\begin{equation}
+    \label{eq:cov_u}
+    \mathbb{R}^{T\times T} \ni\Gamma := \text{Var}(\uu), \qquad \GG_{i,j} = \gamma_\uu(i-j) = \frac{\phi^{|i-j|}\sigma_\eta^2}{1-\phi^2}
+\end{equation}
+
+Note that $\gamma_\uu(h)$ always has a factor of $\sigma_\eta^2$, meaning the Toeplitz matrix $\mathbf{V}$ can be defined such that $\GG = \sigma_\eta^2 \mathbf{V}$:
+
+\begin{equation}
+    \label{eq:V}
+    \mathbf{V} = \frac{1}{1-\phi^2}\left[\begin{array}{cccc}
+        1 &\phi & \dots & \phi^{T-1} \\
+       \phi &  1  & \ddots & \phi^{T-2}\\
+       \vdots & \ddots & \ddots & \vdots \\
+       \phi^{T-1} & \phi^{T-2} & \dots & 1
+    \end{array}\right]
+\end{equation}
+
+We can also use $X_t$ to concisely represent the covariance matrix of $\yy$:
+
+\begin{equation}
+    \label{eq:cov_y}
+    \mathbb{R}^{N \times N} \ni\Omega:= \text{Var}(\yy) = X_t\GG X_t' + \sigma_\varepsilon^2I_N
+\end{equation}
+
+We define $\xi$ to be the vector of all parameters $(\beta,\sigma_\varepsilon^2,\phi, \sigma_\eta^2)$. The vector $\yy$ is a multivariate Gaussian random variable with mean $X_f\beta$, variance $\Omega$, and the following log likelihood function:
+
+\begin{equation}
+    \label{ll_marginal}
+    l(\xi|\yy) = \frac{-N}{2}\text{ln}(2\pi) -\frac{1}{2}\text{ln}|\Omega| - \frac{1}{2}(\yy-X_f\beta)'\Omega^{-1}(\yy - X_f\beta)
+\end{equation}
+
+% Because we can express $f_Y(\yy | \xi) = f_{Y|\uu}(\yy | \xi, \uu)f_U(\uu | \xi)$
+
+By conditioning on ${\uu}$, we can split the log likelihood function into two levels:
+
+$$l(\xi|\yy) =  l_1(\xi_1|\yy,\uu) + l_2(\xi_2|\uu), \qquad \xi_1 = (\beta,\sigma_\varepsilon^2), \qquad \xi_2 = (\phi,\sigma_\eta^2)$$
+
+\begin{equation}
+    \label{ll_level1}
+    l_1(\xi_1|\yy,\uu) = \text{ln}(f_{Y|U}(\yy|\uu, \xi_1) = -\frac{N}{2}\text{ln}(2\pi\sigma_\varepsilon^2) -\frac{1}{2\sigma_\varepsilon^2}||\yy - X_t\uu - X_f\beta||^2
+\end{equation}
+
+\begin{equation}
+    \label{ll_level2}
+    l_2(\xi_2|\uu) = \text{ln}(f_U(\uu)) = -\frac{T}{2}\text{ln}(2\pi\sigma_\eta^2) + \frac{1}{2}\text{ln}(1-\phi^2) -\frac{1}{2\sigma_\varepsilon^2}\uu'V^{-1}\uu
+\end{equation}
+
+\begin{equation}
+    \label{Gamma_det_inv}
+    \mathbf{V}^{-1} = \left[\begin{array}{cccccc}
+        1 & -\phi & 0 & \cdots & 0 & 0  \\
+        -\phi & 1 + \phi^2 & -\phi & \cdots & 0 & 0 \\
+        0 & -\phi & 1 + \phi^2 & \ddots & 0 & 0 \\
+        \vdots & &  \ddots& \ddots& -\phi & 0 \\
+        0 & \cdots & 0 & -\phi & 1 + \phi^2 & -\phi\\ 
+        0 & 0 & \cdots & & -\phi & 1
+    \end{array} \right]
+    \end{equation}
+    \begin{equation}
+\GG^{-1} = \sigma_\eta^{-2}\mathbf{V}^{-1}, \qquad |\GG| = \sigma_\eta^{2T}(1 - \phi^2)
+\end{equation}
+
+
+\begin{equation}
+    \label{eq:u_hat}
+    \mathbb{E}(\uu|\yy) = \Gamma X_t'\Omega^{-1}(\yy-X_f\beta)
+\end{equation}
+
+This estimate $\hat{\uu}$ will have the following covariance structure:
+
+
+\begin{equation}
+    \label{eq:var_u_hat}
+    \text{Var}(\hat{\uu}) = \Sigma_{\hat{\uu},\hat{\uu}} = \sigma_\eta^2\Gamma X_t' \Omega^{-1}X_t\Gamma'
+\end{equation}
+
+
+\begin{figure}[h!]
+\centering
+\caption{A realization of a repeatedly observed AR(1) time series with added noise}
+\begin{minipage}{0.32\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{images/output/ar_ex_panel.png}
+    \caption*{Latent Time Series}
+\end{minipage}\hfill
+\begin{minipage}{0.32\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{images/output/noise_ex.png}
+    \caption*{Individual Noise}
+\end{minipage}\hfill
+\begin{minipage}{0.32\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{images/output/ex_observe.png}
+    \caption*{Observations}
+\end{minipage}
+
+\label{fig:arn_components}
+\end{figure}
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.5\linewidth]{images/output/ts_vs_avgs.png}
+    \caption{A Sample Latent Time Series (blue) and Daily Averages of Observed Data (red)}
+    \label{fig:arma_arman}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=.8\linewidth]{images/output/ar_bias.pdf}
+    \caption{Average estimates for $\phi$ after fitting $\hat{\uu} = \uu + \mathbf{a}$ with an AR(1) model and an ARMA(1,1) model. The results were produced by 100 realizations with $T = 1000$, $\sigma_\eta^2 = \sigma_a^2$. The disparity between the accuracy of the two means grows with the relative magnitude of $\sigma_a^2$ with respect to $\sigma_\eta^2$.}
+    \label{fig:ar_bias} 
+\end{figure}
+
+
+\begin{equation}
+    \gamma_{\hat{\uu}}(h) = \begin{cases}
+    \gamma_\uu(0) + \frac{\sigma_\varepsilon^2}{n}, & h = 0\\
+    \gamma_\uu(h), & |h| >0
+\end{cases} 
+    \label{eq:acvf_ar1plusnoise}
+\end{equation}
+
+
+When sample sizes are allowed to vary over time, an ARMA-Noise model changes:
+
+$$ w_{ti} = u_t + \varepsilon_{ti}, \qquad \{u_t\} \sim \text{ARMA}(\phi,\theta,\sigma_\eta^2,T), \qquad \varepsilon_{ti}\overset{\text{i.i.d.}}{\sim}N(0,\sigma_\varepsilon^2)$$
+
+$$ \bar{w}_{t\cdot} = n_t^{-1}\sum_{i = 1}^{n_t}w_{ti} =  u_t + a_t, \qquad a_t = n_t^{-1}\sum_{i=1}^{n_t}\varepsilon_{ti}$$
+
+$$ \{n_t\} \text{ are i.i.d.} \qquad \Omega(N) \subseteq \left\{\mathbb{Z}>0\right\} $$
+
+The individual noise variance $\sigma_\varepsilon^2$ is estimated with \ref{eq:var_eps_hat}. We review the variance of this estimate for the purposes of estimating $\Sigma_o$ (Equation \ref{eq:Sigma_o}) 
+
+$$ \text{Var}(\hat{\sigma}_\varepsilon^2) = \text{Var}\left[(N-T)^{-1}\sum_{t\in T_2}(n_t-1)S_t^2\right] $$
+
+Note that we cannot treat $(N-T)$ as a constant as we could with a fixed sample size. We leverage the Law of Total Variance to decompose the variance:
+\begin{equation}
+    \text{Var} (\hat{\sigma}_\varepsilon^2) = \mathbb{E}(\text{Var}(\hat{\sigma}_\varepsilon^2|\{N_t\})) + \text{Var}(\mathbb{E}(\hat{\sigma}_\varepsilon^2|\{N_t\})) 
+    \label{eq:total_var_eps}
+\end{equation}
+
+
+Focusing on the first term in Equation \ref{eq:total_var_eps}, we have: 
+
+$$ \mathbb{E}(\text{Var}(\hat{\sigma}_\varepsilon^2|\{N_t\})) = \mathbb{E}\left(\text{Var}\left[(N-T)^{-1}\sum_{t=1}^T\sum_{i=1}^{n_t}(w_{ti}-\bar{w}_{t\cdot})^2|\{N_t\}\right]\right) $$
+
+Having conditioned on $\{N_t\}$ we obtain the following:
+
+$$ \mathbb{E}(\text{Var}(\hat{\sigma}_\varepsilon^2|\{N_t\})) = \mathbb{E}\left((N-T)^{-2}\text{Var}\left[\sum_{t=1}^T\sum_{i=1}^{n_t}(w_{ti}-\bar{w}_{t\cdot})^2\right]\right) $$
+
+Because of the independence within the set $\{S_t^2\}$ we get:
+
+$$ \mathbb{E}(\text{Var}(\hat{\sigma}_\varepsilon^2|\{N_t\})) = \mathbb{E}\left((N-T)^{-2}\sum_{t=1}^T\text{Var}\left[\sum_{i=1}^{n_t}(w_{ti}-\bar{w}_{t\cdot})^2\right]\right) $$
+
+Having previously derived the variance of $S_t^2$ we arrive at:
+
+$$ \mathbb{E}(\text{Var}(\hat{\sigma}_\varepsilon^2|\{N_t\})) = \mathbb{E}\left((N-T)^{-2}\sum_{t=1}^T2(n_t-1)\sigma^4\right) = 2\sigma^4\mathbb{E}(N-T)^{-1} $$
+
+Let's now turn to the second term:
+
+$$ \text{Var}(\mathbb{E}(\hat{\sigma}_\varepsilon^2|\{N_t\})) = \text{Var}(\mathbb{E}((N-T)^{-1}\sum_{t=1}^T\sum_{i=1}^{n_t}(w_{ti} - \bar{w}_{t\cdot})^2|\{N_t\})) $$
+
+Conditioning on $\{N_t\}$, we can pass the expectation inside the first sum:
+
+$$ \text{Var}(\hat{\sigma}_\varepsilon^2|\{N_t\})) = \text{Var}\left[(N-T)^{-1}\sum_{t=1}^T\mathbb{E}\left(\sum_{i=1}^{n_t}(w_{ti} - \bar{w}_{t\cdot})^2\right)\right] $$
+
+With $(n_t-1)S_t^2$ having expectation $(n_t-1)\sigma_\varepsilon^2$, we arrive at:
+
+$$ \text{Var}(\mathbb{E}(\hat{\sigma}_\varepsilon^2|\{N_t\})) = \text{Var}((N-T)^{-1}\sum_{t}(n_t-1)\sigma_\varepsilon^2) $$
+We can then pull out the $\sigma_\varepsilon^2$:
+
+$$ \text{Var}(\mathbb{E}(\hat{\sigma}_\varepsilon^2|\{N_t\})) = \sigma_\varepsilon^4\text{Var}((N-T)^{-1}(N-T)) = 0 $$
+
+This is consistent with the fact that, whatever $\{N_t\}$ is, $\hat{\sigma}_\varepsilon^2$ is unbiased for $\sigma_\varepsilon^2$, therefore having no variance. We're therefore left with:
+
+$$ \text{Var}(\hat{\sigma}_\varepsilon^2) = 2\sigma^4\mathbb{E}(N-T)^{-1} $$
+With only one set of sample sizes, our only estimate for $\mathbb{E}(N-T)^{-1}$ is $(N-T)^{-1}$:
+
+
+$$\widehat{\text{Var}(\hat{\sigma}_\varepsilon^2}) = 2\hat{\sigma}_\varepsilon^4{(N-T)^{-1}}$$
+
+In the above expression, $\hat{\sigma}_\varepsilon^4:= (\hat{\sigma}_\varepsilon^2)^2$
+
+\begin{equation}
+    \hat{\sigma}_a^2 =  \hat{m}\hat{\sigma}_\varepsilon^2, \qquad \hat{m}:=\left(T^{-1}\sum_{t=1}^Tn_t^{-1}\right)\hat{\sigma}_\epsilon^2 
+    \label{eq:m_hat}
+\end{equation} 
+
+With $\hat{\sigma}_\varepsilon^2$, $\hat{\sigma}_a^2$ and $\hat{\text{Var}}(\hat{\sigma}_\varepsilon^2)$ defined as above, the algorithm proposed by Wong and Miller can be once again applied, with necessary adjustments made to $\Sigma_o$ and $H$. 
+

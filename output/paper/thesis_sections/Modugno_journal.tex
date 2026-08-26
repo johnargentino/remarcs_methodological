@@ -1,4 +1,4 @@
-\section{Autoregressive Random Effects Models}
+\subsection{Autoregressive Random Effects Models}
 
 One model that has been developed to analyze RCS data with autocorrelated errors is the Autoregressive Random Effects (ARE) Model \citep{modugno2015multilevel}. Treating observations as the sum of a fixed effects model and an AR(1) time series, ARE models are fit with a recursive process that splits the log likelihood function of the model into two terms and then utilizes an EM algorithm for parameter estimates. This conditional splitting is convenient, as $\uu \sim N(\mathbf{0},\GG)$ and $\yy|\uu \sim N(X_f\beta + \uu, \sigma_\varepsilon^2I_N)$. Furthermore, the choice of imposing an AR(1) structure on $\uu$ lends itself to a concise representation of the determinant and inverse of $\GG$:
 In the absence of an explicit observation of $\uu$, its estimate is repeatedly calculated and used to update parameter estimates. Its estimation is therefore a key part of this algorithm, and is given by its expectation, conditioned on $\yy$.

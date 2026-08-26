@@ -14,31 +14,11 @@
 
 
 
-\section{How Additional White Noise Alters ARMA Processes}
+% \subsection{How Additional White Noise Alters ARMA Processes}
 
 Let's assume the best case scenario for level one of the model, namely the perfect estimation of fixed effect parameters ($\hat{\beta} = \beta$). In this unlikely event, we are able to take data such as that displayed in Figure \ref{fig:sample_are} and extract $\mathbf{w}:=X_t\uu + \bm{\varepsilon}$, which is a realization of an \textit{ARMA-Noise Model} \cite{WongMiller1990}. This decomposition is displayed in Figure \ref{fig:arn_components}:
 
-\begin{figure}[h!]
-\centering
-\caption{A realization of a repeatedly observed AR(1) time series with added noise}
-\begin{minipage}{0.32\textwidth}
-    \centering
-    \includegraphics[width=\textwidth]{images/output/ar_ex_panel.png}
-    \caption*{Latent Time Series}
-\end{minipage}\hfill
-\begin{minipage}{0.32\textwidth}
-    \centering
-    \includegraphics[width=\textwidth]{images/output/noise_ex.png}
-    \caption*{Individual Noise}
-\end{minipage}\hfill
-\begin{minipage}{0.32\textwidth}
-    \centering
-    \includegraphics[width=\textwidth]{images/output/ex_observe.png}
-    \caption*{Observations}
-\end{minipage}
 
-\label{fig:arn_components}
-\end{figure}
 
  With no prior information about the latent time series, the best estimates for the elements of $\uu$ are the averages at each time step:
 
@@ -46,22 +26,11 @@ $$ \hat{\uu} = n^{-1}X_t'(X_t\uu + \varepsilon) = \uu + \mathbf{a} =: \bar{\math
 
 As is shown in Figure \ref{fig:arma_arman}, the daily averages (in red) seem to follow the true latent time series (in blue) fairly closely. We will soon see, however, that the added noise vector $\mathbf{a}$ introduces bias in the estimation of the time series parameters. To describe this bias, let's compare the respective ACVF's of $\uu$ and $\hat{\uu}$.
 
-\begin{figure}[h!]
-    \centering
-    \includegraphics[width=0.5\linewidth]{images/output/ts_vs_avgs.png}
-    \caption{A Sample Latent Time Series (blue) and Daily Averages of Observed Data (red)}
-    \label{fig:arma_arman}
-\end{figure}
+
 
 Being an AR(1) process, the covariance of $u_t$ and $u_{t\pm h}$ is given by Equation \ref{eq:acvf_ar}. By virtue of the independence of $\{\eta_t\}$ and $\{a_t\}$, the ACVF of $\hat{\uu}$ is affected as follows:
 
-\begin{equation}
-    \gamma_{\hat{\uu}}(h) = \begin{cases}
-    \gamma_\uu(0) + \frac{\sigma_\varepsilon^2}{n}, & h = 0\\
-    \gamma_\uu(h), & |h| >0
-\end{cases} 
-    \label{eq:acvf_ar1plusnoise}
-\end{equation}
+
 
 
 
@@ -75,9 +44,3 @@ Because $\{a_t\}$ is white noise, $p_2 = q_2 = 0$. As $p_1=1$ and $q_1=0$, we ca
  The fact that both ACVF's are altered by a factor of $\phi$ after lag 1 means that the AR component is unaffected by the addition of white noise. While noting the AR term $\phi$ goes unchanged by the added noise, the estimation thereof will be irredeemably biased if fit with an AR(1) model (See Figure \ref{fig:ar_bias}). $\xi_2 = (\phi,\sigma_\eta^2)$ must instead be estimated with a method that accounts for this additional noise
 
 
-\begin{figure}
-    \centering
-    \includegraphics[width=.8\linewidth]{images/output/ar_bias.pdf}
-    \caption{Average estimates for $\phi$ after fitting $\hat{\uu} = \uu + \mathbf{a}$ with an AR(1) model and an ARMA(1,1) model. The results were produced by 100 realizations with $T = 1000$, $\sigma_\eta^2 = \sigma_a^2$. The disparity between the accuracy of the two means grows with the relative magnitude of $\sigma_a^2$ with respect to $\sigma_\eta^2$.}
-    \label{fig:ar_bias} 
-\end{figure}

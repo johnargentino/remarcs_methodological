@@ -202,15 +202,23 @@
 
 %\par starts a new paragraph and \noindent suppresses default indention. 
 \noindent
+
+\section{Introduction}
 \input{chapters/introduction.tex}
-\input{chapters/time_series}
-\input{chapters/existing_methods}
-\input{chapters/method}
-\input{chapters/varying_n}
-% \input{chapters/comp_methods}
-\input{chapters/simulations}
-% \input{chapters/case_study}
-\input{chapters/discussion}
+
+\section{Background}
+% \input{chapters/time_series}
+\input{sections/background.tex}
+\section{Method}
+\input{sections/methods.tex}
+\section{Results}
+\input{sections/results.tex}
+\section{Discussion}
+\input{sections/discussion.tex}
+
+% \section{Bulk Material}
+
+
 
 
 
@@ -246,7 +254,8 @@
 % If you are outside the Sciences, they must be formatted alphabetically.
 \bibliographystyle{plain}
 \bibliography{bib}
-
+\section{Appendix}
+% \input{sections/appendix.tex}
 \listoftables
 \listoffigures
 

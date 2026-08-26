@@ -1,48 +1,20 @@
-\section{Autoregressive Random Effects Models}
+% \subsection{Autoregressive Random Effects Models}
 
-One model that has been developed to analyze RCS data with autocorrelated errors is the Autoregressive Random Effects (ARE) Model \citep{modugno2015multilevel}. As it is the model that served as our starting point, we describe it in greater detail. Treating observations as the sum of a fixed effects model and an AR(1) time series, ARE models have two levels:
-\begin{equation}
-    \label{eq:modugno_level1}
-    y_{ti} = \mathbf{x}_{ti}\beta + u_t + \epsilon_{ti}, \hspace{.4in}  i = 1,...,n, \hspace{.4 in} \epsilon_{ti} \sim \text{i.i.d. } N(0,\sigma_\epsilon^2) 
-\end{equation}
+One model that has been developed to analyze RCS data with autocorrelated errors is the Autoregressive Random Effects (ARE) Model \citep{modugno2015multilevel}. Treating observations as the sum of a fixed effects model and an AR(1) time series, ARE models have two levels: a fixed-effects level and a time series level.
+% \begin{equation}
+%     \label{eq:modugno_level1}
+%     y_{ti} = \mathbf{x}_{ti}\beta + u_t + \epsilon_{ti}, \hspace{.4in}  i = 1,...,n, \hspace{.4 in} \epsilon_{ti} \sim \text{i.i.d. } N(0,\sigma_\epsilon^2) 
+% \end{equation}
 
-\begin{equation}
-    \label{eq:modugno_level2}
-    u_t - \phi u_{t-1} = \eta_t + \theta \eta_{t-1} , \hspace{.4in} t=1,...T, \hspace{.4in} \eta_t \sim N(0,\sigma_\eta^2) 
-\end{equation}
+% \begin{equation}
+%     \label{eq:modugno_level2}
+%     u_t - \phi u_{t-1} = \eta_t + \theta \eta_{t-1} , \hspace{.4in} t=1,...T, \hspace{.4in} \eta_t \sim N(0,\sigma_\eta^2) 
+% \end{equation}
 
-A realization of an ARE model is displayed in Figure \ref{fig:sample_are} with the following parameters:
-
-\begin{table}[H]
-    \centering
-    \begin{tabular}{c|c|c|c|c|c|c}
-        Parameter & $\beta_0$ & $\beta_t$ & $\beta_1$ & $\sigma_\varepsilon^2$ & $\phi$ & $\sigma_\eta^2$\\
-        \hline 
-        Value & $40$ & $-0.1$ & $2$ & $1$ & $0.9$ & $1$
-    \end{tabular}
-    \caption{Parameter values for simulated ARE model}
-    \label{tab:sample_are}
-\end{table}
-
-\begin{figure}
-    \centering
-    \includegraphics[width=0.6\linewidth]{images/output/are.png}
-    \caption{Realization of ARE model with parameters defined in Table \ref{tab:sample_are}}
-    \label{fig:sample_are}
-\end{figure}
 
 Setting $N:=nT$, the total number of observations in the dataset,  we define the fixed effect and temporal fluctuation design matrices $X_f$ and $X_t$ (resp.) to be:
 
-$$X_f = \left[\begin{array}{ccc}
-    \mathbf{1}_n & \mathbf{1}_n & \mathbf{x}_1 \\
-    \mathbf{1}_n & \mathbf{2}_n & \mathbf{x}_2 \\
-    \vdots & \vdots & \vdots \\
-    \mathbf{1}_n & \mathbf{T}_n & \mathbf{x}_T
-    \end{array}\right] ,\qquad X_t = \left[\begin{array}{ccc}
-    \ddots & & \mathbf{0}  \\
-     & \mathbf{1}_n & \\
-     \mathbf{0} & & \ddots
-\end{array}\right] $$
+
 With these matrices we can concisely represent the model governing the vector of observations $\yy$:
 
 $$ \yy = X_f\beta + X_t\uu + \bm{\varepsilon}$$
@@ -51,69 +23,13 @@ The method employed to fit such a model is a recursive process that splits the l
 
 
 
-\begin{equation}
-    \label{eq:cov_u}
-    \mathbb{R}^{T\times T} \ni\Gamma := \text{Var}(\uu), \qquad \GG_{i,j} = \gamma_\uu(i-j) = \frac{\phi^{|i-j|}\sigma_\eta^2}{1-\phi^2}
-\end{equation}
 
-Note that $\gamma_\uu(h)$ always has a factor of $\sigma_\eta^2$, meaning the Toeplitz matrix $\mathbf{V}$ can be defined such that $\GG = \sigma_\eta^2 \mathbf{V}$:
 
-\begin{equation}
-    \label{eq:V}
-    \mathbf{V} = \frac{1}{1-\phi^2}\left[\begin{array}{cccc}
-        1 &\phi & \dots & \phi^{T-1} \\
-       \phi &  1  & \ddots & \phi^{T-2}\\
-       \vdots & \ddots & \ddots & \vdots \\
-       \phi^{T-1} & \phi^{T-2} & \dots & 1
-    \end{array}\right]
-\end{equation}
 
-We can also use $X_t$ to concisely represent the covariance matrix of $\yy$:
-
-\begin{equation}
-    \label{eq:cov_y}
-    \mathbb{R}^{N \times N} \ni\Omega:= \text{Var}(\yy) = X_t\GG X_t' + \sigma_\varepsilon^2I_N
-\end{equation}
-
-We define $\xi$ to be the vector of all parameters $(\beta,\sigma_\varepsilon^2,\phi, \sigma_\eta^2)$. The vector $\yy$ is a multivariate Gaussian random variable with mean $X_f\beta$, variance $\Omega$, and the following log likelihood function:
-
-\begin{equation}
-    \label{ll_marginal}
-    l(\xi|\yy) = \frac{-N}{2}\text{ln}(2\pi) -\frac{1}{2}\text{ln}|\Omega| - \frac{1}{2}(\yy-X_f\beta)'\Omega^{-1}(\yy - X_f\beta)
-\end{equation}
-
-% Because we can express $f_Y(\yy | \xi) = f_{Y|\uu}(\yy | \xi, \uu)f_U(\uu | \xi)$
-
-By conditioning on ${\uu}$, we can split the log likelihood function into two levels:
-
-$$l(\xi|\yy) =  l_1(\xi_1|\yy,\uu) + l_2(\xi_2|\uu), \qquad \xi_1 = (\beta,\sigma_\varepsilon^2), \qquad \xi_2 = (\phi,\sigma_\eta^2)$$
-
-\begin{equation}
-    \label{ll_level1}
-    l_1(\xi_1|\yy,\uu) = \text{ln}(f_{Y|U}(\yy|\uu, \xi_1) = -\frac{N}{2}\text{ln}(2\pi\sigma_\varepsilon^2) -\frac{1}{2\sigma_\varepsilon^2}||\yy - X_t\uu - X_f\beta||^2
-\end{equation}
-
-\begin{equation}
-    \label{ll_level2}
-    l_2(\xi_2|\uu) = \text{ln}(f_U(\uu)) = -\frac{T}{2}\text{ln}(2\pi\sigma_\eta^2) + \frac{1}{2}\text{ln}(1-\phi^2) -\frac{1}{2\sigma_\varepsilon^2}\uu'V^{-1}\uu
-\end{equation}
 
 This conditional splitting is convenient, as $\uu \sim N(\mathbf{0},\GG)$ and $\yy|\uu \sim N(X_f\beta + \uu, \sigma_\varepsilon^2I_N)$. Furthermore, the choice of imposing an AR(1) structure on $\uu$ lends itself to a concise representation of the determinant and inverse of $\GG$:
 
-\begin{equation}
-    \label{Gamma_det_inv}
-    \mathbf{V}^{-1} = \left[\begin{array}{cccccc}
-        1 & -\phi & 0 & \cdots & 0 & 0  \\
-        -\phi & 1 + \phi^2 & -\phi & \cdots & 0 & 0 \\
-        0 & -\phi & 1 + \phi^2 & \ddots & 0 & 0 \\
-        \vdots & &  \ddots& \ddots& -\phi & 0 \\
-        0 & \cdots & 0 & -\phi & 1 + \phi^2 & -\phi\\ 
-        0 & 0 & \cdots & & -\phi & 1
-    \end{array} \right]
-    \end{equation}
-    \begin{equation}
-\GG^{-1} = \sigma_\eta^{-2}\mathbf{V}^{-1}, \qquad |\GG| = \sigma_\eta^{2T}(1 - \phi^2)
-\end{equation}
+
 
 In the absence of an explicit observation of $\uu$, its estimate is repeatedly calculated and used to update parameter estimates. Its estimation is therefore a key part of this algorithm, and is given by its expectation, conditioned on $\yy$: 
 
@@ -124,19 +40,6 @@ In the absence of an explicit observation of $\uu$, its estimate is repeatedly c
 % \end{equation}
 
 % With these pieces we can give the following expression for the expectation of $\uu$, conditioned on $\yy$:
-
-\begin{equation}
-    \label{eq:u_hat}
-    \mathbb{E}(\uu|\yy) = \Gamma X_t'\Omega^{-1}(\yy-X_f\beta)
-\end{equation}
-
-This estimate $\hat{\uu}$ will have the following covariance structure:
-
-
-\begin{equation}
-    \label{eq:var_u_hat}
-    \text{Var}(\hat{\uu}) = \Sigma_{\hat{\uu},\hat{\uu}} = \sigma_\eta^2\Gamma X_t' \Omega^{-1}X_t\Gamma'
-\end{equation}
 
 With this estimate now defined, we summarize the fitting of an ARE model:
 
@@ -156,5 +59,5 @@ With this estimate now defined, we summarize the fitting of an ARE model:
     \item[5)] Repeat steps 2-4 until convergence criteria are met.
 \end{itemize}
 
-All estimate updates are based on explicitly calculable maximum likelihood estimators, with the exception of the AR parameter $\phi$, which is updated via one iteration of the Newton-Raphson scheme since $l_2$ is not linear with respect to $\phi$. In the next section, we examine some potential issues with fitting models with the ARE approach.
+% All estimate updates are based on explicitly calculable maximum likelihood estimators, with the exception of the AR parameter $\phi$, which is updated via one iteration of the Newton-Raphson scheme since $l_2$ is not linear with respect to $\phi$. In the next section, we examine some potential issues with fitting models with the ARE approach.
 

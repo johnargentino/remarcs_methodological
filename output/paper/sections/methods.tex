@@ -1,0 +1,343 @@
+% \subsection{Incorporating ARMA-Noise into EM Algorithm}
+Having identified what parts of existing methods we want to utilize as as well as those that we wish to change or generalize, we are ready to define our model and accompanying algorithm, \textit{REgression Models for Autocorrelated Repeated Cross-Sections}, or REMARCS:
+\subsection{Model and Algorithm}
+
+
+We define the vector of observations $\yy$ as the realization of a model defined as the sum of fixed effects, a latent ARMA(1,1) process, and i.i.d. noise (\textit{n.b. sample sizes are currently constant across time steps}).
+
+\begin{equation}
+    \label{eq:fullmodel1}
+    y_{ti} = \mathbf{x}_{ti}\beta + u_t + \epsilon_{ti}, \hspace{.4in} i = 1,...,n \hspace{.4 in} \epsilon_{ti} \sim \text{i.i.d. } N(0,\sigma_\epsilon^2) 
+\end{equation}
+
+\begin{equation}
+    \label{eq:fullmodel2}
+    u_t - \phi u_{t-1} = \eta_t + \theta \eta_{t-1} , \hspace{.4in} t=1,...T \hspace{.4in}  \hspace{.2in} \eta_t \sim N(0,\sigma_\eta^2) 
+\end{equation}
+
+
+
+The algorithm we propose is an iterative process applying the estimates of parameters from one level to update those of the other. The process is as follows:
+
+\begin{itemize}
+    \item[1)] Initialize with $\hat{\beta} = (X_f'X_f)^{-1}X_f'\yy$
+    \item[2)] Estimate $(X_t\uu + \varepsilon)$ with $(\yy - X_f\hat{\beta})$ and fit ARMA-Noise model to obtain estimates $(\hat{\phi}, \hat{\theta}, \hat{\sigma_\eta^2}, \hat{\sigma_\varepsilon^2})$
+    \item[3)] Calculate $\hat{\Omega}$ and $l(\hat{\xi})$
+    \item[4)] Refit fixed effect parameter estimates by calculating GLS estimate $\hat{\beta}_{GLS} = (X_f'\hat{\Omega}^{-1}X_f)X_f'\hat{\Omega}^{-1}\yy$
+    \item[5)] Repeat Steps 2-4 until convergence criteria are met
+    \item[6)] Generate confidence regions. If any parameters are insignificant, restrict model and repeat algorithm
+\end{itemize}
+
+\input{visualizations/em_flow}
+MAKE SURE ALL NOTATION HAS BEEN DEFINED!!!!
+\subsection{Evaluating Convergence}
+
+
+Instead of splitting the likelihood by conditioning on $\hat{\uu}$, doing so with $\bar{\yy}$ instead of has the advantage that likelihoods are based on a constant statistic.
+
+Let's recall the log likelihood $l(\xi)$:
+
+$$ l(\xi) = -\frac{N}{2}\text{ln}(2\pi) - \frac{1}{2}\text{ln}|\Omega| - \frac{1}{2}(\mathbf{y}-X_f\beta)'\Omega^{-1}(\mathbf{y} - X_f\beta) $$
+
+We now condition on $\bar{\mathbf{y}} := n^{-1}X_t'\mathbf{y}$, which has the following distribution.
+
+$$\bar{\mathbf{y}} \sim N(\mu_{\bar{\yy}},\Sigma_{\bar{\yy}}), \qquad \mu_{\bar{\yy}} = n^{-1}X_t'X_f\beta, \qquad \Sigma_{\bar{\yy}} =   \Gamma + n^{-1}\sigma_\varepsilon^2I_T $$
+
+Defining $\xi$ to be the vector of parameters $(\beta, \phi, \theta, \sigma_\eta^2, \sigma_\varepsilon^2)$, we can then define
+the log likelihood function:
+
+
+$$ l_t(\xi) = \text{ln}[f(\bar{\mathbf{y}}|\xi)] = -\frac{T}{2}\text{ln}(2\pi) - \frac{1}{2}\text{ln}|\Sigma_{\bar{\mathbf{y}}}| - \frac{1}{2}(\bar{\mathbf{y}} - \mu_{\bar{\yy}})'\Sigma_{\bar{\mathbf{y}}}^{-1}(\bar{\mathbf{y}} - \mu_{\bar{\yy}}) $$
+If we then condition $\mathbf{y}$ on $\bar{\mathbf{y}}$, the only randomness left is in the vector of deviations, which are independent of $\bar{\mathbf{y}}$:
+
+$$ \mathbf{y} - X_t\bar{\mathbf{y}} = \bm{\varepsilon} - X_t\mathbf{a}   $$
+
+This is a vector with mean $\mathbf{0}$ and variance:
+
+\begin{equation}
+    \text{Var}(\bm{\varepsilon} - X_t\mathbf{a}) = \sigma_\varepsilon^2(I_N  -  n^{-1}X_tX_t') 
+    \label{eq:var_dev}
+\end{equation}
+
+
+
+
+We now derive the second part of our split likelihood. Because of the rank-deficient nature of the matrix Equation \ref{eq:var_dev}, we can simplify the log likelihood
+
+\begin{equation}
+l_i(\xi) = \ln f(\mathbf{y} \mid \bar{\mathbf{y}}, \sigma_\varepsilon^2)
+= -\frac{N-T}{2} \ln(2 \pi \sigma_\varepsilon^2)
+- \frac{1}{2 \sigma_\varepsilon^2} \sum_{t=1}^{T} \sum_{i=1}^{n} 
+\left( y_{it} - \bar{y}_t \right)^2,
+\end{equation}
+
+
+With this we can express the full likelihood as $l(\xi) = l_t(\xi) + l_i(\sigma_\varepsilon^2)$. However, since $\bar{\mathbf{y}}_{t\cdot}$ is independent of our model selection and parameter estimates, $l_i$ is going to be relatively stable. We therefore pair $\xi \in \mathbb{R}^k$ and $l_t(\xi)$ to calculate the Akaike Information Criterion (AIC): 
+
+$$ AIC = -2k -2l_t(\xi) $$
+
+Calculating this weighted likelihood is how we will compare the performance of models that include different subsets of parameters.
+
+\subsection{Inference}
+
+Once parameter estimates have converged, confidence intervals are constructed. 
+
+Fixed effect estimates have covariance matrix:
+
+\begin{equation}
+    Var(\hat{\beta}_{GLS}) = (X_f'\Sigma_\yy^{-1}X_f)^{-1}
+    \label{eq:var_beta_gls}
+\end{equation}
+
+This covariance matrix is estimated with final parameter estimates and then used to construct confidence regions. Just as this method of
+building confidence regions for $\beta$ in some sense assumes that parameters $\phi, \theta,\sigma_\eta^2, \sigma_\varepsilon^2$ have been
+perfectly estimated,confidence intervals for those same parameters makes an analogous assumption.
+
+If $\beta$ is estimated perfectly, then $\yy - X_f\hat{\beta} = X_t \uu + \varepsilon =: \mathbf{z}$, 
+and time-step averages $w_t = \sum_{i=1}^n z_{ti}$ are equal to the sum $u_t + a_t$, with $a_t \overset{i.i.d.}{\sim} N(0,\sigma_\varepsilon^2/n)$.
+According to Box and Jenkins \cite{box1976time}, if $\uu$ is an ARMA$(p_u,q_u)$ process with $p_u,q_u \leq 1$, then $\mathbf{w}$ is an ARMA$(p_w,q_w)$ process,
+with $p_w,q_w \leq 1$.
+
+What's most important to note is that if $\uu$ is parameterized by $\phi,\theta,\sigma_\eta^2$, then $\mathbf{w}$ is parameterized by
+$\phi,\theta_b,\sigma_b^2$. According to \citep{BrockwellDavis1991}, the Maximum Likelihood estimates for $\phi, \theta_b, \sigma_b^2$, which can
+be obtained using an R package like \textit{arima}, have the following asymptotic distribution (when normalized):
+
+$$\sqrt{T}\left[\left(\begin{array}{c}
+     \hat{\phi}  \\
+     \hat{\theta}_b \\
+     \hat{\sigma}_b^2   
+\end{array}\right) - \left(\begin{array}{c}
+     {\phi}  \\
+     {\theta}_b \\
+     {\sigma}_b^2
+\end{array}\right)\right] \xrightarrow{d}N(\mathbf{0}, \Sigma_b)$$
+
+$$\Sigma_b = \left[ \begin{array}{ccc}
+    \frac{(1 - \phi^2)(1 + \phi\theta_b)^2}{(\phi + \theta_b)^2} & \frac{-(1 - \theta_b^2)(1 - \phi^2)(1 + \phi\theta_b)}{(\phi + \theta_b)^2} & 0 \\
+    \frac{-(1 - \theta_b^2)(1 - \phi^2)(1 + \phi\theta_b)}{(\phi + \theta_b)^2} & \frac{(1 - \theta_b^2)(1 + \phi\theta_b)^2}{(\phi + \theta_b)^2} & 0 \\
+    0 & 0 & 2\sigma_b^4
+\end{array} \right] $$
+
+
+
+The parameter estimate $\hat{\sigma}_\varepsilon^2$ and its normalized asymptotic variance are given by:
+
+\begin{equation}
+    \hat{\sigma}_\varepsilon^2 =(N-T)^{-1}\sum_{t=1}^T\sum_{i=1}^{n_t}(w_{ti}-\bar{w}_{t\cdot})^2 
+    \label{eq:var_eps_hat}
+\end{equation}
+
+
+$$\sqrt{T}(\hat{\sigma}_\varepsilon^2 - \sigma_\varepsilon^2) \xrightarrow{d}N(0,\frac{2\sigma_\varepsilon^4}{n-1})$$ 
+
+Because ${y}_{t\cdot} \perp S_t^2$ for all $t$, we know that $\hat{\sigma}_\varepsilon^2 \perp (\hat{\phi},\hat{\theta}_b,\hat{\sigma}_\eta^2)$ and can give the following asymptotic distribution for ``observable" parameters $\tau_o = (\phi,\theta_b,\sigma_b^2,\sigma_\varepsilon^2)$:
+
+\begin{equation}
+    \sqrt{T}(\hat{\tau}_o - \tau_o) \xrightarrow{d} N(\mathbf{0},\Sigma_o), \qquad  \Sigma_o = \left[\begin{array}{cc}
+        \Sigma_b & \mathbf{0} \\
+        \mathbf{0} & \frac{2\sigma_\varepsilon^2}{n-1}
+    \end{array}\right]
+    \label{eq:Sigma_o}
+\end{equation}
+
+
+Equipped with the above estimates, Wong and Miller detail how to estimate ``latent" parameters $\tau_l = (\theta, \sigma_\eta^2)$ by relating the autocovariance functions of $\uu$ and $\mathbf{w}$ through the system of equations $H(\theta,\sigma_\eta^2)$:
+
+PASTE H EQUATION HERE!!!!!!
+
+    \begin{equation}
+    \tau_0 = \left(\begin{array}{c}
+     \phi\\
+     \theta_b \\
+     \sigma_b^2 \\
+     \sigma_\varepsilon^2 \\ 
+    
+\end{array}\right) 
+\qquad
+\tau_1 = \left(\begin{array}{c}
+    \phi_* \\
+    \sigma_{\varepsilon*}^2 \\
+    \theta \\
+    \sigma_\eta^2
+\end{array}\right)
+\end{equation}
+
+Estimates for $\tau_l$ are then given by the roots of $H$. It is important to note that estimates for $\tau_o$ can produce a system of equations that has no real roots, especially for relatively low values of $T$. In this event we use numerical methods to solve for parameter estimates $\hat{\theta},\hat{\sigma}_\eta^2$ that minimize $||H||^2$.
+
+ Were we to have an explicit function $(\hat{\phi},\hat{\theta},\hat{\sigma_\eta^2}) = F(\hat{\tau}_o)$ providing estimates for $\tau_l$, we would directly apply the Delta Method to obtain the asymptotic distribution of our vector of parameter estimates:
+
+\begin{equation}
+        \label{eq:delta}
+    \sqrt{T}(F(\hat{\tau}_o) - \tau_l) \xrightarrow{d} N(\mathbf{0},G\Sigma_oG'), \qquad G = \frac{\partial F}{\partial (\bm{\tau}_{o})}
+\end{equation}
+
+Because we're using $H$, a function whose roots are our estimates, we will adapt \ref{eq:delta} using the \textcolor{black}{Implicit Function Theorem}:
+
+\begin{equation}
+    G = -\left(\frac{\partial H_f}{\partial \bm{\tau}_1}\right)^{-1}
+  \left(\frac{\partial H}{\partial \bm{\tau}_0}\right)
+  \label{eq:G_implicit}
+\end{equation}
+
+Because we're ultimately interested in the normalized asymptotic distribution of parameter estimates $(\hat{\phi}, \hat{\theta}, \hat{\sigma}_\eta^2, \hat{\sigma}_\varepsilon^2)$, we expand $H$ to include some identity functions. 
+
+% \begin{equation}
+%     H_f: \begin{cases}
+%     \phi_* - \phi \\
+%     \sigma_{\varepsilon*}^2 - \sigma_\varepsilon^2 \\
+%     (1 + \theta^2)\sigma_\eta^2 + (1  + \phi^2)\sigma_\varepsilon^2/n - (1 + \theta_b^2)\sigma_b^2 \\
+%         \theta\sigma_\eta^2 -\phi\sigma_\varepsilon^2/n - \theta_b\sigma_b^2
+%     \end{cases} 
+%     \end{equation}
+
+Our procedure is to fit $\hat{\tau}_o$, solve for $\hat{\tau}_l$, and then plug in all estimates into Equations \ref{eq:delta} and \ref{eq:G_implicit}
+If any parameter estimates, observed or latent, are deemed insignificant, the relevant parameter can be restricted to 0 and the procedure
+adapted accordingly. This decision procedure is detailed next.
+
+
+
+
+\subsection{Model Selection}
+Before outlining the methodology for model selection, we motivate its design by exploring the 
+implications of certain parameter combinations in an ARMA-Noise model ${\mathbf{w}} = \uu + \mathbf{a} $.
+
+\begin{table}[htbp]
+\centering
+\begin{tabular}{|c|c|c|}
+\hline
+Parameter Restriction                                                   & Order of $\uu$    & Order of $\mathbf{w}$ \\ \hline
+$\theta = 0$                                                            & AR(1)             & ARMA(1,1)             \\ \hline
+$\phi = 0$                                                              & MA(1)             & MA(1)                 \\ \hline
+$\frac{\theta}{\phi} = \frac{\sigma_\varepsilon^2}{n\sigma_\eta^2}$     & ARMA(1,1)         & AR(1)                 \\ \hline
+$\phi = \theta = 0$                                                     & WN                & WN                    \\ \hline
+Else                                                                    & ARMA(1,1)         & ARMA(1,1)             \\ \hline
+\end{tabular}
+\caption{Implications of Various Restrictions of Time Series Parameters}
+\label{tab:my_table}
+\end{table}
+
+From these relations we derive a decision rule for model selection:
+\input{visualizations/tsms_flow}
+\subsection{Generalizing to Varying Sample Size}
+
+Having detailed the steps involved in fitting and performing inference on model parameter estimates, 
+we now turn to the condition
+required for fitting an ARMA-Noise model, namely that sample size is constant at each time step ($n_t = n \forall t$).
+This condition is included so that the time series $\{a_t\}$ is Gaussian white noise, and $\mathbf{w}$ is therefore still an ARMA process.
+
+Given that RCS data is rarely of a fixed sample size, we now explore the extent to which this condition can be relaxed whilst $\mathbf{a}$ remains white noise. 
+We will now treat $\{n_t\}$ as the realizations of random variables $\{N_t\}_{t=1}^T$. What we aim to establish are the conditions under which the random variable
+ $A_t = N_t^{-1}\sum_{i=1}^{N_t}\varepsilon_{ti}$ is still white noise.
+
+
+Claim:
+
+
+Let $\{\varepsilon_{ti}\}$ be i.i.d. random variables with
+\[
+\mathbb{E}(\varepsilon_{ti}) = 0, \qquad \mathrm{Var}(\varepsilon_{ti}) = \sigma_\varepsilon^2 < \infty,
+\]
+Let $\{N_t\}$ be a stochastic process such that
+\[
+P(N_t \in \mathbb{N}\setminus\{0\}) = 1 \quad \mathbb{E}({N_t^{-1}}) \quad \text{for all } t,
+\]
+
+Define
+\[
+A_t := \frac{1}{N_t}\sum_{i=1}^{N_t} \varepsilon_{ti}.
+\]
+
+Then $\{A_t\}$ is white noise with $\sigma_a^2 = \sigma_\varepsilon^2\,\mathbb{E}(N_t^{-1})$
+
+
+
+Proof:
+
+First, let $\{N_t\}$ be i.i.d. random variables with a sample space that is a subset of the integers strictly 
+greater than $0$. The conditional random variable $A_t|N_t$ then has variance $\sigma_\varepsilon^2/N_t$. 
+
+To find the marginal variance Var($A_t$), we use the Law of Total Variation:
+
+\begin{equation}
+    \label{eq:totalvar}
+    \text{Var}(A_t) = \mathbb{E}(\text{Var}(A_t|N_t)) + \text{Var}(\mathbb{E}(A_t|N_t))
+\end{equation}
+
+Now, Var$(A_t|N_t) = \sigma_\varepsilon^2N^{-1}$, and therefore has an expectation of
+$\sigma_\varepsilon^2\mathbb{E}(N^{-1})$, which is well defined given that the sample space
+of $N_t$ is a subset of the integers strictly greater than zero. At the same time, the expectation of $A$ is $0$
+regardless of the value of $N$, meaning the second term in Equation \ref{eq:totalvar} is 
+zero, leaving only Var$(A) = \sigma_\varepsilon^2\mathbb{E}(N^{-1})$. 
+
+Proof:
+
+$$ N \geq 1 \qquad \text{a.s.} $$
+
+$$ \Rightarrow0 < N^{-1} \leq 1 \qquad \text{a.s.}  $$
+
+$$ \Rightarrow 0 < \mathbb{E}(N^{-1}) \leq 1 \qquad \text{a.s.}  $$
+
+
+
+We can quickly verify that $A_t$ is zero mean with the Law of Total Expectation:
+$$ \mathbb{E}(A_t) = \mathbb{E}(\mathbb{E}(A_t|N_t)) = \mathbb{E}(0) = 0 $$
+
+Now we've already established $\text{Var}(A_t)$ to be independent of $t$, so we now 
+verify that $\text{Cov}(A_r,A_s) = 0$ for $r \neq s$. The Law of Total Covariance states:
+
+
+$$ \text{Cov}(A_r,A_s) = \mathbb{E}(\text{Cov}(A_r,A_s|N_r,N_s)) + \text{Cov}(\mathbb{E}(A_r|N_r), \mathbb{E}(A_s|N_s))$$
+
+Given that $A_r$ and $A_s$ are functions of independent random vectors $\bm{\varepsilon}_r \in \mathbb{R}^{n_r}$ and $\bm{\varepsilon}_s \in \mathbb{R}^{n_s}$, $\text{Cov}(A_r,A_s|N_r,N_s)$ must be zero. Having already established that both variables are zero-mean, the above equation reduces to:
+
+$$ \text{Cov}(A_r,A_s) = \mathbb{E}(0) + \text{Cov}(0, 0) = 0$$
+
+\qed
+
+Having shown that $\{A_t\}$ is still white noise, it now remains to estimate its variance. 
+Though the sample sizes now vary, our estimate for $\sigma_\varepsilon^2$ hasn't changed (see Equation \ref{eq:var_eps_hat}).
+
+
+
+
+Without requiring the distribution of $N_t$, $\sigma_a^2$ can be estimated with:
+
+\begin{equation}
+    \label{eq:var_a_n}
+    \hat{\sigma}_a^2 = \frac{\hat{\sigma}_\varepsilon^2}{T}\sum_{t=1}^T\frac{1}{N_t}
+\end{equation}
+
+With $\hat{\sigma}_\varepsilon^2$, $\hat{\sigma}_a^2$ and $\hat{\text{Var}}(\hat{\sigma}_\varepsilon^2)$ defined as above, the algorithm proposed by Wong and Miller can be once again applied, with necessary adjustments made to $\Sigma_o$ and $H$. 
+
+
+
+% \subsection{ARMA-Noise Models With Stationary Sample Sizes}
+
+
+
+
+
+
+
+The takeaway from all this is that a constant expected inverse of $\{N_t\}$ is the critical piece for $\{A_t\}$ to still be white noise.
+
+So long as the set of inverse sample sizes $\{n_t^{-1}\}$ is conceivably of constant expectation, the ARMA-Noise method is applicable.
+
+COMMENT ON ASSUMPTION OF INDEPENDENCE IN CALCULATING VARIANCE OF ESTIMATE AND IMPLICATIONS FOR STRICTLY STATIONARY SAMPLE SIZES
+AND NON-CONSTANT MEAN
+
+\subsection{Extending to Mixed Effects Models}
+
+INITIAL FIT OF MIXED EFFECTS MODEL
+
+UPDATE TO GLS ESTIMATOR FOR BETA
+
+CONDITIONAL EXPECTATION OF RANDOM INTERCEPTS
+
+ESTIMATE FOR RANDOM EFFECT VARIANCES
+
+\medskip
+
+
+
+

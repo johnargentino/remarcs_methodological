@@ -1,10 +1,10 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026) (preloaded format=pdflatex 2026.3.22)  25 AUG 2026 11:48
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026) (preloaded format=pdflatex 2026.3.22)  26 AUG 2026 15:32
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**/Users/johnargentino/Desktop/research/mvam/are/lacey/remarcs/Dissertation/main.tex
-(/Users/johnargentino/Desktop/research/mvam/are/lacey/remarcs/Dissertation/main.tex
+**/Users/johnargentino/Desktop/research/mvam/are/lacey/remarcs_methodological/output/paper/main.tex
+(/Users/johnargentino/Desktop/research/mvam/are/lacey/remarcs_methodological/output/paper/main.tex
 LaTeX2e <2025-11-01>
 L3 programming layer <2026-01-19>
 (/usr/local/texlive/2026/texmf-dist/tex/latex/base/article.cls
@@ -871,428 +871,233 @@ Package hyperref Info: Link coloring OFF on input line 142.
 
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: End \AtBeginDocument code.
- (./chapters/introduction.tex) (./chapters/time_series.tex) (./chapters/existing_methods.tex (./thesis_sections/rcs_ts_cov.tex [1{/usr/local/texlive/2026/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
+ (./chapters/introduction.tex) (./sections/background.tex [1{/usr/local/texlive/2026/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
 
 ]
-LaTeX Font Info:    Trying to load font information for U+msa on input line 6.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 19.
  (/usr/local/texlive/2026/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 6.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 19.
  (/usr/local/texlive/2026/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-) (./thesis_subsections/arma_cov_subsection.tex (./images/output/arma_cov_head.txt [2]) (./images/output/arma_cov_head_daily.txt) (./images/output/arma_cov_df.txt))) (./thesis_sections/early_methods.tex [3]) (./thesis_sections/Modugno.tex
-<images/output/are.png, id=160, 578.16pt x 433.62pt>
+) [2]
+Overfull \hbox (4.05595pt too wide) in paragraph at lines 176--177
+\OT1/cmr/m/it/10 the two se-ries are in-de-pen-dent, then their sum $\OML/cmm/m/it/10 w[] \OT1/cmr/m/n/10 = \OML/cmm/m/it/10 y[] \OT1/cmr/m/n/10 + \OML/cmm/m/it/10 a[]$ \OT1/cmr/m/it/10 fol-lows an ARMA($\OML/cmm/m/it/10 p; q$\OT1/cmr/m/it/10 )
+ []
+
+[3]) (./sections/methods.tex (./visualizations/em_flow.tex) [4] [5] [6] [7] (./visualizations/tsms_flow.tex
+
+LaTeX Warning: Reference `eq:H_arman' on page 8 undefined on input line 63.
+
+
+LaTeX Warning: Reference `eq:H_thetab' on page 8 undefined on input line 63.
+
+
+LaTeX Warning: Reference `eq:H_phi' on page 8 undefined on input line 63.
+
+)
+Overfull \hbox (0.91724pt too wide) in paragraph at lines 223--227
+\OT1/cmr/m/n/10 pa-ram-e-ter es-ti-mates, we now turn to the con-di-tion re-quired for fit-ting an ARMA-
+ []
+
+[8] [9] [10]) (./sections/results.tex [11]
+<images/output/are.png, id=176, 578.16pt x 433.62pt>
 File: images/output/are.png Graphic file (type png)
 <use images/output/are.png>
 Package pdftex.def Info: images/output/are.png  used on input line 29.
 (pdftex.def)             Requested size: 207.0021pt x 155.24954pt.
- [4] [5 <./images/output/are.png>] [6]) (./thesis_sections/ARMAN.tex
-<images/output/ar_ex_panel.png, id=202, 505.89pt x 505.89pt>
-File: images/output/ar_ex_panel.png Graphic file (type png)
-<use images/output/ar_ex_panel.png>
-Package pdftex.def Info: images/output/ar_ex_panel.png  used on input line 26.
-(pdftex.def)             Requested size: 110.40253pt x 110.4007pt.
-<images/output/noise_ex.png, id=203, 505.89pt x 505.89pt>
-File: images/output/noise_ex.png Graphic file (type png)
-<use images/output/noise_ex.png>
-Package pdftex.def Info: images/output/noise_ex.png  used on input line 31.
-(pdftex.def)             Requested size: 110.40253pt x 110.4007pt.
-<images/output/ex_observe.png, id=204, 505.89pt x 505.89pt>
-File: images/output/ex_observe.png Graphic file (type png)
-<use images/output/ex_observe.png>
-Package pdftex.def Info: images/output/ex_observe.png  used on input line 36.
-(pdftex.def)             Requested size: 110.40253pt x 110.4007pt.
- [7 <./images/output/ar_ex_panel.png> <./images/output/noise_ex.png> <./images/output/ex_observe.png>]
-<images/output/ts_vs_avgs.png, id=213, 578.16pt x 433.62pt>
-File: images/output/ts_vs_avgs.png Graphic file (type png)
-<use images/output/ts_vs_avgs.png>
-Package pdftex.def Info: images/output/ts_vs_avgs.png  used on input line 51.
-(pdftex.def)             Requested size: 172.5pt x 129.37242pt.
-
-
-LaTeX Warning: Reference `eq:acvf_ar' on page 8 undefined on input line 56.
-
-
-Overfull \hbox (4.05595pt too wide) in paragraph at lines 70--71
-\OT1/cmr/m/it/10 the two se-ries are in-de-pen-dent, then their sum $\OML/cmm/m/it/10 w[] \OT1/cmr/m/n/10 = \OML/cmm/m/it/10 y[] \OT1/cmr/m/n/10 + \OML/cmm/m/it/10 a[]$ \OT1/cmr/m/it/10 fol-lows an ARMA($\OML/cmm/m/it/10 p; q$\OT1/cmr/m/it/10 )
- []
-
-<images/output/ar_bias.pdf, id=216, 578.16pt x 433.62pt>
-File: images/output/ar_bias.pdf Graphic file (type pdf)
-<use images/output/ar_bias.pdf>
-Package pdftex.def Info: images/output/ar_bias.pdf  used on input line 80.
-(pdftex.def)             Requested size: 276.00105pt x 206.9972pt.
-) (./thesis_sections/Wong.tex) (./thesis_sections/gls.tex [8 <./images/output/ts_vs_avgs.png>]
-Overfull \hbox (0.2181pt too wide) in paragraph at lines 1--1
-[]\OT1/cmr/bx/n/14.4 Impacts of time se-ries es-ti-ma-tion er-ror on con-
- []
-
-[9 <./images/output/ar_bias.pdf>])) (./chapters/method.tex (./thesis_sections/Wong_EM.tex [10]
-Overfull \hbox (4.58194pt too wide) detected at line 43
-\OML/cmm/m/it/10 l[]\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 ^^X\OT1/cmr/m/n/10 ) = [][\OML/cmm/m/it/10 f\OT1/cmr/m/n/10 ([]\OMS/cmsy/m/n/10 j\OML/cmm/m/it/10 ^^X\OT1/cmr/m/n/10 )] = \OMS/cmsy/m/n/10 ^^@[][]\OT1/cmr/m/n/10 (2\OML/cmm/m/it/10 ^^Y\OT1/cmr/m/n/10 ) \OMS/cmsy/m/n/10 ^^@ [][]j\OT1/cmr/m/n/10 ^^F[]\OMS/cmsy/m/n/10 j ^^@ []\OT1/cmr/m/n/10 ([] \OMS/cmsy/m/n/10 ^^@ \OML/cmm/m/it/10 n[]X[]X[]^^L\OT1/cmr/m/n/10 )[]^^F[]([] \OMS/cmsy/m/n/10 ^^@ \OML/cmm/m/it/10 n[]X[]X[]^^L\OT1/cmr/m/n/10 )
- []
-
-[11] (./visualizations/em_flow.tex)) (./thesis_sections/method_inference.tex [12] [13]) (./thesis_sections/method_model_selection.tex
-
-Package hyperref Warning: Difference (2) between bookmark levels is greater 
-(hyperref)                than one, level fixed on input line 5.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 5.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 5.
-
-
-LaTeX Warning: Reference `fig:neg_ar_var_effect' on page 14 undefined on input line 9.
-
-
-LaTeX Warning: Reference `fig:pos_ar_var_effect' on page 14 undefined on input line 9.
-
-
-LaTeX Warning: Reference `eq:H_arman' on page 14 undefined on input line 12.
-
-[14]
-Overfull \hbox (10.95111pt too wide) detected at line 42
-[] \OT1/cmr/m/n/10 = [] \OML/cmm/m/it/10 ;  [] \OT1/cmr/m/n/10 = []
- []
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 44.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 44.
-
-[15]
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 102.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\theta' on input line 102.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `subscript' on input line 102.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 102.
-
-
-LaTeX Warning: Reference `fig:neg_ar_var_effect' on page 16 undefined on input line 103.
-
-
-LaTeX Warning: Reference `fig:pos_ar_var_effect' on page 16 undefined on input line 103.
-
-
-Overfull \hbox (0.13951pt too wide) in paragraph at lines 120--121
-[]\OT1/cmr/m/n/10 Note that the sec-ond equa-tion pro-vides a crit-i-cal piece of in-for-ma-tion, namely
- []
-
-
-Overfull \hbox (14.8359pt too wide) detected at line 150
-[] \OT1/cmr/m/n/10 = [] \OML/cmm/m/it/10 ;  [] \OT1/cmr/m/n/10 = []
- []
-
-(./visualizations/tsms_flow.tex
-
-LaTeX Warning: Reference `eq:H_arman' on page 16 undefined on input line 63.
-
-))) (./chapters/varying_n.tex (./thesis_sections/wong_drawbacks.tex [16] [17]) (./thesis_sections/wong_varying_n.tex
-Overfull \hbox (13.69637pt too wide) in paragraph at lines 1--1
-[]\OT1/cmr/bx/n/14.4 Time-Step Av-er-ages of White Noise with Vary-
- []
-
-LaTeX Font Info:    Trying to load font information for U+bbm on input line 25.
-(/usr/local/texlive/2026/texmf-dist/tex/latex/bbm-macros/ubbm.fd
-File: ubbm.fd 1999/03/15 V 1.2 Font definition for bbm font - TH
-) [18]
-Overfull \hbox (35.4085pt too wide) has occurred while \output is active
-\OT1/cmr/m/sl/10 13 TIME-STEP AVERAGES OF WHITE NOISE WITH VARYING SAMPLE SIZE \OT1/cmr/m/n/10 19
- []
-
-[19]
-Overfull \hbox (1.80476pt too wide) in paragraph at lines 92--92
-[]\OT1/cmr/bx/n/14.4 ARMA-Noise Mod-els with I.I.D. Sam-ple Size 
- []
-
-
-Overfull \hbox (2.94496pt too wide) in paragraph at lines 95--96
-\OT1/cmr/m/n/10 When sam-ple sizes are al-lowed to vary over time, an ARMA-Noise model changes: 
- []
-
-[20] [21]
-<images/output/inar.png, id=342, 505.89pt x 505.89pt>
-File: images/output/inar.png Graphic file (type png)
-<use images/output/inar.png>
-Package pdftex.def Info: images/output/inar.png  used on input line 181.
-(pdftex.def)             Requested size: 155.24895pt x 155.24954pt.
-<images/output/inar_acf.png, id=343, 2107.875pt x 2107.875pt>
-File: images/output/inar_acf.png Graphic file (type png)
-<use images/output/inar_acf.png>
-Package pdftex.def Info: images/output/inar_acf.png  used on input line 188.
-(pdftex.def)             Requested size: 155.24895pt x 155.22125pt.
- [22 <./images/output/inar.png> <./images/output/inar_acf.png>]
-Overfull \hbox (0.12483pt too wide) in paragraph at lines 209--209
-[]\OT1/cmr/bx/n/14.4 ARMA-Noise Pro-cesses with Non-stationary
- []
-
-
-Overfull \hbox (12.07848pt too wide) has occurred while \output is active
-\OT1/cmr/m/sl/10 16 ARMA-NOISE PROCESSES WITH NON-STATIONARY SAMPLE SIZES \OT1/cmr/m/n/10 23
- []
-
-[23]
-<images/output/constant_inverse_n.png, id=361, 505.89pt x 505.89pt>
-File: images/output/constant_inverse_n.png Graphic file (type png)
-<use images/output/constant_inverse_n.png>
-Package pdftex.def Info: images/output/constant_inverse_n.png  used on input line 256.
-(pdftex.def)             Requested size: 155.24895pt x 155.24954pt.
-<images/output/constant_inverse_a.png, id=362, 505.89pt x 505.89pt>
-File: images/output/constant_inverse_a.png Graphic file (type png)
-<use images/output/constant_inverse_a.png>
-Package pdftex.def Info: images/output/constant_inverse_a.png  used on input line 262.
-(pdftex.def)             Requested size: 155.24895pt x 155.24954pt.
-
-Overfull \hbox (12.07848pt too wide) has occurred while \output is active
-\OT1/cmr/m/sl/10 16 ARMA-NOISE PROCESSES WITH NON-STATIONARY SAMPLE SIZES \OT1/cmr/m/n/10 24
- []
-
-[24 <./images/output/constant_inverse_n.png> <./images/output/constant_inverse_a.png>])) (./chapters/simulations.tex
-<images/output/e_conf_o_3_2.pdf, id=368, 505.89pt x 505.89pt>
+ (./thesis_subsections/arma_cov_subsection.tex [12{/usr/local/texlive/2026/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc} <./images/output/are.png>] (./images/output/arma_cov_head.txt) (./images/output/arma_cov_head_daily.txt) (./images/output/arma_cov_df.txt))
+<images/output/e_conf_o_3_2.pdf, id=186, 505.89pt x 505.89pt>
 File: images/output/e_conf_o_3_2.pdf Graphic file (type pdf)
 <use images/output/e_conf_o_3_2.pdf>
-Package pdftex.def Info: images/output/e_conf_o_3_2.pdf  used on input line 16.
+Package pdftex.def Info: images/output/e_conf_o_3_2.pdf  used on input line 51.
 (pdftex.def)             Requested size: 155.24895pt x 155.24954pt.
-<images/output/e_conf_o_4_2.pdf, id=369, 505.89pt x 505.89pt>
+<images/output/e_conf_o_4_2.pdf, id=187, 505.89pt x 505.89pt>
 File: images/output/e_conf_o_4_2.pdf Graphic file (type pdf)
 <use images/output/e_conf_o_4_2.pdf>
-Package pdftex.def Info: images/output/e_conf_o_4_2.pdf  used on input line 22.
+Package pdftex.def Info: images/output/e_conf_o_4_2.pdf  used on input line 57.
 (pdftex.def)             Requested size: 155.24895pt x 155.24954pt.
- [25 <./images/output/e_conf_o_3_2.pdf> <./images/output/e_conf_o_4_2.pdf>]
-<images/output/e_conf_l_3_2.pdf, id=389, 505.89pt x 505.89pt>
+ [13]
+<images/output/e_conf_l_3_2.pdf, id=197, 505.89pt x 505.89pt>
 File: images/output/e_conf_l_3_2.pdf Graphic file (type pdf)
 <use images/output/e_conf_l_3_2.pdf>
-Package pdftex.def Info: images/output/e_conf_l_3_2.pdf  used on input line 36.
+Package pdftex.def Info: images/output/e_conf_l_3_2.pdf  used on input line 71.
 (pdftex.def)             Requested size: 155.24895pt x 155.24954pt.
-<images/output/e_conf_l_4_2.pdf, id=390, 505.89pt x 505.89pt>
+<images/output/e_conf_l_4_2.pdf, id=198, 505.89pt x 505.89pt>
 File: images/output/e_conf_l_4_2.pdf Graphic file (type pdf)
 <use images/output/e_conf_l_4_2.pdf>
-Package pdftex.def Info: images/output/e_conf_l_4_2.pdf  used on input line 42.
+Package pdftex.def Info: images/output/e_conf_l_4_2.pdf  used on input line 77.
 (pdftex.def)             Requested size: 155.24895pt x 155.24954pt.
-<images/output/l1_conf.pdf, id=393, 505.89pt x 505.89pt>
+ [14 <./images/output/e_conf_o_3_2.pdf> <./images/output/e_conf_o_4_2.pdf>]
+<images/output/l1_conf.pdf, id=218, 505.89pt x 505.89pt>
 File: images/output/l1_conf.pdf Graphic file (type pdf)
 <use images/output/l1_conf.pdf>
-Package pdftex.def Info: images/output/l1_conf.pdf  used on input line 70.
+Package pdftex.def Info: images/output/l1_conf.pdf  used on input line 105.
 (pdftex.def)             Requested size: 165.59853pt x 165.60106pt.
-<images/output/l2_conf.pdf, id=394, 505.89pt x 505.89pt>
+<images/output/l2_conf.pdf, id=219, 505.89pt x 505.89pt>
 File: images/output/l2_conf.pdf Graphic file (type pdf)
 <use images/output/l2_conf.pdf>
-Package pdftex.def Info: images/output/l2_conf.pdf  used on input line 77.
+Package pdftex.def Info: images/output/l2_conf.pdf  used on input line 112.
 (pdftex.def)             Requested size: 165.59853pt x 165.60106pt.
- [26 <./images/output/e_conf_l_3_2.pdf> <./images/output/e_conf_l_4_2.pdf>]
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 87.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 87.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 87.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 87.
-
-(./images/output/params_table.tex [27 <./images/output/l1_conf.pdf> <./images/output/l2_conf.pdf>])
-<images/output/sim_arma_full.pdf, id=429, 505.89pt x 505.89pt>
+ [15 <./images/output/e_conf_l_3_2.pdf> <./images/output/e_conf_l_4_2.pdf>] (./images/output/params_table.tex)
+<images/output/sim_arma_full.pdf, id=238, 505.89pt x 505.89pt>
 File: images/output/sim_arma_full.pdf Graphic file (type pdf)
 <use images/output/sim_arma_full.pdf>
-Package pdftex.def Info: images/output/sim_arma_full.pdf  used on input line 98.
+Package pdftex.def Info: images/output/sim_arma_full.pdf  used on input line 134.
 (pdftex.def)             Requested size: 155.24895pt x 155.24954pt.
-<images/output/sim_arma_fitted.pdf, id=430, 505.89pt x 505.89pt>
+<images/output/sim_arma_fitted.pdf, id=239, 505.89pt x 505.89pt>
 File: images/output/sim_arma_fitted.pdf Graphic file (type pdf)
 <use images/output/sim_arma_fitted.pdf>
-Package pdftex.def Info: images/output/sim_arma_fitted.pdf  used on input line 104.
+Package pdftex.def Info: images/output/sim_arma_fitted.pdf  used on input line 140.
 (pdftex.def)             Requested size: 155.24895pt x 155.24954pt.
+ [16 <./images/output/l1_conf.pdf> <./images/output/l2_conf.pdf>]
 
+LaTeX Warning: Reference `eq:H_arman' on page 17 undefined on input line 168.
 
-LaTeX Warning: Reference `eq:H_arman' on page 28 undefined on input line 132.
-
-<images/output/single_sim_observed.pdf, id=432, 505.89pt x 505.89pt>
+<images/output/single_sim_observed.pdf, id=258, 505.89pt x 505.89pt>
 File: images/output/single_sim_observed.pdf Graphic file (type pdf)
 <use images/output/single_sim_observed.pdf>
-Package pdftex.def Info: images/output/single_sim_observed.pdf  used on input line 138.
+Package pdftex.def Info: images/output/single_sim_observed.pdf  used on input line 174.
 (pdftex.def)             Requested size: 165.59853pt x 165.60106pt.
-<images/output/single_sim_latent.pdf, id=433, 505.89pt x 505.89pt>
+<images/output/single_sim_latent.pdf, id=259, 505.89pt x 505.89pt>
 File: images/output/single_sim_latent.pdf Graphic file (type pdf)
 <use images/output/single_sim_latent.pdf>
-Package pdftex.def Info: images/output/single_sim_latent.pdf  used on input line 144.
+Package pdftex.def Info: images/output/single_sim_latent.pdf  used on input line 180.
 (pdftex.def)             Requested size: 165.59853pt x 165.60106pt.
-[28 <./images/output/sim_arma_full.pdf> <./images/output/sim_arma_fitted.pdf>] (./images/output/sim_arma_ests.tex
+(./images/output/sim_arma_ests.tex
 Overfull \hbox (28.55643pt too wide) in paragraph at lines 2--12
  [][] 
  []
 
-)
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 156.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 156.
-
-(./images/output/params_table_ar.tex)
-<images/output/sim_ma_full.pdf, id=452, 505.89pt x 505.89pt>
+[17 <./images/output/sim_arma_full.pdf> <./images/output/sim_arma_fitted.pdf> <./images/output/single_sim_observed.pdf> <./images/output/single_sim_latent.pdf>]) (./images/output/params_table_ar.tex)
+<images/output/sim_ma_full.pdf, id=288, 505.89pt x 505.89pt>
 File: images/output/sim_ma_full.pdf Graphic file (type pdf)
 <use images/output/sim_ma_full.pdf>
-Package pdftex.def Info: images/output/sim_ma_full.pdf  used on input line 163.
+Package pdftex.def Info: images/output/sim_ma_full.pdf  used on input line 199.
 (pdftex.def)             Requested size: 165.59853pt x 165.60106pt.
-<images/output/sim_ma_fitted.pdf, id=453, 505.89pt x 505.89pt>
+<images/output/sim_ma_fitted.pdf, id=289, 505.89pt x 505.89pt>
 File: images/output/sim_ma_fitted.pdf Graphic file (type pdf)
 <use images/output/sim_ma_fitted.pdf>
-Package pdftex.def Info: images/output/sim_ma_fitted.pdf  used on input line 169.
+Package pdftex.def Info: images/output/sim_ma_fitted.pdf  used on input line 205.
 (pdftex.def)             Requested size: 165.59853pt x 165.60106pt.
- [29 <./images/output/single_sim_observed.pdf> <./images/output/single_sim_latent.pdf>] (./images/output/sim_ar_ests.tex
+ (./images/output/sim_ar_ests.tex
 Overfull \hbox (33.55644pt too wide) in paragraph at lines 2--12
  [][] 
  []
 
-)
-<images/output/single_sim_ma_observed.pdf, id=473, 505.89pt x 505.89pt>
+[18 <./images/output/sim_ma_full.pdf> <./images/output/sim_ma_fitted.pdf>])
+<images/output/single_sim_ma_observed.pdf, id=308, 505.89pt x 505.89pt>
 File: images/output/single_sim_ma_observed.pdf Graphic file (type pdf)
 <use images/output/single_sim_ma_observed.pdf>
-Package pdftex.def Info: images/output/single_sim_ma_observed.pdf  used on input line 201.
+Package pdftex.def Info: images/output/single_sim_ma_observed.pdf  used on input line 237.
 (pdftex.def)             Requested size: 165.59853pt x 165.60106pt.
-<images/output/single_sim_ma_latent.pdf, id=474, 505.89pt x 505.89pt>
+<images/output/single_sim_ma_latent.pdf, id=309, 505.89pt x 505.89pt>
 File: images/output/single_sim_ma_latent.pdf Graphic file (type pdf)
 <use images/output/single_sim_ma_latent.pdf>
-Package pdftex.def Info: images/output/single_sim_ma_latent.pdf  used on input line 208.
+Package pdftex.def Info: images/output/single_sim_ma_latent.pdf  used on input line 244.
 (pdftex.def)             Requested size: 165.59853pt x 165.60106pt.
-<images/output/single_sim_ma_restricted.pdf, id=477, 578.16pt x 433.62pt>
+
+
+LaTeX Warning: Reference `eq:H_theta' on page 19 undefined on input line 252.
+
+<images/output/single_sim_ma_restricted.pdf, id=311, 578.16pt x 433.62pt>
 File: images/output/single_sim_ma_restricted.pdf Graphic file (type pdf)
 <use images/output/single_sim_ma_restricted.pdf>
-Package pdftex.def Info: images/output/single_sim_ma_restricted.pdf  used on input line 220.
+Package pdftex.def Info: images/output/single_sim_ma_restricted.pdf  used on input line 256.
 (pdftex.def)             Requested size: 172.5pt x 129.37242pt.
- [30 <./images/output/sim_ma_full.pdf> <./images/output/sim_ma_fitted.pdf>]
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 226.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 226.
-
-(./images/output/params_table_ma.tex)
-<images/output/sim_ar_full.pdf, id=494, 505.89pt x 505.89pt>
+[19 <./images/output/single_sim_ma_observed.pdf> <./images/output/single_sim_ma_latent.pdf>] (./images/output/params_table_ma.tex)
+<images/output/sim_ar_full.pdf, id=332, 505.89pt x 505.89pt>
 File: images/output/sim_ar_full.pdf Graphic file (type pdf)
 <use images/output/sim_ar_full.pdf>
-Package pdftex.def Info: images/output/sim_ar_full.pdf  used on input line 237.
+Package pdftex.def Info: images/output/sim_ar_full.pdf  used on input line 273.
 (pdftex.def)             Requested size: 155.24895pt x 155.24954pt.
-<images/output/sim_ar_fitted.pdf, id=495, 505.89pt x 505.89pt>
+<images/output/sim_ar_fitted.pdf, id=333, 505.89pt x 505.89pt>
 File: images/output/sim_ar_fitted.pdf Graphic file (type pdf)
 <use images/output/sim_ar_fitted.pdf>
-Package pdftex.def Info: images/output/sim_ar_fitted.pdf  used on input line 243.
+Package pdftex.def Info: images/output/sim_ar_fitted.pdf  used on input line 279.
 (pdftex.def)             Requested size: 155.24895pt x 155.24954pt.
- [31 <./images/output/single_sim_ma_observed.pdf> <./images/output/single_sim_ma_latent.pdf> <./images/output/single_sim_ma_restricted.pdf>] (./images/output/sim_ma_ests.tex
+ (./images/output/sim_ma_ests.tex
 Overfull \hbox (33.55644pt too wide) in paragraph at lines 2--12
  [][] 
  []
 
-)
-<images/output/single_sim_ar_observed.pdf, id=522, 505.89pt x 505.89pt>
+[20 <./images/output/single_sim_ma_restricted.pdf> <./images/output/sim_ar_full.pdf> <./images/output/sim_ar_fitted.pdf>])
+<images/output/single_sim_ar_observed.pdf, id=357, 505.89pt x 505.89pt>
 File: images/output/single_sim_ar_observed.pdf Graphic file (type pdf)
 <use images/output/single_sim_ar_observed.pdf>
-Package pdftex.def Info: images/output/single_sim_ar_observed.pdf  used on input line 281.
+Package pdftex.def Info: images/output/single_sim_ar_observed.pdf  used on input line 317.
 (pdftex.def)             Requested size: 155.24895pt x 155.24954pt.
-<images/output/single_sim_ar_latent.pdf, id=523, 505.89pt x 505.89pt>
+<images/output/single_sim_ar_latent.pdf, id=358, 505.89pt x 505.89pt>
 File: images/output/single_sim_ar_latent.pdf Graphic file (type pdf)
 <use images/output/single_sim_ar_latent.pdf>
-Package pdftex.def Info: images/output/single_sim_ar_latent.pdf  used on input line 287.
+Package pdftex.def Info: images/output/single_sim_ar_latent.pdf  used on input line 323.
 (pdftex.def)             Requested size: 155.24895pt x 155.24954pt.
- [32 <./images/output/sim_ar_full.pdf> <./images/output/sim_ar_fitted.pdf>]
-<images/output/single_sim_ar_restricted.pdf, id=540, 505.89pt x 505.89pt>
+<images/output/single_sim_ar_restricted.pdf, id=359, 505.89pt x 505.89pt>
 File: images/output/single_sim_ar_restricted.pdf Graphic file (type pdf)
 <use images/output/single_sim_ar_restricted.pdf>
-Package pdftex.def Info: images/output/single_sim_ar_restricted.pdf  used on input line 316.
+Package pdftex.def Info: images/output/single_sim_ar_restricted.pdf  used on input line 352.
 (pdftex.def)             Requested size: 155.24895pt x 155.24954pt.
-<images/output/single_sim_ar_restricted_latent.pdf, id=541, 505.89pt x 505.89pt>
+<images/output/single_sim_ar_restricted_latent.pdf, id=360, 505.89pt x 505.89pt>
 File: images/output/single_sim_ar_restricted_latent.pdf Graphic file (type pdf)
 <use images/output/single_sim_ar_restricted_latent.pdf>
-Package pdftex.def Info: images/output/single_sim_ar_restricted_latent.pdf  used on input line 322.
+Package pdftex.def Info: images/output/single_sim_ar_restricted_latent.pdf  used on input line 358.
 (pdftex.def)             Requested size: 155.24895pt x 155.24954pt.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 347.
-
-
-Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 347.
-
-(./images/output/params_table_mab.tex [33 <./images/output/single_sim_ar_observed.pdf> <./images/output/single_sim_ar_latent.pdf> <./images/output/single_sim_ar_restricted.pdf> <./images/output/single_sim_ar_restricted_latent.pdf>])
-<images/output/sim_mab_full.pdf, id=572, 505.89pt x 505.89pt>
+ [21 <./images/output/single_sim_ar_observed.pdf> <./images/output/single_sim_ar_latent.pdf>] (./images/output/params_table_mab.tex)
+<images/output/sim_mab_full.pdf, id=379, 505.89pt x 505.89pt>
 File: images/output/sim_mab_full.pdf Graphic file (type pdf)
 <use images/output/sim_mab_full.pdf>
-Package pdftex.def Info: images/output/sim_mab_full.pdf  used on input line 361.
+Package pdftex.def Info: images/output/sim_mab_full.pdf  used on input line 397.
 (pdftex.def)             Requested size: 155.24895pt x 155.24954pt.
-<images/output/sim_mab_fitted.pdf, id=573, 505.89pt x 505.89pt>
+<images/output/sim_mab_fitted.pdf, id=380, 505.89pt x 505.89pt>
 File: images/output/sim_mab_fitted.pdf Graphic file (type pdf)
 <use images/output/sim_mab_fitted.pdf>
-Package pdftex.def Info: images/output/sim_mab_fitted.pdf  used on input line 367.
+Package pdftex.def Info: images/output/sim_mab_fitted.pdf  used on input line 403.
 (pdftex.def)             Requested size: 155.24895pt x 155.24954pt.
- (./images/output/sim_mab_ests.tex
+ [22 <./images/output/single_sim_ar_restricted.pdf> <./images/output/single_sim_ar_restricted_latent.pdf>] (./images/output/sim_mab_ests.tex
 Overfull \hbox (25.2231pt too wide) in paragraph at lines 2--12
  [][] 
  []
 
 )
-<images/output/sim_mab_observed.pdf, id=578, 505.89pt x 505.89pt>
+<images/output/sim_mab_observed.pdf, id=403, 505.89pt x 505.89pt>
 File: images/output/sim_mab_observed.pdf Graphic file (type pdf)
 <use images/output/sim_mab_observed.pdf>
-Package pdftex.def Info: images/output/sim_mab_observed.pdf  used on input line 400.
+Package pdftex.def Info: images/output/sim_mab_observed.pdf  used on input line 436.
 (pdftex.def)             Requested size: 155.24895pt x 155.24954pt.
-<images/output/sim_mab_latent.pdf, id=579, 505.89pt x 505.89pt>
+<images/output/sim_mab_latent.pdf, id=404, 505.89pt x 505.89pt>
 File: images/output/sim_mab_latent.pdf Graphic file (type pdf)
 <use images/output/sim_mab_latent.pdf>
-Package pdftex.def Info: images/output/sim_mab_latent.pdf  used on input line 406.
+Package pdftex.def Info: images/output/sim_mab_latent.pdf  used on input line 442.
 (pdftex.def)             Requested size: 155.24895pt x 155.24954pt.
- [34 <./images/output/sim_mab_full.pdf> <./images/output/sim_mab_fitted.pdf>]
-<images/output/single_dim_mab_restricted.pdf, id=601, 505.89pt x 505.89pt>
+ [23 <./images/output/sim_mab_full.pdf> <./images/output/sim_mab_fitted.pdf>]
+
+LaTeX Warning: Reference `eq:H_thetab' on page 24 undefined on input line 448.
+
+<images/output/single_dim_mab_restricted.pdf, id=423, 505.89pt x 505.89pt>
 File: images/output/single_dim_mab_restricted.pdf Graphic file (type pdf)
 <use images/output/single_dim_mab_restricted.pdf>
-Package pdftex.def Info: images/output/single_dim_mab_restricted.pdf  used on input line 418.
+Package pdftex.def Info: images/output/single_dim_mab_restricted.pdf  used on input line 454.
 (pdftex.def)             Requested size: 155.24895pt x 155.24954pt.
-<images/output/sim_mab_restricted.pdf, id=602, 505.89pt x 505.89pt>
+<images/output/sim_mab_restricted.pdf, id=424, 505.89pt x 505.89pt>
 File: images/output/sim_mab_restricted.pdf Graphic file (type pdf)
 <use images/output/sim_mab_restricted.pdf>
-Package pdftex.def Info: images/output/sim_mab_restricted.pdf  used on input line 424.
+Package pdftex.def Info: images/output/sim_mab_restricted.pdf  used on input line 460.
 (pdftex.def)             Requested size: 155.24895pt x 155.24954pt.
-) (./chapters/discussion.tex [35 <./images/output/sim_mab_observed.pdf> <./images/output/sim_mab_latent.pdf> <./images/output/single_dim_mab_restricted.pdf> <./images/output/sim_mab_restricted.pdf>] [36]) (./main.bbl) (./main.lot
-Overfull \hbox (3.1662pt too wide) in paragraph at lines 2--2
+) [24 <./images/output/sim_mab_observed.pdf> <./images/output/sim_mab_latent.pdf> <./images/output/single_dim_mab_restricted.pdf> <./images/output/sim_mab_restricted.pdf>] (./sections/discussion.tex [25]) (./main.bbl) (./main.lot [26]
+Overfull \hbox (3.1662pt too wide) in paragraph at lines 3--3
  [][] [][]\OT1/cmr/m/n/10 Parameter val-ues for sim-u-lated RE-MARCS model with all nonzero 
  []
 
-[37])
+)
 \tf@lot=\write7
 \openout7 = `main.lot'.
 
- (./main.lof [38])
+ (./main.lof [27])
 \tf@lof=\write8
 \openout8 = `main.lof'.
 
- [39] (./main.aux)
+ [28] (./main.aux)
  ***********
 LaTeX2e <2025-11-01>
 L3 programming layer <2026-01-19>
@@ -1305,21 +1110,21 @@ LaTeX Warning: There were undefined references.
 LaTeX Warning: There were multiply-defined labels.
 
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: BCBB3A57619B033C5D1EA648D1DB8DF7;6259.
+(rerunfilecheck)             Checksum: B674AEF9526777CDDE907F0E57B620F9;1952.
  ) 
 Here is how much of TeX's memory you used:
- 33481 strings out of 467525
- 662779 string characters out of 5418982
- 1099758 words of memory out of 5000000
- 61627 multiletter control sequences out of 15000+600000
- 640705 words of font info for 89 fonts, out of 8000000 for 9000
+ 33183 strings out of 467525
+ 654837 string characters out of 5418982
+ 1094237 words of memory out of 5000000
+ 61428 multiletter control sequences out of 15000+600000
+ 640380 words of font info for 85 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 84i,11n,131p,2589b,891s stack positions out of 10000i,1000n,20000p,200000b,200000s
- </Users/johnargentino/Library/texlive/2026/texmf-var/fonts/pk/ljfour/public/bbm/bbm10.600pk></usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx5.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx6.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx7.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx9.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex7.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex9.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmmib10.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmmib9.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmsl10.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm7.pfb>
-Output written on main.pdf (39 pages, 4592748 bytes).
+ 84i,11n,131p,2604b,891s stack positions out of 10000i,1000n,20000p,200000b,200000s
+</usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx6.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx7.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx9.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex7.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex9.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmmib10.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmmib9.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmsl10.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2026/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb>
+Output written on main.pdf (28 pages, 2358443 bytes).
 PDF statistics:
- 877 PDF objects out of 1000 (max. 8388607)
- 695 compressed objects within 7 object streams
- 151 named destinations out of 1000 (max. 500000)
- 438 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 667 PDF objects out of 1000 (max. 8388607)
+ 511 compressed objects within 6 object streams
+ 96 named destinations out of 1000 (max. 500000)
+ 265 words of extra memory for PDF output out of 10000 (max. 10000000)
 

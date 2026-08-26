@@ -1,0 +1,211 @@
+Repeated cross-sectional (RCS) data has long been the subject 
+of analysis. When cross-sections are taken with high frequency, the 
+possibility of temporal correlation arises. While panel data consist 
+of a single sample being observed repeatedly, RCS data do not 
+necessarily have any repeaefted observations, ruling out the treatment 
+of the data as a multivariate time series. It is often instead the 
+population mean that is treated as a time series, with individual 
+observations modeled as a realization of that mean with some added 
+noise. 
+
+
+% \subsection{Early Methods for Analyzing RCS Data}
+
+
+
+Among the earliest methods designed for RCS data was that proposed by Scott and Smith~\cite{scott1974repeatedsurveys}, in which dependent variables are aggregated at the time step level and modeled as a time series with added noise:
+
+
+\begin{equation}
+    \label{eq:scott}
+    y_t = \theta_t + e_t, \qquad \text{Var}(e_t) = s_t^2
+\end{equation}
+
+In this model, surveys are conducted at regular time intervals and $\theta_t$ represents a population mean changing over time. The analytical method proposed therein introduces different possibilities for the covariance structures of $\{\theta_t\}$ and $\{e_t\}$, but is ultimately concerned with the use of all previously observed aggregates $\{y_t\}_{t=1}^T$ to estimate $\theta_T$. As our objective is to improve the estimation and of covariate effects and their standard errors, we must look to more highly parameterized models.
+
+Such a model was developed by DiPrete and Grusky \cite{diprete1990multilevel}, in which added complexity and flexibility is added to a standard fixed effects model by having the effects of individual-level variables depend on macro-level variables:
+
+\begin{equation}
+    \label{eq:diprete}
+    y_{ti} = X_{ti}\beta_t + \varepsilon_{ti}, \qquad \beta_t = \mathbf{Z}_t \mathbf{\gamma}, \qquad \varepsilon_{ti} \sim \text{WN}(0,\sigma^2)
+\end{equation}
+
+Such a model requires the presence of macro-level variables that vary over time and explain changing effects of individual-level variables. While this formulation has a broad range of applications, it is only appropriate in cases where temporal correlation can be assumed to be a function of known time-varying predictors, rather than an independent random process.
+% \section{Modeling RCS Data with a Univariate Time Series}
+
+
+There also exist aggregate methods that involve calculating 
+averages of independent and dependent variables at each time 
+step and analyze these averages as a time series with covariates.
+ Such a model is an example of a state-space model that can be 
+ modeled jointly via Kalman filtering \cite{BrockwellDavis1991}. 
+ In the regression setting, aggregates would be needed for both 
+ response and explanatory variables, fitting the following model:
+
+$$ \bar{\mathbf{y}} = (n^{-1}X_t'X_f)\beta + \mathbf{u}, \qquad \mathbf{u}\sim\text{ARMA(p,q)} $$
+
+  While this method is effective at estimating population-level 
+  fixed effects like intercepts and slopes, it is limited when 
+  it comes to the estimation of individual-level effects, 
+  especially if indicator variables vary little in their 
+  distribution at each time step. This is a highly plausible
+   scenario when it comes to sampling methods for surveys, as 
+   researchers interested in the effect of a certain covariate 
+   may very well aim to be consistent in the proportions of time 
+   step samples that have this feature.
+
+  % $$ y_{ti} = \beta_0 + \beta_1t + \beta_2x_{ti} + u_t + \varepsilon_{ti}, \qquad i = 1,...,n_t$$
+
+  % $$ u_t - \phi u_{t-1} = \eta_t + \theta \eta_{t-1}, \qquad t = 1,...,T$$ 
+  
+  
+  % $$\eta_t \overset{\text{i.i.d.}}{\sim}N(0,\sigma_\eta^2), \qquad x_{ti} \sim \text{Bernoulli}(.5), \qquad \varepsilon_{ti} \overset{\text{i.i.d}}{\sim} N(0,\sigma_\varepsilon^2)$$
+
+
+
+
+% \subsection{Autoregressive Random Effects Models}
+
+One model that has been developed to analyze RCS data with 
+autocorrelated errors is the Autoregressive Random Effects 
+(ARE) Model \citep{modugno2015multilevel}. Treating observations 
+as the sum of a fixed effects model and an AR(1) time series,
+ARE models have two levels: a fixed-effects level and a time 
+series level.
+% \begin{equation}
+%     \label{eq:modugno_level1}
+%     y_{ti} = \mathbf{x}_{ti}\beta + u_t + \epsilon_{ti}, \hspace{.4in}  i = 1,...,n, \hspace{.4 in} \epsilon_{ti} \sim \text{i.i.d. } N(0,\sigma_\epsilon^2) 
+% \end{equation}
+
+% \begin{equation}
+%     \label{eq:modugno_level2}
+%     u_t - \phi u_{t-1} = \eta_t + \theta \eta_{t-1} , \hspace{.4in} t=1,...T, \hspace{.4in} \eta_t \sim N(0,\sigma_\eta^2) 
+% \end{equation}
+
+
+The method employed to fit such a model is a recursive process
+ that splits the log likelihood function of the model into two 
+ terms by conditioning on the latent time series $\mathbf{u}$. An EM algorithm is then employed for parameter estimation.
+ 
+
+
+This conditional splitting is convenient, as $\uu \sim 
+N(\mathbf{0},\GG)$ and $\yy|\uu \sim N(X_f\beta + \uu,
+ \sigma_\varepsilon^2I_N)$. Furthermore, the choice of imposing
+ an AR(1) structure on $\uu$ lends itself to a concise
+  representation of the determinant and inverse of $\GG$, the
+  covariance matrix of $\uu$.
+
+
+
+In the absence of an explicit observation of $\uu$, its conditional expectation
+is calculated with current parameter estimates, then used to update those estimates. 
+This process is repeated until convergence criteria are met.
+
+
+% \begin{equation}
+%     \label{cov_uy}
+%     \text{Cov}(\uu,\yy) = \GG X_t'
+% \end{equation}
+
+% With these pieces we can give the following expression for the expectation of $\uu$, conditioned on $\yy$:
+
+
+
+
+
+
+
+% This method preserves individual information, but accounts for the possible presence of temporal correlation by adding the time series term. The method is a recursive process with the following steps:
+
+
+
+% \begin{itemize}
+%     \item[1)] Calculate initial parameter estimates; 
+%     \item[2)] Estimate $\uu$ with $\mathbb{E}(\uu|\yy)$;
+%     \item[3)] Apply $\hat{\uu}$ with an AR(1) likelihood to update $\hat{\xi}_2$ and fit $\yy - X_t\hat{\uu}$ with a fixed effects model to update $\hat{\xi}_1$;
+%     \item[4)] Calculate and store $l_1(\hat{\xi}_1)$ and $l_2(\hat{\xi}_2)$;
+%     \item[5)] Repeat steps 2-4 until convergence criteria are met.
+% \end{itemize}
+
+% All estimate updates are based on explicitly calculable maximum likelihood estimators, with the exception of the AR parameter $\phi$, which is updated via one iteration of the Newton-Raphson scheme since $l_2$ is not linear with respect to $\phi$. In the next section, we examine some potential issues with fitting models with the ARE approach.
+
+
+
+
+
+
+
+
+%  A simple approach for this type of analysis is to aggregate the response variable by day and fit a time series model that incorporates daily covariates (for example, the proportions of respondents from specified geographic regions or the fraction of respondents that are internally displaced persons, or IDPs). However, there are many limitations to this aggregated analysis, not the least of which is the inability to accurately account for interactions among these factors at the household level. 
+
+% Alternative methods for analyzing repeated surveys have long been available, with early developments explicitly modeling changes in parameters over time ~\citep{ScottSmith74,Scott77, Jones80, Tam} and further extensions developed by~\citet{Wong} and~\citet{Staudenmayer}. Multilevel models, first applied to repeated surveys by~\citet{DiPrete}, avoid the need for aggregation by fitting regression models with parameters that are permitted to vary over time. In other specifications, fixed effects may be held constant while a time series is introduced for daily random effects~\citep{Modugno}, and some more computationally intensive approaches account for autocorrelation in longer repeated surveys by combining multilevel modeling with an additional time series for small-scale temporal variation~\citep{Lebo}. When the primary objective is to estimate the statistical significance of model covariates throughout a time period of interest in a large and diverse geographic area, both spatial and temporal sources of variation must be considered. As such, we have developed a novel algorithm for the rigorous analysis of de-identified household level data that applies a hybrid modeling approach to account for regional and demographic variability in addition to temporal autocorrelation. Our methodology enables the fitting of easily interpretable regression models that fully leverage food security survey data without the loss of information inherent in aggregate analyses. 
+
+
+
+ 
+
+
+
+
+% \subsection{How Additional White Noise Alters ARMA Processes}
+
+There are two flaws in this methodology. The first is that fixed effect 
+parameter estimates are updated with the assumption that 
+$\yy - \hat{\uu}$ is a realization of a fixed effects model,
+when its covariance structure is altered by the error in estimating $\uu$.
+The second problem stems from the effect of added individual noise on an AR(1)
+process, the sum of which forms an ARMA-Noise Process \citep{WongMiller1990}.
+
+
+
+Let's assume the best case scenario for level one of the model,
+ namely the perfect estimation of fixed effect parameters 
+ ($\hat{\beta} = \beta$). In this unlikely event, we are able to 
+extract data consisting of multiple noisy observations of each element of an AR(1) process
+
+ With no prior information about the latent time series, the
+  best estimates for the elements of $\uu$ are the averages at 
+  each time step. The added noise turns an originally AR(1) process
+  and turns it into an ARMA(1,1) process. Failing to add a moving
+  average parameter necessarily introduces bias to the estimation of 
+  the time series parameters.
+
+ From Box (1976) \citep{box1976time}, we have the following theorem:
+
+\textit{If $\{y_t\}$ follows an ARMA($p_1,q_1$) model, $\{a_t\}$ follows an ARMA($p_2,q_2$) and the two series are independent, then their sum $w_t = y_t + a_t$ follows an ARMA($p,q$) model in which $p \leq p_1 + p_2$ and $q \leq \text{max}(p_1 + q_2,p_2 + q_1)$. }
+
+Because $\{a_t\}$ is white noise, $p_2 = q_2 = 0$. As $p_1=1$ and $q_1=0$, we can deduce that $\{w_t\}$ is an ARMA($p,q$) process where $p\leq 1$ and $q \leq 1$. Because $\gamma_{\hat{\uu}}(h+1)/\gamma_{\hat{\uu}}(h) = \phi $ for $h > 0$, we know that $p = 1$. The ACVF of $\hat{\uu}$ is therefore incompatible with that of an AR(1) process, so it must be ARMA(1,1).
+
+
+ 
+
+% \section{Analyzing ARMA-Noise Processes}
+
+% \subsection{Impacts of time series estimation error on confidence regions for regression parameters}
+
+
+% In the event that $\xi_2$ is perfectly estimated, all parameter estimates $\hat{\xi}$ are plugged into the conditional expectation formula given in Equation \ref{eq:u_hat}. Even with perfect parameter estimates, $\hat{\uu}$ will still deviate from $\uu$, as $\text{Var}(\hat{\uu} - \uu) = \GG - \GG X_t' \Omega ^ {-1} X_t\GG$. As a result, $\widehat{X_f\beta + \varepsilon} = \yy - X_t\hat{\uu}$ will not be the sum of fixed effects and white noise as the current algorithm supposes. Were we to treat $\yy - X_t\hat{\uu}$ as such, our resulting estimate for $\beta$ would be the standard OLS estimate $\hat{\beta} = (X_f'X_f) ^ {-1}X_f'(\yy - X_t\hat{\uu})$
+
+% However, the inevitable error in $\hat{\uu}$ would endow $\hat{\beta}$ not with the implied $\text{Var}(\hat{\beta}) = (X_f'X_f)^{-1}\sigma_\varepsilon^2$, but rather the following covariance matrix:
+% \begin{equation}
+%     \label{eq:var_beta_modugno}
+%      \text{Var}(\hat{\beta}) = 2\sigma_\varepsilon^2(X_f'X_f) ^ {-1} - \sigma_\varepsilon^2(X_f'X_f) ^ {-1} X_f' (\Omega^{-1} ) X_f ( X_f' X_f ) ^ {-1} =: \Sigma_\beta 
+% \end{equation}
+% As convenient as it might be to subtract corresponding entries of $\hat{\uu}$ from $\yy$ and treat the resulting difference as a fixed effects model with independent noise, the resulting confidence regions would be incorrect. 
+
+% \textcolor{blue}{Add simulations showing the failure of this confidence region to perform well}
+
+As the best-case scenario of estimating and extracting the latent time series will still yield temporal correlation in the data, albeit reduced, we must turn to a more nuanced treatment of residual covariance. A natural choice is the GLS estimator of $\beta$, which we will see challenges the necessity of using $\hat{\uu}$ in the estimation of $\beta$ at all.
+
+
+
+
+
+When framed in the context of repeated surveys, the requirement that the sample size at each time step is constant is unrealistic. Given that real life survey data is rarely so uniform, generalizing the method to allow for varying daily sample size is a natural goal. In examining the method as it stands, the condition of fixed sample size is only necessary in the fitting of ARMA-Noise models, as $\mathbf{w} = \uu + \mathbf{a}$ is only an ARMA process if $\{a_t=n_t^{-1}\sum_{i=1}^{n_t}\}$ is white noise, something that at first glance is violated by varying $n_t$. However, we will now show how this method can be adapted to allow for varying sample sizes, so long as certain conditions are met.
+
+
+
+
+
+% As we now have a viable method (courtesy of Wong and Miller) for estimating all the parameters necessary to estimate $\Omega$, an analog of the above equation with sample estimates will be our estimator for $\beta$, and confidence intervals will be based on a sample estimate of its covariance matrix $\text{Var}(\hat{\beta}_\text{GLS}) = (X_f'\Omega^{-1}X_f)^{-1}$. With all these considerations in mind, we are now ready to propose our method for fitting these types of models.

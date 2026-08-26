@@ -1,10 +1,43 @@
+\begin{itemize}
+    \item SIMULATE FIXED/MIXED EFFECT REMARCS DATA
+    \item FIT WITH FE/ME MODEL
+    \item FIT WITH TS WITH COVARIATES
+    \item FIT WITH MODUGNO
+    \item MODUGNO INSTABILITY
+    \item FIT WITH REMARCS
+    \item HEATMAPS
+    \item MODEL SELECTION
+\end{itemize}
+
+
+
+A realization of an ARE model is displayed in Figure \ref{fig:sample_are} with the following parameters:
+
+\begin{table}[htbp]
+    \centering
+    \begin{tabular}{c|c|c|c|c|c|c}
+        Parameter & $\beta_0$ & $\beta_t$ & $\beta_1$ & $\sigma_\varepsilon^2$ & $\phi$ & $\sigma_\eta^2$\\
+        \hline 
+        Value & $40$ & $-0.1$ & $2$ & $1$ & $0.9$ & $1$
+    \end{tabular}
+    \caption{Parameter values for simulated ARE model}
+    \label{tab:sample_are}
+\end{table}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.6\linewidth]{images/output/are.png}
+    \caption{Realization of ARE model with parameters defined in Table \ref{tab:sample_are}}
+    \label{fig:sample_are}
+\end{figure}
+
 \subsection{Simulations}
 
 In order to evaluate the efficacy of the methods proposed above, individual components of the REMARCS methodology and the algorithm in its entirety were tested on simulated RCS data.  
 
 \input{thesis_subsections/arma_cov_subsection}
 
-\section{ARMA-Noise Model Fitting}
+% \section{ARMA-Noise Model Fitting}
 % \input{images/output/t_conf_o_4_3}
 % \input{images/output/e_conf_o_4_3}
 % \input{images/output/t_conf_l_4_3}
@@ -58,7 +91,7 @@ Confidence regions calculated with $\alpha = .05$ capture true values at rates c
 For both observable and latent parameters we can see performance dipped for parameter combinations $(\phi,\theta)$ close to the $\phi + \theta = 0$ line for time series of length $T = 1000$. However, we can see that performance improved for $T=10,000$, suggesting that parameter estimates for ARMA(1,1) processes that resemble white noise take longer to converge to their asymptotic distributions.
 
 
-\section{REMARCS Model Fitting}
+% \section{REMARCS Model Fitting}
 % \input{images/output/fearma_l1_conf.txt}
 % \input{images/output/fearma_l2_conf.txt}
 
@@ -84,9 +117,10 @@ In order to assess the efficacy of this method, simulations were conducted with 
     \label{fig:conf_heatmap}
 \end{figure}
 
+
 \subsection{Development of model parameter estimates}
 Now that we've seen some aggregate results displaying the efficacy of this method under different parameters, we highlight some individual realizations of specific parameter combinations and observe how the parameter estimates evolve as the algorithm progresses. 
-\subsubsection{Case: $\uu$ and $\mathbf{w}$ are ARMA(1,1)}
+% \subsection{Case: $\uu$ and $\mathbf{w}$ are ARMA(1,1)}
 We start with a single simulation of the most general case of our model, one in which all parameters are nonzero. Exact values are given below:  
 \input{images/output/params_table}
 
@@ -155,7 +189,7 @@ In the table below we can see how properly accounting for temporal correlation h
 
 
 \input{images/output/sim_arma_ests}
-\subsubsection{Case: $\uu$ is AR(1)}
+% \subsection{Case: $\uu$ is AR(1)}
 We now look at data simulated from a restricted model with the following parameters: 
 \input{images/output/params_table_ar}
 \begin{figure}[H]
@@ -225,7 +259,7 @@ We then see in the right panel of Figure \ref{fig:single_sim_ma} that the result
 \end{figure}
 
 
-\subsubsection{Case: $\uu$ is MA(1)}
+% \subsection{Case: $\uu$ is MA(1)}
 
 We now restrict $\phi = 0$ and simulate data with the following parameters:
 
@@ -346,7 +380,7 @@ We take the final time series parameter estimates and perform inference on $\hat
 
 Note that while the point estimate $\hat{\theta}$ doesn't change much, the range of the confidence interval for $\theta$ has shrunk with the decrease in degrees of freedom.
 
-\subsubsection{Case: $\mathbf{w}$ is AR(1)}
+% \subsection{Case: $\mathbf{w}$ is AR(1)}
 
 We now look to the special case in which aggregate noise is an AR(1) process, which we recall can only occur if $\theta/\phi = \mathbb{E}(N^{-1})\sigma_\varepsilon^2/\sigma_\eta^2$. We select parameters for which this equality doesn't hold exactly, but is approximately true given the distribution of $N_t$:
 

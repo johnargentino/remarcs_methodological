@@ -1,9 +1,10 @@
-\contentsline {table}{\numberline {1}{\ignorespaces Parameter values for simulated ARE model}}{4}{table.caption.4}%
-\contentsline {table}{\numberline {2}{\ignorespaces Parameter values for simulated REMARCS model with all nonzero parameters}}{28}{table.caption.16}%
-\contentsline {table}{\numberline {3}{\ignorespaces Parameter estimates for REMARCS model with all nonzero parameters, before and after convergence}}{29}{table.caption.19}%
-\contentsline {table}{\numberline {4}{\ignorespaces Parameter values for simulated REMARCS model with a latent AR(1) process}}{29}{table.caption.20}%
-\contentsline {table}{\numberline {5}{\ignorespaces Parameter estimates REMARCS model with latent AR(1) Time Series, before and after convergence }}{30}{table.caption.22}%
-\contentsline {table}{\numberline {6}{\ignorespaces Parameter values for simulated REMARCS model with a latent MA(1) process}}{31}{table.caption.25}%
-\contentsline {table}{\numberline {7}{\ignorespaces Parameter estimates for REMARCS model with latent MA(1) time series, before and after convergence}}{32}{table.caption.27}%
-\contentsline {table}{\numberline {8}{\ignorespaces Parameter values for simulated REMARCS model with latent AR(1) process }}{34}{table.caption.30}%
-\contentsline {table}{\numberline {9}{\ignorespaces Parameter estimates for REMARCS model with $\theta _b \approx 0$, before and after convergence}}{34}{table.caption.32}%
+\contentsline {table}{\numberline {1}{\ignorespaces Implications of Various Restrictions of Time Series Parameters}}{8}{table.caption.2}%
+\contentsline {table}{\numberline {2}{\ignorespaces Parameter values for simulated ARE model}}{12}{table.caption.4}%
+\contentsline {table}{\numberline {3}{\ignorespaces Parameter values for simulated REMARCS model with all nonzero parameters}}{16}{table.caption.12}%
+\contentsline {table}{\numberline {4}{\ignorespaces Parameter estimates for REMARCS model with all nonzero parameters, before and after convergence}}{18}{table.caption.15}%
+\contentsline {table}{\numberline {5}{\ignorespaces Parameter values for simulated REMARCS model with a latent AR(1) process}}{18}{table.caption.16}%
+\contentsline {table}{\numberline {6}{\ignorespaces Parameter estimates REMARCS model with latent AR(1) Time Series, before and after convergence }}{19}{table.caption.18}%
+\contentsline {table}{\numberline {7}{\ignorespaces Parameter values for simulated REMARCS model with a latent MA(1) process}}{20}{table.caption.21}%
+\contentsline {table}{\numberline {8}{\ignorespaces Parameter estimates for REMARCS model with latent MA(1) time series, before and after convergence}}{21}{table.caption.23}%
+\contentsline {table}{\numberline {9}{\ignorespaces Parameter values for simulated REMARCS model with latent AR(1) process }}{22}{table.caption.26}%
+\contentsline {table}{\numberline {10}{\ignorespaces Parameter estimates for REMARCS model with $\theta _b \approx 0$, before and after convergence}}{23}{table.caption.28}%

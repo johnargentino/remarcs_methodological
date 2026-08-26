@@ -34,121 +34,121 @@ set.seed(123)
 #how variance affects time series
 ```{r}
 set.seed(123)
-pos_ar_df = tibble(power = seq(-5,5, by = 1) %>% rep(each = 9), ma = seq(-.8,.8, by = .2) %>% rep(times = 11)) %>%
-  mutate(variance = 2 ^ power) %>%
-  rowwise() %>%
-  mutate(ma_b = fwd(.4, ma, 1, variance, 1)[1])
-pos_ar_df$ma = as.factor(pos_ar_df$ma)
-
-ggplot(data = pos_ar_df) + 
-  geom_line(mapping = aes(x = power, y = ma_b, group = ma, col = ma)) +
-    scale_x_continuous(breaks = seq(-5,5, by = 1)) +
-  scale_y_continuous(breaks = seq(-1,1, by = 0.2)) +
-  xlab("Variance of added noise (log base two)") + 
-  ylab("New moving average parameter") + 
-  ggtitle("")+
-   labs(color = expression(theta)) +
-  scale_color_manual(values = c(
-  "#000000", # black
-  "#E69F00", # orange
-  "#56B4E9", # sky blue
-  "#009E73", # bluish green
-  "#F0E442", # yellow
-  "#0072B2", # blue
-  "#D55E00", # vermillion
-  "#CC79A7", # reddish purple
-  "#999999"  # grey (extension)
-))
-  theme(
-  axis.title.x = element_text(size = 16),
-  axis.title.y = element_text(size = 16),
-  legend.title = element_text(size = 14),
-  legend.text  = element_text(size = 12),
-  legend.key.size = unit(1.2, "lines")
-  )
-
-ggsave("output/pos_ar_var_effect.pdf", height = 6, width = 8)
-
-neg_ar_df = tibble(power = seq(-5,5, by = 1) %>% rep(each = 9), ma = seq(-.8,.8, by = .2) %>% rep(times = 11)) %>%
-  mutate(variance = 2 ^ power) %>%
-  rowwise() %>%
-  mutate(ma_b = fwd(-.4, ma, 1, variance, 1)[1])
-neg_ar_df$ma = as.factor(neg_ar_df$ma)
-
-ggplot(data = neg_ar_df) + 
-  geom_line(aes(x = power, y = ma_b, group = ma, col = ma)) + 
-    scale_x_continuous(breaks = seq(-5,5, by = 1)) +
-  scale_y_continuous(breaks = seq(-1,1, by = 0.2)) +
-  xlab("Variance of added noise (log base two)") + 
-  ylab("New moving average parameter") + 
-  labs(color = expression(theta)) +
-  scale_color_manual(values = c(
-  "#000000", # black
-  "#E69F00", # orange
-  "#56B4E9", # sky blue
-  "#009E73", # bluish green
-  "#F0E442", # yellow
-  "#0072B2", # blue
-  "#D55E00", # vermillion
-  "#CC79A7", # reddish purple
-  "#999999"  # grey (extension)
-))
-  theme(
-  axis.title.x = element_text(size = 16),
-  axis.title.y = element_text(size = 16),
-  legend.title = element_text(size = 14),
-  legend.text  = element_text(size = 12),
-  legend.key.size = unit(1.2, "lines")
-)
-
-ggsave("output/neg_ar_var_effect.pdf", height = 6, width = 8)
-
-no_ar_df = tibble(power = seq(-5,5, by = 1) %>% rep(each = 9), ma = seq(-.8,.8, by = .2) %>% rep(times = 11)) %>%
-  mutate(variance = 2 ^ power) %>%
-  rowwise() %>%
-  mutate(ma_b = fwd(0, ma, 1, variance, 1)[1])
-
-no_ar_df$ma = as.factor(no_ar_df$ma)
-
-ggplot(data = no_ar_df) + 
-  geom_line(mapping = aes(x = power, y = ma_b, group = ma, col = ma)) + 
-    # Force gridlines at your desired values
-  scale_x_continuous(breaks = seq(-5,5, by = 1)) +
-  scale_y_continuous(breaks = seq(-1,1, by = 0.2)) +
-  xlab("Variance of added noise (log base two)") + 
-  ylab("New moving average parameter") + 
-   labs(color = expression(theta)) +
-  scale_color_manual(values = c(
-  "#000000", # black
-  "#E69F00", # orange
-  "#56B4E9", # sky blue
-  "#009E73", # bluish green
-  "#F0E442", # yellow
-  "#0072B2", # blue
-  "#D55E00", # vermillion
-  "#CC79A7", # reddish purple
-  "#999999"  # grey (extension)
-))
-  theme(
-  axis.title.x = element_text(size = 16),
-  axis.title.y = element_text(size = 16),
-  legend.title = element_text(size = 14),
-  legend.text  = element_text(size = 12),
-  legend.key.size = unit(1.2, "lines")
-  )
-
-ggsave("output/no_ar_var_effect.pdf", height = 6, width = 8)
+# pos_ar_df = tibble(power = seq(-5,5, by = 1) %>% rep(each = 9), ma = seq(-.8,.8, by = .2) %>% rep(times = 11)) %>%
+#   mutate(variance = 2 ^ power) %>%
+#   rowwise() %>%
+#   mutate(ma_b = fwd(.4, ma, 1, variance, 1)[1])
+# pos_ar_df$ma = as.factor(pos_ar_df$ma)
+# 
+# ggplot(data = pos_ar_df) + 
+#   geom_line(mapping = aes(x = power, y = ma_b, group = ma, col = ma)) +
+#     scale_x_continuous(breaks = seq(-5,5, by = 1)) +
+#   scale_y_continuous(breaks = seq(-1,1, by = 0.2)) +
+#   xlab("Variance of added noise (log base two)") + 
+#   ylab("New moving average parameter") + 
+#   ggtitle("")+
+#    labs(color = expression(theta)) +
+#   scale_color_manual(values = c(
+#   "#000000", # black
+#   "#E69F00", # orange
+#   "#56B4E9", # sky blue
+#   "#009E73", # bluish green
+#   "#F0E442", # yellow
+#   "#0072B2", # blue
+#   "#D55E00", # vermillion
+#   "#CC79A7", # reddish purple
+#   "#999999"  # grey (extension)
+# ))
+#   theme(
+#   axis.title.x = element_text(size = 16),
+#   axis.title.y = element_text(size = 16),
+#   legend.title = element_text(size = 14),
+#   legend.text  = element_text(size = 12),
+#   legend.key.size = unit(1.2, "lines")
+#   )
+# 
+# ggsave("output/pos_ar_var_effect.pdf", height = 6, width = 8)
+# 
+# neg_ar_df = tibble(power = seq(-5,5, by = 1) %>% rep(each = 9), ma = seq(-.8,.8, by = .2) %>% rep(times = 11)) %>%
+#   mutate(variance = 2 ^ power) %>%
+#   rowwise() %>%
+#   mutate(ma_b = fwd(-.4, ma, 1, variance, 1)[1])
+# neg_ar_df$ma = as.factor(neg_ar_df$ma)
+# 
+# ggplot(data = neg_ar_df) + 
+#   geom_line(aes(x = power, y = ma_b, group = ma, col = ma)) + 
+#     scale_x_continuous(breaks = seq(-5,5, by = 1)) +
+#   scale_y_continuous(breaks = seq(-1,1, by = 0.2)) +
+#   xlab("Variance of added noise (log base two)") + 
+#   ylab("New moving average parameter") + 
+#   labs(color = expression(theta)) +
+#   scale_color_manual(values = c(
+#   "#000000", # black
+#   "#E69F00", # orange
+#   "#56B4E9", # sky blue
+#   "#009E73", # bluish green
+#   "#F0E442", # yellow
+#   "#0072B2", # blue
+#   "#D55E00", # vermillion
+#   "#CC79A7", # reddish purple
+#   "#999999"  # grey (extension)
+# ))
+#   theme(
+#   axis.title.x = element_text(size = 16),
+#   axis.title.y = element_text(size = 16),
+#   legend.title = element_text(size = 14),
+#   legend.text  = element_text(size = 12),
+#   legend.key.size = unit(1.2, "lines")
+# )
+# 
+# ggsave("output/neg_ar_var_effect.pdf", height = 6, width = 8)
+# 
+# no_ar_df = tibble(power = seq(-5,5, by = 1) %>% rep(each = 9), ma = seq(-.8,.8, by = .2) %>% rep(times = 11)) %>%
+#   mutate(variance = 2 ^ power) %>%
+#   rowwise() %>%
+#   mutate(ma_b = fwd(0, ma, 1, variance, 1)[1])
+# 
+# no_ar_df$ma = as.factor(no_ar_df$ma)
+# 
+# ggplot(data = no_ar_df) + 
+#   geom_line(mapping = aes(x = power, y = ma_b, group = ma, col = ma)) + 
+#     # Force gridlines at your desired values
+#   scale_x_continuous(breaks = seq(-5,5, by = 1)) +
+#   scale_y_continuous(breaks = seq(-1,1, by = 0.2)) +
+#   xlab("Variance of added noise (log base two)") + 
+#   ylab("New moving average parameter") + 
+#    labs(color = expression(theta)) +
+#   scale_color_manual(values = c(
+#   "#000000", # black
+#   "#E69F00", # orange
+#   "#56B4E9", # sky blue
+#   "#009E73", # bluish green
+#   "#F0E442", # yellow
+#   "#0072B2", # blue
+#   "#D55E00", # vermillion
+#   "#CC79A7", # reddish purple
+#   "#999999"  # grey (extension)
+# ))
+#   theme(
+#   axis.title.x = element_text(size = 16),
+#   axis.title.y = element_text(size = 16),
+#   legend.title = element_text(size = 14),
+#   legend.text  = element_text(size = 12),
+#   legend.key.size = unit(1.2, "lines")
+#   )
+# 
+# ggsave("output/no_ar_var_effect.pdf", height = 6, width = 8)
 ```
 
 #sample acf
 ```{r}
-set.seed(123)
-pdf("output/sample_acf.pdf", height = 7, width = 7)
-ar_plus_acf = acf(arima.sim(model = list(ar = .8), n = 10000), main = "")
-ar_plus_acf = acf(arima.sim(model = list(ar = -.8), n = 10000), main = "")
-ar_plus_acf = acf(arima.sim(model = list(ma = .8), n = 10000), main = "")
-ar_plus_acf = acf(arima.sim(model = list(ma = -.8), n = 10000), main = "")
-dev.off
+# set.seed(123)
+# pdf("output/sample_acf.pdf", height = 7, width = 7)
+# ar_plus_acf = acf(arima.sim(model = list(ar = .8), n = 10000), main = "")
+# ar_plus_acf = acf(arima.sim(model = list(ar = -.8), n = 10000), main = "")
+# ar_plus_acf = acf(arima.sim(model = list(ma = .8), n = 10000), main = "")
+# ar_plus_acf = acf(arima.sim(model = list(ma = -.8), n = 10000), main = "")
+# dev.off
 ```
 
 #Showing bias introduced in Modugno of fitting ARMA-Process with AR(1)

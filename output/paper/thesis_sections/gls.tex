@@ -1,4 +1,4 @@
-\section{Impacts of time series estimation error on confidence regions for regression parameters}
+% \subsection{Impacts of time series estimation error on confidence regions for regression parameters}
 
 We've already looked at the implications of perfectly estimating $\beta$ to improve how Level 2 parameters are estimated. Let's now go in the other direction, assuming perfect estimation of $\xi_2$ to investigate the implications  on fitting $\hat{\beta}$. This hypothetical is somewhat contrived, as we could only isolate $X_t\uu + \bm{\varepsilon}$ in the event that $\beta$ was estimated perfectly, in which case we would have no need to estimate it again. To that end, let's assume that our algorithm of choice perfectly estimates $\beta$ on a particular update, but doesn't ``know'' it. It then perfectly fits $\hat{\xi}_2$ using the method outlined by Wong, and the question becomes whether $\beta$ is a ``stable'' estimate.
 
