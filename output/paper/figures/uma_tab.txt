@@ -1,0 +1,14 @@
+% latex table generated in R 4.4.2 by xtable 1.8-4 package
+% Sun Aug 30 15:47:21 2026
+\begin{table}[ht]
+\centering
+\caption{Rates at which AR Parameter is Insignificant When True Parameter is Zero} 
+\label{tab:uma_phi_insig}
+\begin{tabular}{rrrrrr}
+  \hline
+  \hline
+theta & -0.90 & -0.50 & -0.10 & 0.30 & 0.70 \\ 
+  phi\_captured & 1.00 & 1.00 & 0.50 & 0.50 & 1.00 \\ 
+   \hline
+\end{tabular}
+\end{table}

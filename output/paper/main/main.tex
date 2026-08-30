@@ -1,0 +1,305 @@
+%% =====================================================================
+
+%% This is file thesis.tex, a template for Tulane University Thesis
+%% (PHYSICS DEPT.), Version 1, by Tim Schuler (based on MATH Version 1.2  
+%% by Dmitri Alexeev). It is supplied with files TUT.cls (class 
+%% definitions) and TUT.bst (bibliography definitions). This is the 
+%% only file you need to edit. Simply follow the instructions provided 
+%% for each line. TUT.cls replaces the book document class, which means 
+%% that you should have no problems with using it if your system works 
+%% with book.cls.
+%% =====================================================================
+
+% TUT.cls document class automatically
+%% =====================================================================
+%% TULANE SSE PRINTING GUIDELINES:
+%% 1. The final copy must be printed on 8.5 x 11-inch white paper.
+%% 2. The paper must be acid-free, 100% cotton fiber, and 20 lb bond.
+%% 3. All margins should be 1 inch, EXCEPT chapter titles and the very
+%%    first page of the Abstract, TOC, etc., which must be 2 inches from the top.
+%%    (This TUT.cls file attempts to handle these margins automatically)
+%% =====================================================================
+
+\documentclass{article}
+\usepackage{bbm}
+\usepackage{graphicx}
+\usepackage{placeins}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{listings}
+\usepackage{booktabs}
+\usepackage{rotating}
+
+% --- MODERN PACKAGES INJECTED (2026) ---
+\usepackage[hidelinks]{hyperref}   % Clickable links in PDF
+\usepackage{float}      % For exact [H] placement of figures/tables
+\usepackage{endnotes}   % For endnotes support
+\usepackage{glossaries} % For glossary support
+\usepackage{imakeidx}   % For index support
+% ---------------------------------------
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{xcolor}
+\numberwithin{equation}{section}
+
+\theoremstyle{plain}
+\newtheorem{property}{Property}[section]
+\newtheorem{theorem}{Theorem}[section]
+\usepackage{graphicx} % Required for inserting images
+\usepackage{natbib}
+\usepackage{bm}
+\usepackage{subcaption}
+\usepackage{caption}
+\usepackage{array}
+\newcommand{\Sig}{\mathbf{\Sigma}}
+\newcommand{\yy}{\mathbf{y}}
+\newcommand{\ee}{\mathbf{\epsilon}}
+\newcommand{\II}{\mathbf{I}}
+\newcommand{\uu}{\mathbf{u}}
+\newcommand{\bb}{\mathbf{b}}
+\newcommand{\XX}{\mathbf{X}}
+\newcommand{\GG}{\mathbf{\Gamma}}
+\newcommand{\VV}{\mathbf{V}}
+
+\usepackage{tikz}
+\usepackage{soul}
+\usepackage{float}
+\usepackage{appendix}
+
+\usepackage{xcolor}
+% \usepackage[colorlinks=false, breaklinks=true]{hyperref}
+% \usepackage{subfig}
+% \usepackage{subfigure}
+\usepackage{subcaption}
+\usetikzlibrary{shapes.geometric, arrows.meta, positioning}
+
+\tikzstyle{startstop} = [rectangle, rounded corners, minimum width=3cm, minimum height=1cm,text centered, draw=black, fill=red!30]
+\tikzstyle{process} = [rectangle, minimum width=3cm, minimum height=1cm, text centered, draw=black, fill=blue!30]
+\tikzstyle{decision} = [rectangle, minimum width=3cm, minimum height=1cm, text centered, draw=black, fill=green!30]
+\tikzstyle{arrow} = [thick,->,>=stealth]
+\makeindex
+
+
+
+
+
+
+
+
+% The margins are set correctly by default. However, if your printer
+% gives too much of an offset, you may need to define these to
+% some proper values depending on your printer.
+% Use the file testpage.tex to figure out values for your printer.
+%\voffset=-.25in
+%\hoffset=0in
+
+% Put your additional packages here.
+%\usepackage{pb-diagram,lamsarrow,pb-lams} 
+%\usepackage{amstext,amsmath,amssymb,amsfonts,amsthm}
+%\dgARROWLENGTH=1.5em
+
+% If you want to have an Index at the end
+%\usepackage{makeidx}
+%\makeindex
+
+% Doublespacing is required by the Graduate School. You may still
+% use singlespacing to view and print your drafts.
+
+%\singlespacing
+
+% You may want to use these commands (optional)
+%\renewcommand{\figurename}{Diagram}
+%\renewcommand{\listfigurename}{List of Diagrams}
+
+% If you have a file with your favorite TeX definitions 
+% (e.g. mycoms.tex), you may input it here.
+%\input{mycoms}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%% Necessary Definitions %%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Your name
+\author{John Argentino}
+
+
+
+% If you want the Copyright notice to be printed, give 
+% the Copyright year, otherwise comment out or leave the year empty.
+% \copyrightyear{\the\year}
+
+% Your Department 
+
+% \membere{}
+% \memberf{}
+
+% If you have a member (or yourself) with a very long name, you will
+% need to increase the \approvallength. It is set by default to
+% 2.5in, which is sufficient in most cases.
+%\approvallength=2.5in 
+
+\input{../r_variables.tex}
+%===============
+\begin{document}
+%===============
+
+
+% The abstract environment produces the abstract title page and the
+% abstract, which are required for dissertations. If you don't need
+% the abstract (and its title page), then comment it out.
+%
+% IMPORTANT OVERRIDE RULE: 
+% The abstract for a Ph.D. dissertation MUST NOT EXCEED 350 WORDS!
+% If it exceeds 350 words, University Microfilms will edit it.
+\begin{abstract}
+\end{abstract}
+
+
+% The maketitle command produces the title page for the thesis and
+% the copyright notice if the \copyrightyear has been defined above.
+% \maketitle
+
+
+% \section{Introduction}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% All pages following the title are supposed to be numbered in roman
+% style at the bottom, up to the Introduction.
+\pagenumbering{roman}
+\pagestyle{plain}
+\setcounter{page}{2}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \chapter*{Foreword}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Write your Foreword here or comment it out if you don't need it.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Contents
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% List your contents or figures (and other similar stuff) here.
+% \tableofcontents
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \input{chapters/introduction}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Regularly numbered pages start with the Introduction and continue
+% throughout the rest of the thesis
+
+
+% It is recommended that you keep this main file small by inputing
+% the chapters using the ``input'' commands. But if your thesis is
+% relatively small, you may write it all in this single file.
+% The following line assumes that the Introduction is in the file
+% intro.tex.
+
+%\par starts a new paragraph and \noindent suppresses default indention. 
+\noindent
+
+\section{Introduction}
+\input{../sections/introduction.tex}
+
+\section{Background}
+% \input{chapters/time_series}
+\input{../sections/background.tex}
+\section{Method}
+\input{../sections/methods.tex}
+\section{Simulations}
+\input{../sections/results.tex}
+% \section{Case Study}
+\section{Discussion}
+\input{../sections/discussion.tex}
+
+% \section{Bulk Material}
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Use the same idea with the input commands for all your other chapters. This will load examples.tex.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\input{valdoms}
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% References %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% File TUT.bst contains the bibliography style definitions for BIBTeX.
+% File Bib.bib is assumed to contains the bibliography database 
+% to be used by BIBTeX. If you use other filename, change the
+% bibliography command below accordingly.
+% You can change the name of the Bib.bib file, not TUT.bst file.
+% To use BIBTeX, UNCOMMENT the following two lines and COMMENT out
+% the sample bibliography a few lines below (or delete it). 
+% Press F2 + F11 + F2 + F2 to run bibtex
+%
+% IMPORTANT BIBLIOGRAPHY RULES:
+% If you are in the Sciences, your references must be compiled in 
+% the exact order they are cited in the text (e.g., using a style like 'unsrt').
+% If you are outside the Sciences, they must be formatted alphabetically.
+\bibliographystyle{plain}
+\bibliography{mVAM_refs}
+\section{Appendix}
+% \input{sections/appendix.tex}
+\listoftables
+\listoffigures
+
+% If you don't want to use BIBTeX, you will have to create the
+% bibliography manually. But remember, Graduate School requires the
+% items to appear in ORDER OF CITATION, which means you will need to 
+% reorder everything if you change your input file(s). Also, 
+% there are specific style requirements. Below is a small sample
+% which you can use as a template.
+% But really, use BIBTeX!!! 
+%\begin{thebibliography}{99}
+%\bibitem{AndersonFuller92}
+%  F. Anderson and K. Fuller,
+%  ``Rings and categories of modules'',
+%  Springer-Verlag, 1992
+%\bibitem{BazzoniFuchsSalce95}
+%  S. Bazzoni, L. Fuchs and L. Salce,
+%  ``The hierarchy  of uniserial modules over a valuation domain'',
+%  \underline{Forum Math.} {\bf 7}, 247-277 (1995)
+%\end{thebibliography}
+
+% \appendix
+
+% \input{chapters/derivations}
+%\input{chapters/extra_visualizations}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Endnotes, Glossaries, and Index (Optional uncomment to use)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\theendnotes
+%\printnoidxglossaries
+%\printindex
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \chapter*{Biography}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Biography needs to fit on one page, so don't get too involved.
+
+% Your biography here.
+
+\end{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% E N D %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

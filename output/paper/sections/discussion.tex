@@ -18,5 +18,12 @@ Furthermore, failure to account for temporal correlation when modeling repeated 
     This method is not without limitations, particularly given its reliance on asymptotic distributions. As such confidence regions underperform for low values of T, particularly in boundary cases like $\phi,\theta \approx \pm1$ and $\phi + \theta \approx 0$, as the resulting covariance structure is close to that of white noise. The imposition of an ARMA order no greater than $(1,1)$ is certainly limiting, as it precludes REMARCS Models with all but three types of latent ARMA processes from being properly fit.  
 
 % \section{Directions for Future Research}
-    There are a number of natural extensions that arise from this work, particularly generalizing the time series level of the model to allow for $p,q > 1$. Given that survey data so often tracks binary output variables, relaxing the Gaussian condition is of further interest. Since confidence intervals are currently based on asymptotic distributions, the derivation of small-sample corrections is warranted.
+    There are a number of natural extensions that arise from this work, particularly 
+    generalizing the time series level of the model to allow for $p,q > 1$. Given that 
+    survey data so often tracks binary output variables, relaxing the Gaussian condition 
+    is of further interest. Since confidence intervals are currently based on asymptotic
+    distributions, the derivation of small-sample corrections is warranted. Lastly, 
+    while the theory now accommodates samples size that vary, whether it be strictly stationary
+    or not in certain circumstances, understanding the effect this has on parameter estimation
+    is not yet understood.
 % \section{Conclusion}

@@ -1,5 +1,0 @@
-% \section{ARMA Processes with Covariates}
-
-
-
-We now introduce the model $\mathbf{y} = X_f\beta + \mathbf{u}$, in which $\mathbf{u}$ is an ARMA process and $X_f\beta$ being a design matrix and vector of coefficients for $k$ fixed effects. As the observed time series is no longer stationary, it cannot be treated as an ARMA process. Given that the noise of the model is now correlated, the vector of fixed effect parameters $\beta$ can no longer be estimated via ordinary least squares. Were the parameters of $\mathbf{u}$ known, then so too would the covariance matrix of the whole model $\Sigma_\mathbf{y}$ and $\beta$ would be best estimated with the GLS estimator $\hat{\beta} = (X_f'\Sigma_\mathbf{y}^{-1}X_f)^{-1}X_f\Sigma_\mathbf{y}^{-1}\mathbf{y}$. As the time series parameters are just as much the object of estimation, fitting the model is a joint process that employs the Kalman filter \textcolor{blue}{reference} when performed by \emph{arima}.

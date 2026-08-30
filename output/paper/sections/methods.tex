@@ -15,8 +15,6 @@ We define the vector of observations $\yy$ as the realization of a model defined
     u_t - \phi u_{t-1} = \eta_t + \theta \eta_{t-1} , \hspace{.4in} t=1,...T \hspace{.4in}  \hspace{.2in} \eta_t \sim N(0,\sigma_\eta^2) 
 \end{equation}
 
-
-
 The algorithm we propose is an iterative process applying the estimates of parameters from one level to update those of the other. The process is as follows:
 
 \begin{itemize}
@@ -28,8 +26,7 @@ The algorithm we propose is an iterative process applying the estimates of param
     \item[6)] Generate confidence regions. If any parameters are insignificant, restrict model and repeat algorithm
 \end{itemize}
 
-\input{visualizations/em_flow}
-MAKE SURE ALL NOTATION HAS BEEN DEFINED!!!!
+
 \subsection{Evaluating Convergence}
 
 
@@ -141,9 +138,26 @@ Because ${y}_{t\cdot} \perp S_t^2$ for all $t$, we know that $\hat{\sigma}_\vare
 \end{equation}
 
 
-Equipped with the above estimates, Wong and Miller detail how to estimate ``latent" parameters $\tau_l = (\theta, \sigma_\eta^2)$ by relating the autocovariance functions of $\uu$ and $\mathbf{w}$ through the system of equations $H(\theta,\sigma_\eta^2)$:
+Equipped with the above estimates, Wong and Miller detail how to estimate
+ ``latent" parameters $\tau_l = (\theta, \sigma_\eta^2)$ by relating the 
+ autocovariance functions of $\uu$ and $\mathbf{w}$ through the system 
+ of equations $H(\theta,\sigma_\eta^2)$, which is obtained by taking the expression
+ $w_t = u_t + a_t$, multiplying $(1 - \phi B)$, with $B$ symbolizing the 
+ backwards operator, then calculating the ACVF of both sides at lags
+ $0$ and $1$. This system of equations is then supplemented by $\phi - \phi_*$ and
+ $\sigma_\varepsilon^2 - \sigma_{\varepsilon*}^2$ so the final covariance 
+ matrix includes all parameters of interest.
 
-PASTE H EQUATION HERE!!!!!!
+\begin{equation}
+    H(\theta, \sigma_\eta^2) = \begin{cases}
+        \phi - \phi_* \\
+        (1 + \theta_b^2)\sigma_b^2 - (1 + \theta^2)\sigma_\eta^2 - (1 + \phi^2)\sigma_a^2  \\
+        \theta_b\sigma_b^2 - \theta\sigma_\eta^2 + \phi\sigma_a^2\\
+         \sigma_{\varepsilon}^2 - \sigma_{\varepsilon*}^2 
+        \end{cases}
+\end{equation}
+
+
 
     \begin{equation}
     \tau_0 = \left(\begin{array}{c}
@@ -156,9 +170,10 @@ PASTE H EQUATION HERE!!!!!!
 \qquad
 \tau_1 = \left(\begin{array}{c}
     \phi_* \\
-    \sigma_{\varepsilon*}^2 \\
+
     \theta \\
-    \sigma_\eta^2
+    \sigma_\eta^2\\
+        \sigma_{\varepsilon*}^2 
 \end{array}\right)
 \end{equation}
 
@@ -217,7 +232,7 @@ Else                                                                    & ARMA(1
 \end{table}
 
 From these relations we derive a decision rule for model selection:
-\input{visualizations/tsms_flow}
+\input{../visualizations/tsms_flow}
 \subsection{Generalizing to Varying Sample Size}
 
 Having detailed the steps involved in fitting and performing inference on model parameter estimates, 
@@ -326,17 +341,40 @@ So long as the set of inverse sample sizes $\{n_t^{-1}\}$ is conceivably of cons
 COMMENT ON ASSUMPTION OF INDEPENDENCE IN CALCULATING VARIANCE OF ESTIMATE AND IMPLICATIONS FOR STRICTLY STATIONARY SAMPLE SIZES
 AND NON-CONSTANT MEAN
 
+MATRIX N and how the likelihood changes 
+
+Comment on missing time steps
+
+
+
+
 \subsection{Extending to Mixed Effects Models}
 
-INITIAL FIT OF MIXED EFFECTS MODEL
+A natural extension of this algorithm is to allow for random effects in addition to fixed ones,
+yielding a model of the following form:
 
-UPDATE TO GLS ESTIMATOR FOR BETA
+\begin{equation}
+    \yy = X_f\beta + X_r\mathbf{b} + X_t\uu + \varepsilon, \qquad     \text{Var}(\mathbf{b}) = \Sigma_b
+\end{equation}
 
-CONDITIONAL EXPECTATION OF RANDOM INTERCEPTS
 
-ESTIMATE FOR RANDOM EFFECT VARIANCES
+
+
+
+
+The algorithm changes only in that the initial model fit includes random effects (\textit{lmer package})
+The fixed effects estimate $\hat{\beta}_{GLS}$ adjusts in that $\Omega$ now includes the 
+term $X_r\Sigma_bX_r'$. Random intercepts $\mathbf{b}$ are updated with the 
+conditional expectation $\mathbb{E}(\mathbf{b}|\yy, \hat{\xi}) = \Sigma_b X_r' \Omega^{-1}(\yy - X_f\hat{\beta})$.
+Those intercepts are then used to update the parameters of $\Sigma_b$, using the formula
+INSERT FORMULA HERE. A flowchart depicting the steps of the algorithm is given in 
+Figure \ref{fig:modelflow}.
+
 
 \medskip
+
+\input{../visualizations/em_flow}
+MAKE SURE ALL NOTATION HAS BEEN DEFINED!!!!
 
 
 

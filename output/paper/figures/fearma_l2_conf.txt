@@ -1,0 +1,16 @@
+% latex table generated in R 4.4.2 by xtable 1.8-4 package
+% Sun Aug 30 15:44:12 2026
+\begin{table}[ht]
+\centering
+\caption{Empirical confidence levels for varying time series parameters} 
+\label{tab:l2_conf}
+\begin{tabular}{rrrr}
+  \hline
+phi & 0 & 0.4 & 0.8 \\ 
+  \hline
+0.10 & 1.00 & 1.00 & 1.00 \\ 
+  0.50 & 1.00 & 1.00 & 1.00 \\ 
+  0.90 & 1.00 & 0.50 & 1.00 \\ 
+   \hline
+\end{tabular}
+\end{table}

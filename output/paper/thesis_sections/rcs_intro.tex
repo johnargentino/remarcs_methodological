@@ -1,9 +1,0 @@
-\section{High Frequency Surveys}
-
-
-
-Our setting is that of high-frequency repeated cross-sectional survey data. These surveys record time-specific output variables and time-independent covariates at the individual level. Such an array of variables would lend itself well to a fixed effects or mixed effects model were it not for the high frequency nature of the surveying. Such a frequency opens up the very likely possibility that noise correlated across time, breaking the key assumption of residual independence in standard fixed effects modeling. 
-
-The mVAM survey responses comprise repeated cross-sectional (RCS) data, in which participants are not assumed to overlap from one day to the next. This distinguishes RCS surveys from panel data, in which a sample of respondents is fixed and repeatedly surveyed. Despite assumed independence in the selection of daily RCS samples, indicators collected through repeated surveys still retain a subtle, but nonetheless present, temporal correlation due to external factors~\citep{Lebo}.
-
-Repeated cross-sectional data, as opposed to panel data, has less of an explicit correlation across time \citep{lebo2015repeated}. A number of existing of methods have arisen to account for this correlation, however none are well suited to surveys with such high frequency, individual-level covariates, and no time-dependent macrolevel variables. We combine elements from a multilevel model with a latent time series with a method for analyzing time series with added noise, generalizing both methods to enable their compatibility. The final product is an algorithm for fitting data from Equations \ref{eq:model_level1}-\ref{eq:model_level2}

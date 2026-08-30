@@ -8,33 +8,33 @@
     \node (start) [startstop] {$\mathbf{y} = X_f\beta + X_r\mathbf{b} + X_t\mathbf{u} + \varepsilon$};
     \node (step1) [process, right=1.5cm of start] 
         {Fit ME Model to $\yy$};
-    \node (step2) [process, below = 1.5cm of start] 
+    \node (step2) [process, below = 1cm of start] 
         {$\mathbf{z}:= \yy - X_f\hat{\beta} - X_r\hat{\mathbf{b}}$};
-    \node (step3) [process, below = 3cm of step2] 
+    \node (step3) [process, below = 2cm of step2] 
         {${\mathbf{w}}_t = n^{-1}\sum_{i=1}^{n} \mathbf{z}_{it}$};
     
     % Parallel branch
-    \node (step4a) [process, below = 5.5cm of step1] 
+    \node (step4a) [process, below = 4cm of step1] 
         {${\mathbf{x}} =  \mathbf{z} - X_t\mathbf{w}$};
-    \node (step5a) [process, below = 3cm of step4a] 
+    \node (step5a) [process, below = 2cm of step4a] 
         {$\hat{\sigma}_a^{2} = \frac{||\mathbf{x}||^2\sum n_t^{-1}}{(N-T)T}$};
     
-    \node (step4b) [process, below = 3cm of step3] 
+    \node (step4b) [process, below = 2cm of step3] 
         {$(\hat{\theta}_*, \hat{\phi}, \hat{\sigma}_*^2)$};
     
-    \node (step5b) [process, below  = 3cm of step5a] 
+    \node (step5b) [process, below  = 2cm of step5a] 
         {$H(\theta,\sigma_\eta^2)$};
     
     \node (step7) [process, above right = 1cm and 1cm of step5b] 
         {$(\hat{\theta}, \hat{\sigma}_\eta^2)$};
     
     % % Merge after parallel
-    \node (step8) [process, above = 3cm of step7] 
+    \node (step8) [process, above = 2cm of step7] 
         {Calculate $\hat{\beta}_{GLS}^{(k)}$ and $\mathbb{E}(\mathbf{b}|\mathbf{y})$};
     
-    \node (checkll) [decision, above = 3cm of step8] 
+    \node (checkll) [decision, above = 2cm of step8] 
         {Likelihood converged?};
-    \node (done) [startstop, above = 3.5cm of checkll] {Done};
+    \node (done) [startstop, above = 2cm of checkll] {Done};
     
     % Arrows
     \draw [arrow] (start) -- (step1)
