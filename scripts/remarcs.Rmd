@@ -21,7 +21,8 @@ library(xtable)
 library(plotly)
 library(minpack.lm)
 library(htmlwidgets)
-
+library(reticulate)
+sink.number()
 ```
 
 
@@ -141,7 +142,7 @@ ggsave("../output/paper/figures/no_ar_var_effect.pdf", height = 6, width = 8)
 #Params
 ar_bias_vara = 2
 veta_arbias = 1
-minutes = 1
+minutes = .4
 T_arbias = 1000
 
 
@@ -287,11 +288,11 @@ p = plot_ly() %>%
     legend = list(title = list(text = "Source"))
   )
 p
-# htmlwidgets::saveWidget(
-#   p,
-#   file = "../output/paper/figures/phi_3d_plot.html",
-#   selfcontained = TRUE
-# )
+htmlwidgets::saveWidget(
+  p,
+  file = "../output/paper/figures/phi_3d_plot.html",
+  selfcontained = TRUE
+)
 ```
 
 ```{r}
@@ -309,7 +310,7 @@ b_0 = 43
 b_t = -.001
 b_1 = .25
 beta = c(b_0,b_t, b_1)
-minutes = 1
+minutes = .4
 ```
 
 ```{r}
@@ -503,19 +504,19 @@ cov_conf = ts_cov_df$`Sig. Freq. TS`[ts_cov_df$Parameter == "Covariate"] %>% as.
 ```{r}
 #Params
 
-tol = .1
+tol = .05
 arman_veta = 1
 arman_veps = 1
 arman_lambda = 5
-arman_sims = 10
+
 arman_T1 = 1000
 arman_T2 = 5000
 arman_alpha = .05
-
+minutes = .4
 ```
 
 ```{r}
-
+set.seed(123)
 conf_df = tibble(ar = rep(seq(-.9,.9,by = .4), each = 5),
                  ma = rep(seq(0,.8,by = .2), times = 5)
                  )
@@ -528,13 +529,16 @@ conf_df = mutate(rowwise(conf_df),
                                                   theta = ma,
                                                   var_eta = arman_veta,
                                                   TT = arman_T1,
-                                                  sims = arman_sims,
+                                                  sims = 1,
                                                   var_eps = arman_veps,
                                                   lambda = arman_lambda,
                                                   alpha = arman_alpha
                                                   )
                                        )
                  )
+end = Sys.time()
+single_sim = as.numeric(end - start, units = "mins")
+arman_sims = max(minutes %/% single_sim, 1)
 
 conf_df = mutate(rowwise(conf_df),
                  e_conf_l_4_2 = ifelse(abs(ar + ma) < tol,
@@ -697,7 +701,7 @@ are_slope = b_t
 are_cov = b_1
 are_beta = c(are_int, are_slope, are_cov)
 are_repel = tibble(phi = seq(.1,.9, by = .2))
-minutes = 1
+minutes = .4
 ```
 
 ```{r}
@@ -764,7 +768,7 @@ uar_cov = b_1
 uar_beta = c(are_int, are_slope, are_cov)
 uar_df = tibble(phi = seq(-.9,.9, by = .4))
 uar_lambda = 5
-minutes = 1
+minutes = .4
 ```
 
 ```{r}
@@ -830,7 +834,7 @@ uma_cov = b_1
 uma_beta = c(are_int, are_slope, are_cov)
 uma_df = tibble(theta = seq(-.9,.9, by = .4))
 uma_lambda = 5
-minutes = 1
+minutes = .4
 ```
 
 ```{r}
@@ -939,4 +943,5 @@ cat(sprintf("\\newcommand{\\uarint}{%s}\n", uar_int))
 cat(sprintf("\\newcommand{\\uarcov}{%s}\n", uar_cov))
 cat(sprintf("\\newcommand{\\uarlambda}{%s}\n", uar_lambda))
 sink()
+sink.number()
 ```

@@ -1180,8 +1180,13 @@ emp_exp_ar_vs_arma = function(phi, v_a, TT, sims){
     uu = arima.sim(model = list(ar = phi), sd = 1, n = TT)
     aa = rnorm(n = TT, mean = 0, sd = sqrt(v_a))
     ww = uu + aa
-    ar_model = arima(ww, order = c(1,0,0), include.mean = FALSE)
-    arma_model = arima(ww, order = c(1,0,1), include.mean = FALSE)
+    ar_model = arima(ww,
+                     order = c(1,0,0),
+                     include.mean = FALSE,
+                     method = "ML"
+                     )
+    arma_model = arima(ww, order = c(1,0,1), include.mean = FALSE,
+                       method = "ML")
     phi_hat_ar = ar_model$coef["ar1"]
     phi_hat_arma = arma_model$coef["ar1"]
     veta_hat_ar = ar_model$sigma2
