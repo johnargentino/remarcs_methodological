@@ -1543,8 +1543,7 @@ are_stability = function(sims,
   return(list(phi = mean(phi_track, na.rm = TRUE),
               phi_capt = mean(phi_captured, na.rm = TRUE),
               var_eta = mean(veta_track, na.rm = TRUE),
-              sims = length(na.exclude(phi_track)),
-
+              sims = length(na.exclude(phi_track))
               )
          )
 }

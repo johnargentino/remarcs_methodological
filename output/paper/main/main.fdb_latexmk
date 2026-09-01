@@ -1,22 +1,22 @@
 # Fdb version 4
-["bibtex main"] 1788265446.1417 "main.aux" "main.bbl" "main" 1788265827.1356 0
+["bibtex main"] 1788267410.39183 "main.aux" "main.bbl" "main" 1788267671.90504 0
   "../mVAM_refs.bib" 1788254341.8889 59627 568e5fca723c1c7c181d4e2907af443c ""
   "/usr/local/texlive/2026/texmf-dist/bibtex/bst/base/plain.bst" 1292289607 20613 bd3fbfa9f64872b81ac57a0dd2ed855f ""
-  "main.aux" 1788265826.69532 9679 559a96711f3c2f22a990e184366e446d "pdflatex"
+  "main.aux" 1788267671.43277 9605 03de93361880e40beac007c0e69e8652 "pdflatex"
   (generated)
   "main.bbl"
   "main.blg"
   (rewritten before read)
-["makeindex main.idx"] 1788247998.84665 "main.idx" "main.ind" "main" 1788265827.13546 0
-  "main.idx" 1788265824.82075 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
+["makeindex main.idx"] 1788247998.84665 "main.idx" "main.ind" "main" 1788267671.90465 0
+  "main.idx" 1788267669.53369 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
   (generated)
   "main.ilg"
   "main.ind"
   (rewritten before read)
-["pdflatex"] 1788265823.85859 "/Users/johnargentino/Desktop/research/mvam/are/lacey/remarcs_methodological/output/paper/main/main.tex" "main.pdf" "main" 1788265827.13573 0
+["pdflatex"] 1788267668.58952 "/Users/johnargentino/Desktop/research/mvam/are/lacey/remarcs_methodological/output/paper/main/main.tex" "main.pdf" "main" 1788267671.90518 0
   "../figures/ar_bias.pdf" 1788174630.51674 6628 e577bafead448c990d1886a739253c5b ""
   "../figures/are.png" 1788174631.5892 1003995 a0ffb596f6adefdb50319eecc5cd9525 ""
-  "../figures/are_tab.txt" 1788242688.69641 538 d1e41427dd2066bc9c20bf0559f61c3a ""
+  "../figures/are_tab.txt" 1788266787.68996 487 2309921cf33670b3bc9fcdaf3252b4c9 ""
   "../figures/arma_cov_df.txt" 1788174991.51185 556 66ecf71e36bcf60cf72b57fe216aefbf ""
   "../figures/arma_cov_head.txt" 1788174991.51523 352 21c1ccc18ba851bac04b861ec1ad5012 ""
   "../figures/arma_cov_head_daily.txt" 1788174991.51758 399 b318df8f9b727b3e503824b318457f10 ""
@@ -31,10 +31,10 @@
   "../sections/discussion.tex" 1787890924.94179 4692 fd9ed1e7380cd7ebad2ea2203e236300 ""
   "../sections/introduction.tex" 1788171283.46984 3102 bc0d1211c6db42cecadb76a48a322a38 ""
   "../sections/methods.tex" 1788265543.85155 19139 cebbac5046b2fdda5658bb8e163b5b0d ""
-  "../sections/results.tex" 1788265442.01071 12541 1aecf104260cfc51acfa87e446369ddd ""
+  "../sections/results.tex" 1788267668.27305 12434 c00ee14c41f2e01f63c2e9821e14c2ba ""
   "../visualizations/em_flow.tex" 1787921676.56153 2888 e0b814ad56728880dfe0b83d2cde8650 ""
   "../visualizations/tsms_flow.tex" 1787565996 2786 971c3fb25ae537976e2a612c1b8cc12c ""
-  "/Users/johnargentino/Desktop/research/mvam/are/lacey/remarcs_methodological/output/paper/main/main.tex" 1788265823.58581 10508 934b96c4ae20b2a822b866c7547440af ""
+  "/Users/johnargentino/Desktop/research/mvam/are/lacey/remarcs_methodological/output/paper/main/main.tex" 1788267115.15901 10508 934b96c4ae20b2a822b866c7547440af ""
   "/usr/local/texlive/2026/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc" 1136849721 2900 1537cc8184ad1792082cd229ecc269f4 ""
   "/usr/local/texlive/2026/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2026/texmf-dist/fonts/tfm/jknappen/ec/ectt1000.tfm" 1136768653 1536 06717a2b50de47d4087ac0e6cd759455 ""
@@ -267,13 +267,13 @@
   "/usr/local/texlive/2026/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1784616340 5573038 b99aad5e4898a9034e953632f940512b ""
   "/usr/local/texlive/2026/texmf-var/web2c/pdftex/pdflatex.fmt" 1774209607 3636776 dc5fa9b6b1453b9d196cd42edf876004 ""
   "/usr/local/texlive/2026/texmf.cnf" 1774209515 577 648cd9f92f9c0eac486f4c71c85cfbbe ""
-  "main.aux" 1788265826.69532 9679 559a96711f3c2f22a990e184366e446d "pdflatex"
-  "main.bbl" 1788265446.28828 3413 2045653acaf8c9e8e5305e420d479541 "bibtex main"
+  "main.aux" 1788267671.43277 9605 03de93361880e40beac007c0e69e8652 "pdflatex"
+  "main.bbl" 1788267410.56505 3413 2045653acaf8c9e8e5305e420d479541 "bibtex main"
   "main.ind" 1788247998.99296 0 d41d8cd98f00b204e9800998ecf8427e "makeindex main.idx"
-  "main.lof" 1788265826.69718 941 7e69004845b1bbd1e9f064623a9a5155 "pdflatex"
-  "main.lot" 1788265826.69712 738 a5056c407f2db1f0a1432d3658effdd4 "pdflatex"
-  "main.out" 1788265826.69684 3882 dc2f6e36a9aeaab009eba04fd49c769b "pdflatex"
-  "main.tex" 1788265823.58581 10508 934b96c4ae20b2a822b866c7547440af ""
+  "main.lof" 1788267671.43454 904 92ce655522a9654a1ff3c182c799a3dc "pdflatex"
+  "main.lot" 1788267671.4345 738 1dd2224fc0ef71d14e28c74ec230273e "pdflatex"
+  "main.out" 1788267671.43422 3882 b5e3d90eacf3ddac6f2f6cdada71ba63 "pdflatex"
+  "main.tex" 1788267115.15901 10508 934b96c4ae20b2a822b866c7547440af ""
   (generated)
   "main.aux"
   "main.idx"

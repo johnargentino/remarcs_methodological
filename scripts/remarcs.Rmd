@@ -770,7 +770,7 @@ are_repel$phi_captured = sapply(are_repel$are_mean, function(x) x[[2]])
 are_repel$veta_mean = sapply(are_repel$are_mean, function(x) x[[3]])
 are_repel$sims = sapply(are_repel$are_mean, function(x) x[[4]])
 
-are_tab = are_repel |> dplyr::select(phi, phi_mean, phi_captured, sims) |> as.matrix()
+are_tab = are_repel |> dplyr::select(phi, phi_mean, phi_captured) |> as.matrix()
 are_tab = t(are_tab)
 are_tab <- xtable(
   are_tab,
@@ -783,6 +783,8 @@ print(are_tab,
       include.rownames = TRUE,
       include.colnames = FALSE,
       caption.placement = "top")
+
+
 ```
 
 #Model Selection: u is AR(1)

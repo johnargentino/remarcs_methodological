@@ -2,7 +2,31 @@ Before applying this methodology to real data, we first corroborate its necessit
 efficacy through simulations, closely examining individual components of the algorithm
 along with pre-existing methods. 
 
+\subsection{Instability of EM Algorithm}
 
+To highlight the necessity for a different approach to fitting latent parameters,
+we test the potential stability of time series parameter estimates obtained 
+from an EM algorithm that estimates the latent time series $\uu$ through its conditional expectation.
+We define our model as follows:
+
+$$ y_{ti} = \mathbf{x}_{ti} \beta + u_t + \varepsilon_{ti}, \qquad t = 1,...,T $$
+$$i = 1,...,n_t \qquad n_t \overset{i.i.d.}{\sim} \text{Poi}(\lambda) + 1 $$
+
+Here, $\uu$ is defined to be an AR(1) process with innovation variance $\sigma_\eta^2 = \areveta$. 
+Other fixed parameters include $\sigma_\varepsilon^2 = \areveps$, $T = \areT$, and $\beta = c(\areint,\areslope,\arecov)$.
+For varying values of $\phi$, $\aresims$ realizations of the model were simulated,
+and for each simulation, \emph{true values for all parameters} were used to 
+estimate $\hat{\uu} = \Sigma_\uu X_t' \Sigma_\yy^{-1}(\yy - X_f \beta)$. That estimate
+was then used to fit an AR(1) model, updating $\hat{\phi}$ just as would be done
+via the EM algorithm (in the unlikely event all parameters were unwittingly estimated perfectly).
+Results are displayed in Table \ref{tab:are_stability}.
+
+\input{../figures/are_tab.txt}
+
+It is immediately apparent that even in the event of perfect parameter estimation,
+conditioning on $\hat{\uu}$ will yield biased estimates for time series parameters if treated as an AR(1) process.
+Having demonstrated the need for a different approach to fitting time series parameters, 
+we now turn to confirming the effect that additional noise has on ARMA processes..
 
 \subsection{Effect of Noise on ARMA Processes}
 
@@ -27,7 +51,7 @@ while $\uu$ may be AR(1), $\mathbf{w}$ is an ARMA(1,1) process.
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=\linewidth]{../figures/ar_bias.pdf}
-    \caption{Aggregated estimates for AR. LINK TO 3D PLOT}
+    \caption[AR bias]{Aggregated estimates for AR parameter of time series with added noise}
     \label{fig:ar_bias}
 \end{figure}
 
@@ -52,20 +76,9 @@ We begin with simulations of an ARMA(1,1)-Noise Model:
  
 Differing values of $\phi$ and $\theta$ were combined with fixed parameters $\sigma_\varepsilon^2 = \armanconfveps$, $\sigma_\eta^2 = \armanconfveta$, and $\lambda = \armanconflambda$.
 For each value-pair $(\phi,\theta)$, $\armanconfsims$ simulations are generated and used to estimate
-parameter values. Covariance matrices are estimated and used to calculate empirical confidence levels with $\alpha = \armanconfalpha$ 
-(see Figure \ref{fig:e_conf_l}).
-
-COMMENT on use of method of moments estimator for wong
-
- defined by $w_t = \bar{\yy}_{t\cdot}$, with MA parameter $\theta_b$ and innovation variance $\sigma_b^2$, 
- produces time series estimates with normalized covariance close to $\Sigma_{\phi,\theta_b}$. For each set 
- of parameters, we calculate the true values of $\theta_b$ and $\sigma_b^2$.  We then fit $(\hat{\phi},\hat{\theta}_b)$ 
- with $\bar{\mathbf{w}}$ and construct confidence regions centered around those estimates, counting the rates at 
- which these confidence regions capture the true parameter values. These empirical confidences are displayed in 
- Figure \ref{fig:e_conf_l}. 
-
-% CHECK THAT DELTA METHOD IS TAKING DERIVATIVES W.R.T. VEPS NOT VARA
-
+parameter values. Confidence regions are then calculated and used to test if true parameter values 
+were successfully captured. The empirical confidence levels of varying parameter combinations $(\phi,\theta)$ are depicted
+in Figure \ref{fig:e_conf_l}.
 
 
 \begin{figure}[htbp]
@@ -90,37 +103,12 @@ COMMENT on use of method of moments estimator for wong
 
 
 We can see performance dipped for parameter combinations $(\phi,\theta)$ close to the $\phi + \theta = 0$ line for time series of length $T = \armanconfTleft$. However, we can see that performance improved for $T=\armanconfTright$, suggesting that parameter estimates for ARMA(1,1) processes that resemble white noise take longer to converge to their asymptotic distributions.
-\subsection{Instability of EM Algorithm}
-
-To highlight the necessity for a different approach to fitting latent parameters,
-we test the stability of time series parameters using an EM algorithm. We define our model
-to be as follows:
-
-$$ y_{ti} = \mathbf{x}_{ti} \beta + u_t + \varepsilon_{ti}, \qquad t = 1,...,T $$
-$$i = 1,...,n_t \qquad n_t \overset{i.i.d.}{\sim} \text{Poi}(\lambda) + 1 $$
-
-Here, $\uu$ is defined to be an AR(1) process with innovation variance $\sigma_\eta^2 = \areveta$. 
-Other fixed parameters include $\sigma_\varepsilon^2 = \areveps$, $T = \areT$, and $\beta = c(\areint,\areslope,\arecov)$.
-For varying values of $\phi$, $\aresims$ realizations of the model were simulated,
-and for each simulation, \emph{true values for all parameters} were used to 
-estimate $\hat{\uu} = \Sigma_\uu X_t' \Sigma_\yy^{-1}(\yy - X_f \beta)$. That estimate
-was then used to fit an AR(1) model, updating $\hat{\phi}$ just as would be done
-via the EM algorithm (in the unlikely event all parameters were unwittingly estimated perfectly).
-Results are displayed in Table \ref{tab:are_stability}.
-
-\input{../figures/are_tab.txt}
-
-It is immediately apparent that even in the event of perfect parameter estimation,
-the resulting time series estimate $\hat{\uu}$ is not an AR(1) process and more 
-importantly will yield biased estimates for time series parameters if treated as one.
-Having demonstrated the need for the REMARCS Algorithm, we now turn to evaluating 
-its efficacy.
+Now that we've established that the methodology proposed by Wong and Miller is effective
+in estimating parameters governing an ARMA-Noise model, we can add fixed effects to the model.
 
 \subsection{Empirical Confidence of REMARCS algorithm}
 
-Now 
-
-In order to assess the efficacy of this method, $ \simsfearma $ simulations were conducted with 
+Now in order to assess the efficacy of this method, $ \simsfearma $ simulations were conducted with 
 fixed parameters $\beta = (\intfearma,\slopefearma,\xfearma)$, $\sigma_\eta^2 = \vetafearma$, 
 $ \sigma_\varepsilon^2 = \vepsfearma$, and varying combinations of ARMA parameters $(\phi,\theta)$. 
 
@@ -131,7 +119,6 @@ to asymptotic distributions is slower for parameter combinations close to the li
 This under-performance is mitigated as $T$ grows, indicating that time series more closely resembling white noise 
 will require larger values of $T$ for accurate estimation. 
 
-EXCLUDE VETA FROM CONFIDENCE REGIONS FOR RIGHT PANEL
 
 \begin{figure}[htbp]
     \centering
@@ -285,4 +272,7 @@ The REMARCS algorithm was also applied to mVAM data from the same time period in
 \subsection{To-Do List}
 \begin{itemize}
     \item Comment on missing values
+    \item Exclude veta from confidence regions for right panel of REMARCS simulations
+    \item Synchronize color ranges for T1 and T2 of ARMAN simulations, L1 and L2 of REMARCS simulations
+    \item Rownames, aesthetics, captions of tables
 \end{itemize}
