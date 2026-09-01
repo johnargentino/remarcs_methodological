@@ -1,16 +1,16 @@
 % latex table generated in R 4.4.2 by xtable 1.8-4 package
-% Mon Aug 31 08:41:26 2026
+% Mon Aug 31 14:16:31 2026
 \begin{table}[ht]
 \centering
 \begin{tabular}{lrrrrr}
   \hline
 Parameter & True Value & TSCOV Mean & REMARCS Mean & Sig. Freq. TS & Sig. Freq. REMARCS \\ 
   \hline
-phi & 0.900 & 0.897 & 0.896 & 1.000 & 1.000 \\ 
-  theta & 0.000 & -0.583 & 0.254 & 1.000 & 0.000 \\ 
-  Intercept & 43.000 & 42.191 & 42.245 & 1.000 & 1.000 \\ 
-  Slope & -0.001 & -0.001 & -0.000 & 0.000 & 0.000 \\ 
-  Covariate & 0.250 & 0.380 & 0.225 & 0.333 & 0.667 \\ 
+phi & 0.900 & 0.892 & 0.892 & 1.000 & 1.000 \\ 
+  theta & 0.000 & -0.584 & 0.173 & 1.000 & 0.050 \\ 
+  Intercept & 43.000 & 43.020 & 43.024 & 1.000 & 1.000 \\ 
+  Slope & -0.001 & -0.001 & -0.001 & 0.194 & 0.223 \\ 
+  Covariate & 0.250 & 0.240 & 0.236 & 0.158 & 0.496 \\ 
    \hline
 \end{tabular}
 \end{table}

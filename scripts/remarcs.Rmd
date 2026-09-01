@@ -142,7 +142,7 @@ ggsave("../output/paper/figures/no_ar_var_effect.pdf", height = 6, width = 8)
 #Params
 ar_bias_vara = 2
 veta_arbias = 1
-minutes = .4
+minutes = 4
 T_arbias = 1000
 
 
@@ -310,7 +310,7 @@ b_0 = 43
 b_t = -.001
 b_1 = .25
 beta = c(b_0,b_t, b_1)
-minutes = .4
+minutes = 10
 ```
 
 ```{r}
@@ -512,7 +512,7 @@ arman_lambda = 5
 arman_T1 = 1000
 arman_T2 = 5000
 arman_alpha = .05
-minutes = .4
+minutes = 20
 ```
 
 ```{r}
@@ -523,12 +523,12 @@ conf_df = tibble(ar = rep(seq(-.9,.9,by = .4), each = 5),
 start = Sys.time()
 
 conf_df = mutate(rowwise(conf_df),
-                 e_conf_l_3_2 = ifelse(abs(ar + ma) < tol,
+                 e_conf_l_4_2 = ifelse(abs(ar + ma) < tol,
                                        NA,
                                        emp_conf_l(phi = ar,
                                                   theta = ma,
                                                   var_eta = arman_veta,
-                                                  TT = arman_T1,
+                                                  TT = arman_T2,
                                                   sims = 1,
                                                   var_eps = arman_veps,
                                                   lambda = arman_lambda,
@@ -538,7 +538,22 @@ conf_df = mutate(rowwise(conf_df),
                  )
 end = Sys.time()
 single_sim = as.numeric(end - start, units = "mins")
-arman_sims = max(minutes %/% single_sim, 1)
+arman_sims = max((minutes / 2) %/% single_sim, 1)
+
+conf_df = mutate(rowwise(conf_df),
+                 e_conf_l_3_2 = ifelse(abs(ar + ma) < tol,
+                                       NA,
+                                       emp_conf_l(phi = ar,
+                                                  theta = ma,
+                                                  var_eta = arman_veta,
+                                                  TT = arman_T1,
+                                                  sims = arman_sims,
+                                                  var_eps = arman_veps,
+                                                  lambda = arman_lambda,
+                                                  alpha = arman_alpha
+                                                  )
+                                       )
+                 )
 
 conf_df = mutate(rowwise(conf_df),
                  e_conf_l_4_2 = ifelse(abs(ar + ma) < tol,
@@ -595,7 +610,7 @@ theta_vec = rep(seq(0,.8, by = .4), times = 3)
 fearma_sim_df = tibble(phi = phi_vec, theta = theta_vec)
 
 fearma_T = 1000
-fearma_sims = 2
+fearma_sims = 1
 fearma_veta = var_eta
 fearma_veps = var_eps
 fearma_int = b_0
@@ -605,12 +620,27 @@ fearma_beta = c(fearma_int,
                 fearma_slope,
                 fearma_x)
 fearma_alpha = .05
+minutes = 14
 ```
 
 
 ```{r}
 
 set.seed(123)
+start = Sys.time()
+fearma_sim_df2 = mutate(rowwise(fearma_sim_df), 
+                        emp_conf = arman_gls_em(sims = 1, 
+                                                TT = fearma_T, 
+                                                ar = phi, 
+                                                ma = theta, 
+                                                veta = fearma_veta, 
+                                                veps = fearma_veps, 
+                                                beta = fearma_beta
+                                                ) %>% list())
+end = Sys.time()
+single_sim = as.numeric(end - start, units = "mins")
+fearma_sims = max(minutes %/% single_sim, 1)
+
 fearma_sim_df2 = mutate(rowwise(fearma_sim_df), 
                         emp_conf = arman_gls_em(sims = fearma_sims, 
                                                 TT = fearma_T, 
@@ -701,7 +731,7 @@ are_slope = b_t
 are_cov = b_1
 are_beta = c(are_int, are_slope, are_cov)
 are_repel = tibble(phi = seq(.1,.9, by = .2))
-minutes = .4
+minutes = 10
 ```
 
 ```{r}
@@ -738,8 +768,9 @@ are_repel$phi_mean = sapply(are_repel$are_mean, function(x) x[[1]])
 are_repel$phi_captured = sapply(are_repel$are_mean, function(x) x[[2]])
 
 are_repel$veta_mean = sapply(are_repel$are_mean, function(x) x[[3]])
+are_repel$sims = sapply(are_repel$are_mean, function(x) x[[4]])
 
-are_tab = are_repel |> dplyr::select(phi, phi_mean, phi_captured) |> as.matrix()
+are_tab = are_repel |> dplyr::select(phi, phi_mean, phi_captured, sims) |> as.matrix()
 are_tab = t(are_tab)
 are_tab <- xtable(
   are_tab,
@@ -768,7 +799,7 @@ uar_cov = b_1
 uar_beta = c(are_int, are_slope, are_cov)
 uar_df = tibble(phi = seq(-.9,.9, by = .4))
 uar_lambda = 5
-minutes = .4
+minutes = 4
 ```
 
 ```{r}
@@ -834,7 +865,7 @@ uma_cov = b_1
 uma_beta = c(are_int, are_slope, are_cov)
 uma_df = tibble(theta = seq(-.9,.9, by = .4))
 uma_lambda = 5
-minutes = .4
+minutes = 3
 ```
 
 ```{r}
@@ -885,6 +916,7 @@ print(uma_tab,
       include.colnames = FALSE,
       caption.placement = "top")
 ```
+#Honduras
 
 
 

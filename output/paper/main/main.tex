@@ -31,7 +31,16 @@
 \usepackage{rotating}
 
 % --- MODERN PACKAGES INJECTED (2026) ---
-\usepackage[hidelinks]{hyperref}   % Clickable links in PDF
+% \usepackage[hidelinks]{hyperref}   % Clickable links in PDF
+\usepackage[hidelinks]{hyperref}
+% Optional: Customize link colors so the URL looks clean
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=blue,
+}
+
 \usepackage{float}      % For exact [H] placement of figures/tables
 \usepackage{endnotes}   % For endnotes support
 \usepackage{glossaries} % For glossary support
@@ -219,6 +228,7 @@
 
 % \section{Bulk Material}
 
+\section{Data Availability Statement}
 
 
 
@@ -254,7 +264,7 @@
 % the exact order they are cited in the text (e.g., using a style like 'unsrt').
 % If you are outside the Sciences, they must be formatted alphabetically.
 \bibliographystyle{plain}
-\bibliography{mVAM_refs}
+\bibliography{../mVAM_refs}
 \section{Appendix}
 % \input{sections/appendix.tex}
 \listoftables

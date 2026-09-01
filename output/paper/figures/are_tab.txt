@@ -1,5 +1,5 @@
 % latex table generated in R 4.4.2 by xtable 1.8-4 package
-% Mon Aug 31 08:44:19 2026
+% Tue Sep  1 09:04:48 2026
 \begin{table}[ht]
 \centering
 \caption{Aggregate Estimates and Empirical Confidence Levels for AR parameter Following Ideal Time Series Estimation} 
@@ -8,8 +8,9 @@
   \hline
   \hline
 phi & 0.10 & 0.30 & 0.50 & 0.70 & 0.90 \\ 
-  phi\_mean & 0.19 & 0.49 & 0.73 & 0.88 & 0.97 \\ 
-  phi\_captured & 0.33 & 0.00 & 0.00 & 0.00 & 0.00 \\ 
+  phi\_mean & 0.17 & 0.49 & 0.73 & 0.88 & 0.97 \\ 
+  phi\_captured & 0.34 & 0.00 & 0.00 & 0.00 & 0.00 \\ 
+  sims & 29.00 & 29.00 & 29.00 & 29.00 & 29.00 \\ 
    \hline
 \end{tabular}
 \end{table}

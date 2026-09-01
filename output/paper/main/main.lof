@@ -1,6 +1,6 @@
-\contentsline {figure}{\numberline {1}{\ignorespaces Decision tree for selecting parameters to include in ARMA-Noise model}}{8}{figure.caption.2}%
-\contentsline {figure}{\numberline {2}{\ignorespaces Flowchart of algorithm steps for estimating model parameters}}{11}{figure.caption.3}%
-\contentsline {figure}{\numberline {3}{\ignorespaces Aggregated estimates for AR. LINK TO 3D PLOT}}{12}{figure.caption.4}%
-\contentsline {figure}{\numberline {4}{\ignorespaces Rates at which point estimates for $\tau _l$ fall within confidence regions based on sample estimates}}{13}{figure.caption.5}%
-\contentsline {figure}{\numberline {5}{\ignorespaces Empirical confidences with which model parameters fall within confidence regions generated after model convergence}}{15}{figure.caption.7}%
-\contentsline {figure}{\numberline {6}{\ignorespaces Realization of ARE model with parameters defined in Table \ref {tab:sample_are}}}{16}{figure.caption.11}%
+\contentsline {figure}{\numberline {1}{\ignorespaces Decision tree for selecting parameters to include in ARMA-Noise model}}{9}{figure.caption.2}%
+\contentsline {figure}{\numberline {2}{\ignorespaces Flowchart of algorithm steps for estimating model parameters}}{12}{figure.caption.3}%
+\contentsline {figure}{\numberline {3}{\ignorespaces Aggregated estimates for AR. LINK TO 3D PLOT}}{13}{figure.caption.4}%
+\contentsline {figure}{\numberline {4}{\ignorespaces Rates at which point estimates for $\tau _l$ fall within confidence regions based on sample estimates}}{15}{figure.caption.5}%
+\contentsline {figure}{\numberline {5}{\ignorespaces Empirical confidences with which model parameters fall within confidence regions generated after model convergence}}{16}{figure.caption.7}%
+\contentsline {figure}{\numberline {6}{\ignorespaces Realization of ARE model with parameters defined in Table \ref {tab:sample_are}}}{18}{figure.caption.11}%

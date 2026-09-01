@@ -1497,17 +1497,38 @@ are_stability = function(sims,
 
 
 
-    G_inv = G_hat |>
-      chol() |>
-      chol2inv()
+    # ... [previous code] ...
+
+    G_inv = G_hat |> chol() |> chol2inv()
     Gplus_inv = G_inv + Matrix::t(X_t) %*% X_t / veps
-    Gplus_inv = Gplus_inv |>
-      chol() |>
-      chol2inv()
+
+    # SAFE INVERSION OF Gplus
+    Gplus_inv_calculated <- tryCatch({
+      Gplus_inv |> chol() |> chol2inv()
+    }, error = function(e) {
+      cat("Error in Gplus_inv calculation at iteration:", sim, "\n")
+      return(NULL) # Flag a failure
+    })
+
+    if (is.null(Gplus_inv_calculated)) next # Skip this bad simulation run
+    Gplus_inv <- Gplus_inv_calculated
+
     Oinvresid = (test$resid / veps) - veps ^ (-2) * (X_t %*% (Gplus_inv %*% (Matrix::t(X_t) %*% test$resid)))
     u_hat = (G_hat %*% (Matrix::t(X_t) %*% Oinvresid)) %>% as.vector()
-    arma_hat = arima(u_hat, order = arma_order)
+
+    # SAFE ARIMA ESTIMATION
+    arma_hat <- tryCatch({
+      arima(u_hat, order = arma_order)
+    }, error = function(e) {
+      cat("Error in arima optimization at iteration:", sim, "\n")
+      return(NULL)
+    })
+
+    if (is.null(arma_hat)) next # Skip if arima matrix inversion failed
+
     phi_hat = arma_hat$coef["ar1"]
+    # ... [rest of loop continues safely] ...
+
     var_eta_hat = arma_hat$sigma2
     phi_track = phi_track |> append(phi_hat)
     veta_track = veta_track |> append(var_eta_hat)
@@ -1519,7 +1540,13 @@ are_stability = function(sims,
 
   # xi1 = mean(chi_beta_track3_gls < beta_cutoff)
   # xi2 = mean(xi2captured_track_gls < cutoff)
-  return(list(phi = mean(phi_track), phi_capt = mean(phi_captured), var_eta = mean(veta_track)))
+  return(list(phi = mean(phi_track, na.rm = TRUE),
+              phi_capt = mean(phi_captured, na.rm = TRUE),
+              var_eta = mean(veta_track, na.rm = TRUE),
+              sims = length(na.exclude(phi_track)),
+
+              )
+         )
 }
 
 arman_gls_ms = function(sims, TT, ar, ma, veta, veps, beta, alpha = .05, lambda_n = 20){

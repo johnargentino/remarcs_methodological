@@ -1,4 +1,20 @@
-\begin{thebibliography}{1}
+\begin{thebibliography}{10}
+
+\bibitem{akaike}
+Hirotugu Akaike.
+\newblock A new look at the statistical model identification.
+\newblock {\em IEEE Transactions on Automatic Control}, 19(6):716--723, 1974.
+
+\bibitem{Argentino2026}
+John Argentino.
+\newblock {\em REMARCS: A New Approach For Analyzing High-Frequency Repeated Cross-Sectional Data From Household Food Security Surveys}.
+\newblock PhD thesis, Tulane University, New Orleans, Louisiana USA, May 2026.
+\newblock Available from Tulane University Dissertation Archive.
+
+\bibitem{Argentino2026review}
+John Argentino, Shalean Collins, and Michelle Lacey.
+\newblock Learning from mobile food security surveys in emergency contexts.
+\newblock Manuscript submitted for publication, 2026.
 
 \bibitem{box1976time}
 George E.~P. Box and Gwilym~M. Jenkins.
@@ -10,10 +26,35 @@ Peter~J. Brockwell and Richard~A. Davis.
 \newblock {\em Time Series: Theory and Methods}.
 \newblock Springer Series in Statistics. Springer, New York, 2 edition, 1991.
 
+\bibitem{casellaberger}
+George Casella and Roger~L. Berger.
+\newblock {\em Statistical Inference}.
+\newblock Duxbury, 2nd edition, 2002.
+
+\bibitem{collado1997estimating}
+M.~Dolores Collado.
+\newblock Estimating dynamic models from time series of independent cross-sections.
+\newblock {\em Journal of Econometrics}, 82(1):37--62, 1997.
+
+\bibitem{deaton1985panel}
+Angus Deaton.
+\newblock Panel data from time series of cross-sections.
+\newblock {\em Journal of Econometrics}, 30(1-2):109--126, 1985.
+
 \bibitem{diprete1990multilevel}
 Thomas~A. DiPrete and David~B. Grusky.
 \newblock Multilevel analysis of trends with an application to the study of income inequality in the united states.
 \newblock {\em American Sociological Review}, 55(3):438--451, 1990.
+
+\bibitem{goldstein1994multilevel}
+Harvey Goldstein, Michael J.~R. Healy, and Jon Rasbash.
+\newblock Multilevel time series models with applications to repeated measures data.
+\newblock {\em Statistics in Medicine}, 13(16):1643--1655, 1994.
+
+\bibitem{kalman1960new}
+Rudolph~Emil Kalman.
+\newblock A new approach to linear filtering and prediction problems.
+\newblock {\em Journal of Basic Engineering}, 82(1):35--45, 1660.
 
 \bibitem{WongMiller1990}
 Wing keung Wong and Robert~B. Miller.
@@ -24,6 +65,16 @@ Wing keung Wong and Robert~B. Miller.
 Lucia Modugno, Silvia Cagnone, and Simone Giannerini.
 \newblock A multilevel model with autoregressive components for the analysis of tribal art prices.
 \newblock {\em Journal of Applied Statistics}, 42(10):2141--2158, 2015.
+
+\bibitem{Pfeffermann2022}
+Danny Pfeffermann.
+\newblock Time series modelling of repeated survey data for estimation of finite population parameters.
+\newblock {\em Journal of the Royal Statistical Society: Series A (Statistics in Society)}, 185(4):1757--1777, 2022.
+
+\bibitem{babyrudin}
+Walter Rudin.
+\newblock {\em Principles of Mathematical Analysis}.
+\newblock McGraw-Hill, 3rd edition, 1976.
 
 \bibitem{scott1974repeatedsurveys}
 A.~J. Scott and T.~M.~F. Smith.
