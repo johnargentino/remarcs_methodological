@@ -1,19 +1,19 @@
 # Fdb version 4
-["bibtex main"] 1788267410.39183 "main.aux" "main.bbl" "main" 1788276403.40478 0
+["bibtex main"] 1788277300.55928 "main.aux" "main.bbl" "main" 1788277305.05686 0
   "../mVAM_refs.bib" 1788254341.8889 59627 568e5fca723c1c7c181d4e2907af443c ""
   "/usr/local/texlive/2026/texmf-dist/bibtex/bst/base/plain.bst" 1292289607 20613 bd3fbfa9f64872b81ac57a0dd2ed855f ""
-  "main.aux" 1788276402.75424 9605 03de93361880e40beac007c0e69e8652 "pdflatex"
+  "main.aux" 1788277304.52423 9605 8fd20b033484de1f1e06a74eff8cf743 "pdflatex"
   (generated)
   "main.bbl"
   "main.blg"
   (rewritten before read)
-["makeindex main.idx"] 1788247998.84665 "main.idx" "main.ind" "main" 1788276403.40448 0
-  "main.idx" 1788276400.4968 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
+["makeindex main.idx"] 1788247998.84665 "main.idx" "main.ind" "main" 1788277305.05666 0
+  "main.idx" 1788277301.75096 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
   (generated)
   "main.ilg"
   "main.ind"
   (rewritten before read)
-["pdflatex"] 1788276399.40546 "/Users/johnargentino/Desktop/research/mvam/are/lacey/remarcs_methodological/output/paper/main/main.tex" "main.pdf" "main" 1788276403.40497 0
+["pdflatex"] 1788277300.72961 "/Users/johnargentino/Desktop/research/mvam/are/lacey/remarcs_methodological/output/paper/main/main.tex" "main.pdf" "main" 1788277305.05699 0
   "../figures/ar_bias.pdf" 1788174630.51674 6628 e577bafead448c990d1886a739253c5b ""
   "../figures/are.png" 1788174631.5892 1003995 a0ffb596f6adefdb50319eecc5cd9525 ""
   "../figures/are_tab.txt" 1788266787.68996 487 2309921cf33670b3bc9fcdaf3252b4c9 ""
@@ -31,7 +31,7 @@
   "../sections/discussion.tex" 1787890924.94179 4692 fd9ed1e7380cd7ebad2ea2203e236300 ""
   "../sections/introduction.tex" 1788171283.46984 3102 bc0d1211c6db42cecadb76a48a322a38 ""
   "../sections/methods.tex" 1788265543.85155 19139 cebbac5046b2fdda5658bb8e163b5b0d ""
-  "../sections/results.tex" 1788276399.04177 12604 190784cb2ece48f140b461f779023e79 ""
+  "../sections/results.tex" 1788277296.51343 12744 73ff6daf5c361fd3c6ad4f0c0d6c6ee1 ""
   "../visualizations/em_flow.tex" 1787921676.56153 2888 e0b814ad56728880dfe0b83d2cde8650 ""
   "../visualizations/tsms_flow.tex" 1787565996 2786 971c3fb25ae537976e2a612c1b8cc12c ""
   "/Users/johnargentino/Desktop/research/mvam/are/lacey/remarcs_methodological/output/paper/main/main.tex" 1788267115.15901 10508 934b96c4ae20b2a822b866c7547440af ""
@@ -267,12 +267,12 @@
   "/usr/local/texlive/2026/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1784616340 5573038 b99aad5e4898a9034e953632f940512b ""
   "/usr/local/texlive/2026/texmf-var/web2c/pdftex/pdflatex.fmt" 1774209607 3636776 dc5fa9b6b1453b9d196cd42edf876004 ""
   "/usr/local/texlive/2026/texmf.cnf" 1774209515 577 648cd9f92f9c0eac486f4c71c85cfbbe ""
-  "main.aux" 1788276402.75424 9605 03de93361880e40beac007c0e69e8652 "pdflatex"
-  "main.bbl" 1788267410.56505 3413 2045653acaf8c9e8e5305e420d479541 "bibtex main"
+  "main.aux" 1788277304.52423 9605 8fd20b033484de1f1e06a74eff8cf743 "pdflatex"
+  "main.bbl" 1788277300.72466 3413 2045653acaf8c9e8e5305e420d479541 "bibtex main"
   "main.ind" 1788247998.99296 0 d41d8cd98f00b204e9800998ecf8427e "makeindex main.idx"
-  "main.lof" 1788276402.75642 904 92ce655522a9654a1ff3c182c799a3dc "pdflatex"
-  "main.lot" 1788276402.75639 738 1dd2224fc0ef71d14e28c74ec230273e "pdflatex"
-  "main.out" 1788276402.75593 3882 b5e3d90eacf3ddac6f2f6cdada71ba63 "pdflatex"
+  "main.lof" 1788277304.52605 904 92ce655522a9654a1ff3c182c799a3dc "pdflatex"
+  "main.lot" 1788277304.52601 738 1dd2224fc0ef71d14e28c74ec230273e "pdflatex"
+  "main.out" 1788277304.52569 3882 b5e3d90eacf3ddac6f2f6cdada71ba63 "pdflatex"
   "main.tex" 1788267115.15901 10508 934b96c4ae20b2a822b866c7547440af ""
   (generated)
   "main.aux"

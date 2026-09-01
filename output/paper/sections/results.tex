@@ -76,7 +76,7 @@ We begin with simulations of an ARMA(1,1)-Noise Model:
  $$\quad t = 1,...,T \quad i = 1,...,n_t \quad n_t \overset{i.i.d.}{\sim} \text{Poi}(\lambda) + 1 $$
  
 Differing values of $\phi$ and $\theta$ were combined with fixed parameters $\sigma_\varepsilon^2 = \armanconfveps$, $\sigma_\eta^2 = \armanconfveta$, and $\lambda = \armanconflambda$.
-For each value-pair $(\phi,\theta)$, $\armanconfsims$ simulations are generated and used to estimate
+For each value-pair $(\phi,\theta)$, $\armanconfsims$ simulations are generated and used to estimate each combination
 parameter values. Confidence regions are then calculated and used to test if true parameter values 
 were successfully captured. The empirical confidence levels of varying parameter combinations $(\phi,\theta)$ are depicted
 in Figure \ref{fig:e_conf_l}.
@@ -109,9 +109,9 @@ in estimating parameters governing an ARMA-Noise model, we can add fixed effects
 
 \subsection{Empirical Confidence of REMARCS algorithm}
 
-Now in order to assess the efficacy of this method, $ \simsfearma $ simulations were conducted with 
+Now in order to assess the efficacy of this method, $ \simsfearma $ simulations were conducted with each combination of 
 fixed parameters $\beta = (\intfearma,\slopefearma,\xfearma)$, $\sigma_\eta^2 = \vetafearma$, 
-$ \sigma_\varepsilon^2 = \vepsfearma$, and varying combinations of ARMA parameters $(\phi,\theta)$. 
+$ \sigma_\varepsilon^2 = \vepsfearma$, and varying values of ARMA parameters $(\phi,\theta)$. 
 
 In Figure \ref{fig:conf_heatmap}, we can see the proportion of simulations that yielded 
 confidence regions successfully capturing $\beta$ (left) and $(\phi,\theta,\sigma_\eta^2)$ (right). 
@@ -209,7 +209,7 @@ the ARE model and fitting a time series with covariates.
 
 We consider fitting this model by aggregating the data at each time point 
 and treating the averages as a time series with covariates. $\sims$ 
-simulations were generated and fit with each method.
+simulations were generated for each set of parameters and fit with both methods.
 
 
 
@@ -225,7 +225,7 @@ covariates is then fit:
 
 
 If we then fit a time series with covariates to the condensed dataset, we obtain results with empirical means 
-displayed in the table below. The ``Significance Frequency" column displays the fraction of the hundred 
+displayed in the table below. The ``Significance Frequency" column displays the fraction of the $\sims$ 
 simulations in which the corresponding parameter estimate was statistically significant at the $\alpha = .05$ 
 level.
 
@@ -277,4 +277,5 @@ The REMARCS algorithm was also applied to mVAM data from the same time period in
     \item Synchronize color ranges for T1 and T2 of ARMAN simulations, L1 and L2 of REMARCS simulations
     \item Rownames, aesthetics, captions of tables
     \item README
+    \item Add parameter combinations and more simulations to REMARCS simulations
 \end{itemize}
