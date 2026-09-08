@@ -1,4 +1,4 @@
-\contentsline {figure}{\numberline {1}{\ignorespaces Decision tree for selecting parameters to include in ARMA-Noise model}}{9}{figure.caption.2}%
+\contentsline {figure}{\numberline {1}{\ignorespaces Decision tree for parameter restriction in ARMA--Noise model}}{9}{figure.caption.2}%
 \contentsline {figure}{\numberline {2}{\ignorespaces Flowchart of algorithm steps for estimating model parameters}}{12}{figure.caption.3}%
 \contentsline {figure}{\numberline {3}{\ignorespaces AR bias}}{14}{figure.caption.5}%
 \contentsline {figure}{\numberline {4}{\ignorespaces Rates at which point estimates for $\tau _l$ fall within confidence regions based on sample estimates}}{15}{figure.caption.6}%

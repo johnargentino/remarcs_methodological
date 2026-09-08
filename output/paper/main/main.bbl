@@ -16,6 +16,11 @@ John Argentino, Shalean Collins, and Michelle Lacey.
 \newblock Learning from mobile food security surveys in emergency contexts.
 \newblock Manuscript submitted for publication, 2026.
 
+\bibitem{Bates2015}
+Douglas Bates, Martin M{\"a}chler, Benjamin~M. Bolker, and Steve~C. Walker.
+\newblock Fitting linear mixed-effects models using {lme4}.
+\newblock {\em Journal of Statistical Software}, 67(1):1--48, 2015.
+
 \bibitem{box1976time}
 George E.~P. Box and Gwilym~M. Jenkins.
 \newblock {\em Time Series Analysis: Forecasting and Control}.
@@ -61,6 +66,11 @@ Wing keung Wong and Robert~B. Miller.
 \newblock Repeated time series analysis of arima-noise models.
 \newblock {\em Journal of Business \& Economic Statistics}, 8(2):243--250, 1990.
 
+\bibitem{laird1982variance}
+Nan~M. Laird.
+\newblock Computation of variance components using the em algorithm.
+\newblock {\em Journal of Statistical Computation and Simulation}, 14(3-4):295--303, 1982.
+
 \bibitem{modugno2015multilevel}
 Lucia Modugno, Silvia Cagnone, and Simone Giannerini.
 \newblock A multilevel model with autoregressive components for the analysis of tribal art prices.
@@ -80,5 +90,10 @@ Walter Rudin.
 A.~J. Scott and T.~M.~F. Smith.
 \newblock Analysis of repeated surveys using time series methods.
 \newblock {\em Journal of the American Statistical Association}, 69(347):674--678, 1974.
+
+\bibitem{woodbury1950}
+Max~A. Woodbury.
+\newblock Inverting modified matrices.
+\newblock Technical Report~42, Statistical Research Group, Princeton University, 1950.
 
 \end{thebibliography}

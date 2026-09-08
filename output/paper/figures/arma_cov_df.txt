@@ -1,16 +1,17 @@
 % latex table generated in R 4.4.2 by xtable 1.8-4 package
-% Mon Aug 31 14:16:31 2026
+% Mon Sep  7 23:23:53 2026
 \begin{table}[ht]
 \centering
-\begin{tabular}{lrrrrr}
+\begin{tabular}{rlllll}
   \hline
-Parameter & True Value & TSCOV Mean & REMARCS Mean & Sig. Freq. TS & Sig. Freq. REMARCS \\ 
+ & phi & theta & Intercept & Slope & Covariate \\ 
   \hline
-phi & 0.900 & 0.892 & 0.892 & 1.000 & 1.000 \\ 
-  theta & 0.000 & -0.584 & 0.173 & 1.000 & 0.050 \\ 
-  Intercept & 43.000 & 43.020 & 43.024 & 1.000 & 1.000 \\ 
-  Slope & -0.001 & -0.001 & -0.001 & 0.194 & 0.223 \\ 
-  Covariate & 0.250 & 0.240 & 0.236 & 0.158 & 0.496 \\ 
+True Parameter Value &  0.90 &  0.00 & 43.00 &  0.00 &  0.25 \\ 
+  Estimate Mean &  0.89 & -0.58 & 43.00 &  0.00 &  0.27 \\ 
+  Rate of Estimate Significance & 1.00 & 1.00 & 1.00 & 0.20 & 0.16 \\ 
+  Rate of Parameter Capture & 0.96 & 0.00 & 0.92 & 0.92 & 0.92 \\ 
    \hline
 \end{tabular}
+\caption{Simulation Results for Aggregating Data and Fitting as a Time Series with Covariates} 
+\label{tab:armacov}
 \end{table}

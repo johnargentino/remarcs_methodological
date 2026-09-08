@@ -1,0 +1,23 @@
+\contentsline {section}{\numberline {1}Introduction}{1}{section.1}%
+\contentsline {section}{\numberline {2}Background}{2}{section.2}%
+\contentsline {subsection}{\numberline {2.1}mVAM Data}{2}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Existing Methods}{2}{subsection.2.2}%
+\contentsline {section}{\numberline {3}Methods}{5}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Model and Algorithm}{6}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Evaluating Convergence}{6}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}Inference}{7}{subsection.3.3}%
+\contentsline {subsection}{\numberline {3.4}Model Selection}{9}{subsection.3.4}%
+\contentsline {subsection}{\numberline {3.5}Generalizing to Varying Sample Size}{10}{subsection.3.5}%
+\contentsline {subsection}{\numberline {3.6}Extending to Mixed Effects Models}{12}{subsection.3.6}%
+\contentsline {section}{\numberline {4}Results}{14}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Instability of EM Algorithm}{14}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Effect of Noise on ARMA Processes}{14}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}Empirical Confidence of ARMA-Noise Models}{15}{subsection.4.3}%
+\contentsline {subsection}{\numberline {4.4}Empirical Confidence of REMARCS algorithm}{16}{subsection.4.4}%
+\contentsline {subsection}{\numberline {4.5}Empirical Confidence of Model Selection}{17}{subsection.4.5}%
+\contentsline {subsection}{\numberline {4.6}Method Comparison}{18}{subsection.4.6}%
+\contentsline {subsection}{\numberline {4.7}Case Study: mVAM Data in Honduras}{19}{subsection.4.7}%
+\contentsline {section}{\numberline {5}Discussion}{20}{section.5}%
+\contentsline {section}{\numberline {6}Data Availability Statement}{21}{section.6}%
+\contentsline {section}{\numberline {7}To-Do List}{21}{section.7}%
+\contentsline {section}{\numberline {8}Appendix}{23}{section.8}%

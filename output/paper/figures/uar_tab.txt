@@ -1,5 +1,5 @@
 % latex table generated in R 4.4.2 by xtable 1.8-4 package
-% Tue Sep  1 09:10:08 2026
+% Tue Sep  8 01:29:48 2026
 \begin{table}[ht]
 \centering
 \caption{Rates at which MA Parameter is Insignificant When True Parameter is Zero} 
@@ -7,8 +7,8 @@
 \begin{tabular}{rrrrrr}
   \hline
   \hline
-phi & -0.90 & -0.50 & -0.10 & 0.30 & 0.70 \\ 
-  theta\_captured & 1.00 & 0.82 & 1.00 & 0.91 & 0.91 \\ 
+AR Parameter & -0.90 & -0.50 & -0.10 & 0.30 & 0.70 \\ 
+  MA Insig. Rate & 0.94 & 0.94 & 0.97 & 0.95 & 0.97 \\ 
    \hline
 \end{tabular}
 \end{table}

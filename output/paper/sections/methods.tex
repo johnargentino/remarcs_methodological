@@ -316,6 +316,9 @@ $$ \text{Cov}(A_r,A_s) = \mathbb{E}(0) + \text{Cov}(0, 0) = 0$$
 
 Having shown that $\{A_t\}$ is still white noise, it now remains to estimate its variance. 
 Though the sample sizes now vary, our estimate for $\sigma_\varepsilon^2$ hasn't changed (see Equation \ref{eq:var_eps_hat}).
+From Argentino (2026) \cite{Argentino2026}, this estimate does assume independence in the
+daily sample sizes. If sample sizes display evidence of dependence, then the estimate for
+$\sigma_\varepsilon^2$ must be amended to reflect it.
 
 
 
@@ -340,10 +343,17 @@ With $\hat{\sigma}_\varepsilon^2$, $\hat{\sigma}_a^2$ and $\hat{\text{Var}}(\hat
 
 
 The takeaway from all this is that a constant expected inverse of $\{N_t\}$ is the critical piece for $\{A_t\}$ to still be white noise.
+Such a condition is satisfied if the sample sizes are the realizations of a \emph{strictly} stationary time series,
+but not necessarily if stationarity is weak. The sample sizes don't even have to be of constant mean, 
+so long as the expectation of $N_t^{-1}$ is constant \cite{Argentino2026}.
 
 So long as the set of inverse sample sizes $\{n_t^{-1}\}$ is conceivably of constant expectation, the ARMA-Noise method is applicable.
 
-
+The condition that $P(N_t > 0) = 1$ begs the question of what to do in the event of missing time steps. These instances are 
+treated as "missing data", since the method of moments estimator for $\mathbb{E}(N_t^{-1})$ would be undefined if those
+instances were included. Only non-zero sample sizes are used to estimate $\mathbb{E}(N_t^{-1})$, and the zeros present 
+in the vector of sample sizes will simply correspond to zero-columns in $X_t$ that don't end up affecting 
+the outcome, as packages like \textit{arima} can handle missing values.
 
 
 \subsection{Extending to Mixed Effects Models}
@@ -360,11 +370,26 @@ yielding a model of the following form:
 
 
 
-The algorithm changes only in that the initial model fit includes random effects (\textit{lmer package})
+The algorithm changes only in that the initial model fit includes random effects (\textit{lmer package}) \cite{Bates2015}
 The fixed effects estimate $\hat{\beta}_{GLS}$ adjusts in that $\Omega$ now includes the 
 term $X_r\Sigma_bX_r'$. Random intercepts $\mathbf{b}$ are updated with the 
 conditional expectation $\mathbb{E}(\mathbf{b}|\yy, \hat{\xi}) = \Sigma_b X_r' \Omega^{-1}(\yy - X_f\hat{\beta})$.
-Those intercepts are then used to update the parameters of $\Sigma_b$. A flowchart depicting the steps of the algorithm is given in 
+Following the EM formulation for variance component estimation
+\citep{laird1982variance}, the update for the random-effects
+variance is:
+
+\[
+\widehat{\sigma}_b^{2\,(k+1)}
+=
+\frac{1}{m}
+\sum_{i=1}^m
+\left[
+\widehat{b}_i^{\,2}
++
+\operatorname{Var}(b_i \mid \mathbf{y})
+\right].
+\]
+A flowchart depicting the steps of the algorithm is given in 
 Figure \ref{fig:modelflow}.
 
 
@@ -375,17 +400,10 @@ Figure \ref{fig:modelflow}.
 
 Derivations excluded for concision can be found in the PhD dissertation on which this work
 is based \cite{Argentino2026}. Having described the procedure for parameter estimation and
-inference, we now proceed to assess the algorithm's performance.
+inference, we now proceed to assess the algorithm's performance. A note on computational speed:
+because we aren't relying on pre-compiled functions like \emph{lm}, \emph{arima} and 
+\emph{lmer} for updating parameter estimates, we have to calculate estimates manually.
+The main computational bottleneck of this procedure is inverting $\Sigma_\yy$. However,
+we can expedite this process through the Woodbury equation \cite{woodbury1950}, used once in
+the fixed effects setting and twice in the mixed effects setting.
 
-
-\subsection{To-Do List}
-\begin{itemize}
-    \item Amend code so that likelihood is split based on ybar and not uhat
-    \item Fix Model Selection Flowchart
-    \item ASSUMPTION OF INDEPENDENCE IN CALCULATING VARIANCE OF ESTIMATE
-    \item Implications for STRICTLY STATIONARY SAMPLE SIZES aND NON-CONSTANT MEAN
-    \item MATRIX N and how the likelihood changes 
-    \item Comment on missing time steps
-    \item MAKE SURE ALL NOTATION HAS BEEN DEFINED!!!!
-    \item Formula for updating $\sigma_b^2$
-\end{itemize}

@@ -1,0 +1,17 @@
+% latex table generated in R 4.4.2 by xtable 1.8-4 package
+% Mon Sep  7 23:23:53 2026
+\begin{table}[ht]
+\centering
+\begin{tabular}{rlllll}
+  \hline
+ & phi & theta & Intercept & Slope & Covariate \\ 
+  \hline
+True Parameter Value &  0.90 &  0.00 & 43.00 &  0.00 &  0.25 \\ 
+  Estimate Mean &  0.89 &  0.15 & 43.02 &  0.00 &  0.25 \\ 
+  Rate of Estimate Significance & 1.00 & 0.06 & 1.00 & 0.22 & 0.57 \\ 
+  Rate of Parameter Capture & 0.96 & 0.94 & 0.93 & 0.91 & 0.96 \\ 
+   \hline
+\end{tabular}
+\caption{Simulation Results for Fitting Data with a REMARCS Model} 
+\label{tab:remarcs}
+\end{table}

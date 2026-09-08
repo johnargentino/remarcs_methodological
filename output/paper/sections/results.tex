@@ -84,13 +84,13 @@ in Figure \ref{fig:e_conf_l}.
 
 \begin{figure}[htbp]
 \centering
-    \begin{subfigure}{0.45\linewidth}
+    \begin{subfigure}{0.55\linewidth}
         \centering
         \includegraphics[width=\linewidth]{../figures/e_conf_l_3_2.pdf}
         \subcaption{$T = \armanconfTleft$}
     \end{subfigure}
     \hfill
-    \begin{subfigure}{0.45\linewidth}
+    \begin{subfigure}{0.41\linewidth}
         \centering
         \includegraphics[width=\linewidth]{../figures/e_conf_l_4_2.pdf}
         \subcaption{$T = \armanconfTright$}
@@ -114,7 +114,7 @@ fixed parameters $\beta = (\intfearma,\slopefearma,\xfearma)$, $\sigma_\eta^2 = 
 $ \sigma_\varepsilon^2 = \vepsfearma$, and varying values of ARMA parameters $(\phi,\theta)$. 
 
 In Figure \ref{fig:conf_heatmap}, we can see the proportion of simulations that yielded 
-confidence regions successfully capturing $\beta$ (left) and $(\phi,\theta,\sigma_\eta^2)$ (right). 
+confidence regions successfully capturing $\beta$ (left) and $(\phi,\theta)$ (right). 
 One observation we can make is that, similarly to the ARMA-Noise simulations, convergence
 to asymptotic distributions is slower for parameter combinations close to the line $\phi + \theta = 0$. 
 This under-performance is mitigated as $T$ grows, indicating that time series more closely resembling white noise 
@@ -123,17 +123,17 @@ will require larger values of $T$ for accurate estimation.
 
 \begin{figure}[htbp]
     \centering
-    \begin{subfigure}{0.48\textwidth}
+    \begin{subfigure}{0.55\textwidth}
         \centering
         \includegraphics[width=\linewidth]{../figures/l1_conf.pdf}
-        \caption{Fixed Effect Parameter Estimation}
+        \caption{Fixed Effect Parameters \hspace{.5in}}
         \label{fig:sub1}
     \end{subfigure}
     \hfill
-    \begin{subfigure}{0.48\textwidth}
+    \begin{subfigure}{0.41\textwidth}
         \centering
         \includegraphics[width=\linewidth]{../figures/l2_conf.pdf}
-        \caption{Time Series Parameter Estimation}
+        \caption{Time Series Parameters}
         \label{fig:sub2}
     \end{subfigure}
     \caption{Empirical confidences with which model parameters fall within confidence regions generated after model convergence}
@@ -216,43 +216,54 @@ simulations were generated for each set of parameters and fit with both methods.
 Some sample rows of simulated data are provided below:
 
 
-\input{../figures/arma_cov_head.txt}
+% \input{../figures/arma_cov_head.txt}
 
 After aggregating at each time step, we obtain the following condensed dataset, from which a time series with 
 covariates is then fit:
 
-\input{../figures/arma_cov_head_daily.txt}
+% \input{../figures/arma_cov_head_daily.txt}
 
+\begin{table}[htbp]
+    \centering
 
+    \begin{subtable}[t]{0.48\textwidth}
+        \centering
+        \input{../figures/arma_cov_head.txt}
+        \caption{Individual Data}
+        \label{tab:arma_cov_head}
+    \end{subtable}
+    \hfill
+    \begin{subtable}[t]{0.48\textwidth}
+        \centering
+        \input{../figures/arma_cov_head_daily.txt}
+        \caption{Aggregate Data}
+        \label{tab:arma_cov_head_daily}
+    \end{subtable}
+
+    \caption{Example of the simulated dataset before and after aggregation. Panel (a) shows sample observations from the original simulated data, while panel (b) shows the condensed dataset obtained by aggregating observations at each time step. The aggregated data are subsequently used to fit the time series model with covariates.}
+    \label{tab:arma_cov_comparison}
+\end{table}
+
+Note that entries of the \textit{x} column, while displaying some variability, are fairly close to $0.5$. 
 If we then fit a time series with covariates to the condensed dataset, we obtain results with empirical means 
 displayed in the table below. The ``Significance Frequency" column displays the fraction of the $\sims$ 
-simulations in which the corresponding parameter estimate was statistically significant at the $\alpha = .05$ 
+simulations in which the corresponding parameter estimate was statistically significant at the $\alpha = \tscovalpha$ 
 level.
 
 
 \input{../figures/arma_cov_df.txt}
 
+Note that the effect of the dummy indicator variable is deemed significant only
+ $\covconf\%$ of the time (Table \ref{tab:armacov}), whereas the same simulations yield an empirical confidence of $\covconfremarcs\%$ when the REMARCS algorithm is applied (Table \ref{tab:remarcs}). This example highlights the shortcomings of fitting a time series with covariates.
+  Also of note is how skewed the sample mean of $\hat{\theta}$ is. This is because what we are in fact estimating is 
+  $\theta_b$, the MA parameter of $\mathbf{w}$.
 
-Note that entries of the \textit{x} column, while displaying some variability, are fairly close to $0.5$. 
 
-ADD STANDARD ERRORS!!! CHANGE SIGNIFICANCE TO EMPIRICAL CONFIDENCE
-DOUBLE CHECK SIGMAO FUNCTION, VAREPS OR VARA
-% Note that the effect of the dummy indicator variable is deemed significant only
-%  $\covconf\%$ of the time. This example highlights the shortcomings of fitting a time series with covariates.
-%   Also of note is how skewed the sample mean of $\hat{\theta}$ is. This is because what we are in fact estimating is 
-%   $\theta_b$, the MA parameter of $\mathbf{w}$
+\input{../figures/remarcs_df.txt}
 
 
 
-\begin{itemize}
-    \item SIMULATE FIXED/MIXED EFFECT REMARCS DATA
-    \item FIT WITH FE/ME MODEL
-    \item FIT WITH TS WITH COVARIATES
-    \item MODUGNO INSTABILITY
-    \item FIT WITH REMARCS
-    \item HEATMAPS
-    \item MODEL SELECTION
-\end{itemize}
+
 
 
 
@@ -270,12 +281,3 @@ Now that our algorithm has demonstrated promising results on simulated data, we 
 The REMARCS algorithm was also applied to mVAM data from the same time period in Yemen \cite{Argentino2026review}. 
 
 
-\subsection{To-Do List}
-\begin{itemize}
-    \item Comment on missing values
-    \item Exclude veta from confidence regions for right panel of REMARCS simulations
-    \item Synchronize color ranges for T1 and T2 of ARMAN simulations, L1 and L2 of REMARCS simulations
-    \item Rownames, aesthetics, captions of tables
-    \item README
-    \item Add parameter combinations and more simulations to REMARCS simulations
-\end{itemize}

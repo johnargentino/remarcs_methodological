@@ -142,7 +142,7 @@ ggsave("../output/paper/figures/no_ar_var_effect.pdf", height = 6, width = 8)
 #Params
 ar_bias_vara = 2
 veta_arbias = 1
-minutes = 4
+minutes = 30
 T_arbias = 1000
 
 
@@ -290,7 +290,7 @@ p = plot_ly() %>%
 p
 htmlwidgets::saveWidget(
   p,
-  file = "../output/paper/figures/phi_3d_plot.html",
+  file = "../docs/phi_3d_plot.html",
   selfcontained = TRUE
 )
 ```
@@ -310,7 +310,9 @@ b_0 = 43
 b_t = -.001
 b_1 = .25
 beta = c(b_0,b_t, b_1)
-minutes = 10
+true_pars = c(phi, theta, beta)
+tscovalpha = .05
+minutes = 30
 ```
 
 ```{r}
@@ -344,13 +346,17 @@ ggsave("../output/paper/figures/are.png", width = 8, height = 6)
 #current chunk
 
 estimates = c()
-zscores = c()
+ses = c()
 variances = c()
+captured = c()
+zscores = c()
 
 estimates_remarcs = c()
-zscores_remarcs = c()
+se_remarcs = c()
 veta_remarcs = c()
 veps_remarcs = c()
+captured_remarcs = c()
+zscores_remarcs = c()
 
 start = Sys.time()
 n_t = rpois(n = TT, lambda = ll) + 1
@@ -397,15 +403,27 @@ armacov = arima(df_armacov$y, order = c(1,0,1), xreg = covariate_matrix[,2:3], i
 sim_est = armacov$coef
 sim_se = armacov$var.coef %>% diag() %>% sqrt()
 sim_z = sim_est / sim_se
-zscores = cbind(zscores, sim_z)
+sim_captured = true_pars < (sim_est + sim_se * abs(qnorm(tscovalpha / 2))) &
+  true_pars > (sim_est - sim_se * abs(qnorm(tscovalpha / 2)))
+
+
+ses = cbind(ses, sim_se)
 estimates = cbind(estimates, armacov$coef)
 variance = armacov$sigma2
 variances = append(variances, variance)
+captured = cbind(captured, sim_captured)
+zscores = cbind(zscores, sim_z)
 
 sim_est_remarcs = c(rmarcs$TS_Pars[,1],rmarcs$Beta_Pars[,1])
 sim_se_remarcs = c(rmarcs$TS_Pars[,2], rmarcs$Beta_Pars[,2])
 sim_z_remarcs = sim_est_remarcs / sim_se_remarcs
+sim_captured_remarcs =  true_pars < (sim_est_remarcs + sim_se_remarcs * abs(qnorm(tscovalpha / 2))) &
+  true_pars > (sim_est_remarcs - sim_se_remarcs * abs(qnorm(tscovalpha / 2)))
+
+
 zscores_remarcs = cbind(zscores_remarcs, sim_z_remarcs)
+captured_remarcs = cbind(captured_remarcs, sim_captured_remarcs)
+se_remarcs = cbind(se_remarcs, sim_se_remarcs)
 estimates_remarcs = cbind(estimates_remarcs, sim_est_remarcs)
 veta_remarcs = cbind(rmarcs$`TS Variance`)
 veps_remarcs = cbind(rmarcs$`Individual Variance`)
@@ -458,18 +476,26 @@ armacov = arima(df_armacov$y, order = c(1,0,1), xreg = covariate_matrix[,2:3], i
 sim_est = armacov$coef
 sim_se = armacov$var.coef %>% diag() %>% sqrt()
 sim_z = sim_est / sim_se
-zscores = cbind(zscores, sim_z)
+ses = cbind(ses, sim_se)
+sim_captured = true_pars < (sim_est + sim_se * abs(qnorm(tscovalpha / 2))) &
+  true_pars > (sim_est - sim_se * abs(qnorm(tscovalpha / 2)))
 estimates = cbind(estimates, armacov$coef)
 variance = armacov$sigma2
 variances = append(variances, variance)
+captured = cbind(captured, sim_captured)
+zscores = cbind(zscores, sim_z)
 
 sim_est_remarcs = c(rmarcs$TS_Pars[,1],rmarcs$Beta_Pars[,1])
 sim_se_remarcs = c(rmarcs$TS_Pars[,2], rmarcs$Beta_Pars[,2])
 sim_z_remarcs = sim_est_remarcs / sim_se_remarcs
-zscores_remarcs = cbind(zscores_remarcs, sim_z_remarcs)
+sim_captured_remarcs =  true_pars < (sim_est_remarcs + sim_se_remarcs * abs(qnorm(tscovalpha / 2))) &
+  true_pars > (sim_est_remarcs - sim_se_remarcs * abs(qnorm(tscovalpha / 2)))
+se_remarcs = cbind(se_remarcs, sim_se_remarcs)
 estimates_remarcs = cbind(estimates_remarcs, sim_est_remarcs)
 veta_remarcs = cbind(rmarcs$`TS Variance`)
 veps_remarcs = cbind(rmarcs$`Individual Variance`)
+captured_remarcs = cbind(captured_remarcs, sim_captured_remarcs)
+zscores_remarcs = cbind(zscores_remarcs, sim_z_remarcs)
 
 }
 
@@ -477,26 +503,81 @@ veps_remarcs = cbind(rmarcs$`Individual Variance`)
 # hist(variances)
 # rowMeans(2 * (1 - pnorm(abs(zscores))) < .05)
 
+
+
 ts_cov_df = tibble(Parameter = c("phi", 
                             "theta", 
                             "Intercept", 
                             "Slope",
                             "Covariate"),
-                   `True Value` = c(phi, theta, beta[1], beta[2], beta[3]),
-                   `TSCOV Mean` = rowMeans(estimates), 
-                   `REMARCS Mean` = rowMeans(estimates_remarcs),
-                   `Sig. Freq. TS` = rowMeans(2 * (1 - pnorm(abs(zscores))) < .05),
-                   `Sig. Freq. REMARCS` = rowMeans(2 * (1 - pnorm(abs(zscores_remarcs))) < .05)
+                   `True Parameter Value` = round(c(phi, theta, beta[1], beta[2], beta[3]), digits = 2),
+                   `Estimate Mean` = round(rowMeans(estimates), digits = 2), 
+                   `Rate of Estimate Significance` = round(rowMeans(2 * (1 - pnorm(abs(zscores))) < .05), digits = 2),
+                  `Rate of Parameter Capture` = round(rowMeans(captured), digits = 2)
 )
 
+remarcs_df = tibble(Parameter = c("phi", 
+                            "theta", 
+                            "Intercept", 
+                            "Slope",
+                            "Covariate"),
+                   `True Parameter Value` = round(c(phi, theta, beta[1], beta[2], beta[3]), digits = 2),
+                   `Estimate Mean` = round(rowMeans(estimates_remarcs), digits = 2),
+                   
+                   `Rate of Estimate Significance` = round(rowMeans(2 * (1 - pnorm(abs(zscores_remarcs))) < .05), digits = 2),
+                  `Rate of Parameter Capture` = round(rowMeans(captured_remarcs), digits = 2)
+)
 
-print(xtable(ts_cov_df, digits = c(0, 3, 3, 3, 3,3,3)), include.rownames = FALSE, file = "../output/paper/figures/arma_cov_df.txt")
+ts_cov_mat = ts_cov_df |> as.matrix() |> t()
+remarcs_mat = remarcs_df |> as.matrix() |> t()
 
-print(xtable(head(test %>% dplyr::select(t,x,y))), include.rownames = FALSE, file = "../output/paper/figures/arma_cov_head.txt")
+ts_cov_mat = ts_cov_mat[2:nrow(ts_cov_mat),]
+remarcs_mat = remarcs_mat[2:nrow(remarcs_mat),]
+colnames(ts_cov_mat) = c("phi", 
+                            "theta", 
+                            "Intercept", 
+                            "Slope",
+                            "Covariate")
+colnames(remarcs_mat) = c("phi", 
+                            "theta", 
+                            "Intercept", 
+                            "Slope",
+                            "Covariate")
 
-print(xtable(head(df_armacov)), include.rownames = FALSE, file = "../output/paper/figures/arma_cov_head_daily.txt")
 
-cov_conf = ts_cov_df$`Sig. Freq. TS`[ts_cov_df$Parameter == "Covariate"] %>% as.numeric() * 100
+
+print(xtable(ts_cov_mat,
+             floating = FALSE,
+      caption = "Simulation Results for Aggregating Data and Fitting as a Time Series with Covariates", 
+      label = "tab:armacov"), 
+      include.rownames = TRUE, 
+      include.colnames = TRUE, 
+      file = "../output/paper/figures/arma_cov_df.txt")
+print(xtable(remarcs_mat,
+             floating = FALSE,
+      caption = "Simulation Results for Fitting Data with a REMARCS Model", 
+      label = "tab:remarcs"), 
+      include.rownames = TRUE, 
+      include.colnames = TRUE, 
+      file = "../output/paper/figures/remarcs_df.txt")
+
+
+print(
+  xtable(head(test %>% dplyr::select(t, x, y))),
+  include.rownames = FALSE,
+  floating = FALSE,
+  file = "../output/paper/figures/arma_cov_head.txt"
+)
+
+print(
+  xtable(head(df_armacov)),
+  include.rownames = FALSE,
+  floating = FALSE,
+  file = "../output/paper/figures/arma_cov_head_daily.txt"
+)
+
+cov_conf = ts_cov_df$`Rate of Estimate Significance`[ts_cov_df$Parameter == "Covariate"] %>% as.numeric() * 100
+cov_conf_remarcs = remarcs_df$`Rate of Estimate Significance`[remarcs_df$Parameter == "Covariate"] %>% as.numeric() * 100
 
 ```
 
@@ -512,7 +593,7 @@ arman_lambda = 5
 arman_T1 = 1000
 arman_T2 = 5000
 arman_alpha = .05
-minutes = 20
+minutes = 60
 ```
 
 ```{r}
@@ -570,32 +651,49 @@ conf_df = mutate(rowwise(conf_df),
                                        )
                  )
 
-end = Sys.time()
-print(end-start)
+```
+
+```{r}
 
 
+# Shared color scale limits
+conf_min <- min(
+  c(conf_df$e_conf_l_3_2, conf_df$e_conf_l_4_2),
+  na.rm = TRUE
+)
+
+conf_max <- 1
+
+# e_conf_l_3_2 plot
 ggplot(conf_df, aes(x = factor(ar), y = factor(ma), fill = e_conf_l_3_2)) +
   geom_tile() +
-    labs(fill = "Empirical Confidence") +
+  labs(fill = "Empirical Confidence") +
   xlab("AR Parameter") +
   ylab("MA Parameter") +
-   scale_fill_viridis_c(limits = c(min(conf_df$e_conf_l_3_2), 1)) +
+  scale_fill_viridis_c(
+    limits = c(conf_min, conf_max)
+  ) +
   theme(
     axis.title.x = element_text(size = 16),
     axis.title.y = element_text(size = 16)
   )
 
-ggsave("../output/paper/figures/e_conf_l_3_2.pdf", width = 7, height = 7)
+ggsave("../output/paper/figures/e_conf_l_3_2.pdf", width = 8, height = 6)
 
+
+# e_conf_l_4_2 plot
 ggplot(conf_df, aes(x = factor(ar), y = factor(ma), fill = e_conf_l_4_2)) +
   geom_tile() +
-    labs(fill = "Empirical Confidence") +
+  labs(fill = "Empirical Confidence") +
   xlab("AR Parameter") +
   ylab("MA Parameter") +
-   scale_fill_viridis_c(limits = c(min(conf_df$e_conf_l_4_2), 1)) +
+  scale_fill_viridis_c(
+    limits = c(conf_min, conf_max)
+  ) +
   theme(
     axis.title.x = element_text(size = 16),
-    axis.title.y = element_text(size = 16)
+    axis.title.y = element_text(size = 16),
+    legend.position = "none"
   )
 
 ggsave("../output/paper/figures/e_conf_l_4_2.pdf", width = 7, height = 7)
@@ -605,8 +703,8 @@ ggsave("../output/paper/figures/e_conf_l_4_2.pdf", width = 7, height = 7)
 ```{r}
 #Params
 
-phi_vec = rep(seq(.1,.9, by = .4), each = 3)
-theta_vec = rep(seq(0,.8, by = .4), times = 3)
+phi_vec = rep(seq(-.9,.9, by = .4), each = 5)
+theta_vec = rep(seq(0,.8, by = .2), times = 5)
 fearma_sim_df = tibble(phi = phi_vec, theta = theta_vec)
 
 fearma_T = 1000
@@ -620,7 +718,7 @@ fearma_beta = c(fearma_int,
                 fearma_slope,
                 fearma_x)
 fearma_alpha = .05
-minutes = 14
+minutes = 30
 ```
 
 
@@ -659,32 +757,43 @@ fearma_sim_df2$l2_conf = sapply(fearma_sim_df2$emp_conf, function(x) x[[2]])
 
 ```{r}
 
+# Shared color scale limits
+conf_min <- min(c(fearma_sim_df2$l1_conf, fearma_sim_df2$l2_conf), na.rm = TRUE)
+conf_max <- max(c(fearma_sim_df2$l1_conf, fearma_sim_df2$l2_conf), na.rm = TRUE)
+
+# L1 confidence plot
 ggplot(fearma_sim_df2, aes(x = factor(phi), y = factor(theta), fill = l1_conf)) +
   geom_tile() +
   xlab("AR Parameter") + 
   ylab("MA Parameter") + 
-  scale_fill_viridis_c() +
-    labs(fill = "Empirical Confidence") +
+  scale_fill_viridis_c(
+    limits = c(conf_min, conf_max)
+  ) +
+  labs(fill = "Empirical Confidence") +
   theme(
     axis.title.x = element_text(size = 16),
     axis.title.y = element_text(size = 16)
   )
-  
-ggsave("../output/paper/figures/l1_conf.pdf", width = 7, height = 7)
 
+ggsave("../output/paper/figures/l1_conf.pdf", width = 8, height = 6)
+
+
+# L2 confidence plot
 ggplot(fearma_sim_df2, aes(x = factor(phi), y = factor(theta), fill = l2_conf)) +
   geom_tile() +
   xlab("AR Parameter") + 
   ylab("MA Parameter") +
-  scale_fill_viridis_c() +
-    labs(fill = "Empirical Confidence") +
+  scale_fill_viridis_c(
+    limits = c(conf_min, conf_max)
+  ) +
+  labs(fill = "Empirical Confidence") +
   theme(
     axis.title.x = element_text(size = 16),
-    axis.title.y = element_text(size = 16)
+    axis.title.y = element_text(size = 16),
+    legend.position = "none"
   )
-  
-ggsave("../output/paper/figures/l2_conf.pdf", width = 7, height = 7)
 
+ggsave("../output/paper/figures/l2_conf.pdf", width = 7, height = 7)
 l1_mat <- fearma_sim_df2 %>%
   select(phi, theta, l1_conf) %>%
   pivot_wider(names_from = theta, values_from = l1_conf) %>%
@@ -731,7 +840,7 @@ are_slope = b_t
 are_cov = b_1
 are_beta = c(are_int, are_slope, are_cov)
 are_repel = tibble(phi = seq(.1,.9, by = .2))
-minutes = 10
+minutes = 30
 ```
 
 ```{r}
@@ -771,6 +880,7 @@ are_repel$veta_mean = sapply(are_repel$are_mean, function(x) x[[3]])
 are_repel$sims = sapply(are_repel$are_mean, function(x) x[[4]])
 
 are_tab = are_repel |> dplyr::select(phi, phi_mean, phi_captured) |> as.matrix()
+colnames(are_tab)= c("AR Paramater", "Estimate Mean", "Rate of Capture")
 are_tab = t(are_tab)
 are_tab <- xtable(
   are_tab,
@@ -801,7 +911,7 @@ uar_cov = b_1
 uar_beta = c(are_int, are_slope, are_cov)
 uar_df = tibble(phi = seq(-.9,.9, by = .4))
 uar_lambda = 5
-minutes = 4
+minutes = 30
 ```
 
 ```{r}
@@ -838,6 +948,7 @@ uar_df = uar_df |>
 uar_df$theta_captured = sapply(uar_df$results, function(x) x[[1]])
 uar_df = uar_df |>
   dplyr::select(phi, theta_captured)
+colnames(uar_df) = c("AR Parameter", "MA Insig. Rate")
 uar_tab = uar_df |> as.matrix()
 uar_tab = t(uar_tab)
 uar_tab <- xtable(
@@ -867,7 +978,7 @@ uma_cov = b_1
 uma_beta = c(are_int, are_slope, are_cov)
 uma_df = tibble(theta = seq(-.9,.9, by = .4))
 uma_lambda = 5
-minutes = 3
+minutes = 30
 ```
 
 ```{r}
@@ -904,6 +1015,7 @@ uma_df = uma_df |>
 uma_df$phi_captured = sapply(uma_df$results, function(x) x[[2]])
 uma_df = uma_df |>
   dplyr::select(theta, phi_captured)
+colnames(uma_df) = c("MA Parameter", "AR Insig. Rate")
 uma_tab = uma_df |> as.matrix()
 uma_tab = t(uma_tab)
 uma_tab <- xtable(
@@ -976,6 +1088,8 @@ cat(sprintf("\\newcommand{\\uarslope}{%s}\n", uar_slope))
 cat(sprintf("\\newcommand{\\uarint}{%s}\n", uar_int))
 cat(sprintf("\\newcommand{\\uarcov}{%s}\n", uar_cov))
 cat(sprintf("\\newcommand{\\uarlambda}{%s}\n", uar_lambda))
+cat(sprintf("\\newcommand{\\tscovalpha}{%s}\n", tscovalpha))
+cat(sprintf("\\newcommand{\\covconfremarcs}{%s}\n", cov_conf_remarcs))
 sink()
 sink.number()
 ```
