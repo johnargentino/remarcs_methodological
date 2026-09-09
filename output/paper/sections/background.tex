@@ -107,7 +107,7 @@ $$ {\mathbf{y}} = X_f\beta + \mathbf{u}, \qquad \mathbf{u}\sim\text{ARMA(p,q)} $
 Since individual identifiers are not available for our dataset of interest, we can neither 
 assume nor preclude sample overlap. It does beg the question of the applicability of a
 pseudo-panel, as detailed by Deaton \cite{deaton1985panel}. Similarly dealing with a lack
-of individuals who are tracked over the course of a surveying period, Deaton defines "cohorts"
+of individuals who are tracked over the course of a surveying period, Deaton defines ``cohorts"
 with fixed membership that are then represented at each time step. Cohort means are then 
 estimated at each time step, and microdata is used to estimate the variance of the resulting
 errors-in-variables.
@@ -124,11 +124,11 @@ ARE models are fit through a recursive process
  
 
 
-This conditional splitting is convenient, as $\uu \sim 
-N(\mathbf{0},\GG)$ and $\yy|\uu \sim N(X_f\beta + \uu,
+This conditional splitting yields convenient distributions, as $\uu \sim 
+N(\mathbf{0},\GG)$ and $\yy|\uu \sim N(X_f\beta + X_t\uu,
  \sigma_\varepsilon^2I_N)$. Furthermore, the choice of imposing
  an AR(1) structure on $\uu$ lends itself to a concise
-  representation of the determinant and inverse of $\GG$.
+  representation of the determinant and inverse of $\GG$ \cite{modugno2015multilevel}.
 
 
 

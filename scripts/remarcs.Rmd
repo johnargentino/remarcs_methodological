@@ -835,12 +835,12 @@ print(l2_tab,
 are_T = 1000
 are_veta = var_eta
 are_veps = 20
-are_int = b_0
+are_int = 50
 are_slope = b_t
 are_cov = b_1
 are_beta = c(are_int, are_slope, are_cov)
-are_repel = tibble(phi = seq(.1,.9, by = .2))
-minutes = 30
+are_repel = tibble(phi = seq(-9,.9, by = .4))
+minutes = 1
 ```
 
 ```{r}
@@ -911,7 +911,7 @@ uar_cov = b_1
 uar_beta = c(are_int, are_slope, are_cov)
 uar_df = tibble(phi = seq(-.9,.9, by = .4))
 uar_lambda = 5
-minutes = 30
+minutes = .5
 ```
 
 ```{r}
@@ -978,7 +978,7 @@ uma_cov = b_1
 uma_beta = c(are_int, are_slope, are_cov)
 uma_df = tibble(theta = seq(-.9,.9, by = .4))
 uma_lambda = 5
-minutes = 30
+minutes = 1
 ```
 
 ```{r}
