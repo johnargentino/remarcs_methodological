@@ -61,11 +61,13 @@
 \author{John Argentino}
 
 \input{../r_variables.tex}
+\title{REMARCS: Regression Models for Autocorrelated Repeated Cross-Sections}
 
 \begin{document}
-
-% \begin{abstract}
-% \end{abstract}
+\maketitle
+\begin{abstract}
+    High-frequency repeated cross-sectional (RCS) surveys provide detailed information about populations over time without requiring the repeated observation of the same individuals. However, temporal correlation in survey responses complicates regression-based inference, while aggregating observations to the time-step level discards individual-level information. Existing approaches that incorporate latent temporal processes can also produce biased time-series parameter estimates because cross-sectional sampling noise is not properly accounted for. We develop REMARCS (REgression Models for Autocorrelated Repeated Cross-Sections), a framework for estimating regression models with individual-level covariates, latent temporal dependence, and cross-sectional noise. The method models the latent temporal process as an ARMA(1,1) process and uses ARMA-Noise methods to distinguish temporal variation from observation noise. An iterative estimation procedure combines these estimates with generalized least squares to obtain regression parameters while retaining the individual-level structure of the data. We further extend ARMA-Noise methods to accommodate varying sample sizes across time steps, a common feature of real-world surveys. Confidence regions for latent time-series parameters are obtained using the Delta Method and an implicit-function formulation, yielding a procedure for model selection among restricted temporal structures. Simulation studies demonstrate that treating noisy aggregate residuals as an AR process can produce substantial bias, whereas the proposed approach recovers temporal and regression parameters with substantially improved empirical coverage. The method also outperforms aggregation-based regression in simulations when individual-level covariates exhibit limited variation across time. REMARCS provides a framework for analyzing high-frequency RCS data while preserving individual-level information and accounting for temporal correlation, with applications including mobile phone surveys used to monitor household food security.
+\end{abstract}
 \pagenumbering{roman}
 \pagestyle{plain}
 \setcounter{page}{2}
@@ -85,18 +87,20 @@
 \section{Discussion}
 \input{../sections/discussion.tex}
 \section{Data Availability Statement}
-\section{To-Do List}
-\begin{itemize}
-    \item Sync changes to Fixed and Mixed functions in package
-    \item load package in R Markdown file and alude to it in paper
-    \item Amend code so that likelihood is split based on ybar and not uhat
-    \item Title page and abstract
-    \item Case study (background and results)?
-\end{itemize}
+The code that produced these results can be found \href{https://github.com/johnargentino/remarcs_methodological}{here}.
+% \section{To-Do List}
+% \begin{itemize}
+%     % \item Sync changes to Fixed and Mixed functions in package
+%     \item load package in R Markdown file and alude to it in paper
+%     \item Amend code so that likelihood is split based on ybar and not uhat
+%     \item Add standard errors to tables with rates of capture
+%     \item Add negative values to AR parameters
+%     \item Juxtapose bias on uhat and AR plus noise
+% \end{itemize}
 \bibliographystyle{plain}
 \bibliography{../mVAM_refs}
-\section{Appendix}
+% \section{Appendix}
 % \input{sections/appendix.tex}
-\listoftables
-\listoffigures
+% \listoftables
+% \listoffigures
 \end{document}

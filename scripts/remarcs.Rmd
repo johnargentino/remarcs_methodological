@@ -139,10 +139,10 @@ ggsave("../output/paper/figures/no_ar_var_effect.pdf", height = 6, width = 8)
 #Showing bias introduced in Modugno of fitting ARMA-Process with AR(1)
 ##Estimating phi
 ```{r}
-#Params
+#Param
 ar_bias_vara = 2
 veta_arbias = 1
-minutes = 30
+minutes = 1
 T_arbias = 1000
 
 
@@ -162,6 +162,7 @@ ar_bias_df = ar_bias_df %>%
 end = Sys.time()
 single_sim = as.numeric(end - start, units = "mins")
 sims_arbias = max((minutes %/% single_sim),1)
+sims_arbias = 10 ^(round(log10(sims_arbias),0))
 ar_bias_df = ar_bias_df %>%
   rowwise() %>%
   mutate(means = emp_exp_ar_vs_arma(phi, var_a, TT = T_arbias, sims = sims_arbias) %>% list())
@@ -312,7 +313,7 @@ b_1 = .25
 beta = c(b_0,b_t, b_1)
 true_pars = c(phi, theta, beta)
 tscovalpha = .05
-minutes = 30
+minutes = 1
 ```
 
 ```{r}
@@ -430,6 +431,7 @@ veps_remarcs = cbind(rmarcs$`Individual Variance`)
 end = Sys.time()
 single_sim = as.numeric(end - start, units = "mins")
 sims = max((minutes %/% single_sim),1)
+sims = 10 ^(round(log10(sims),0))
 
 for (sim in 1:(sims - 1)){
 n_t = rpois(n = TT, lambda = ll) + 1
@@ -593,7 +595,7 @@ arman_lambda = 5
 arman_T1 = 1000
 arman_T2 = 5000
 arman_alpha = .05
-minutes = 60
+minutes = 1
 ```
 
 ```{r}
@@ -620,6 +622,7 @@ conf_df = mutate(rowwise(conf_df),
 end = Sys.time()
 single_sim = as.numeric(end - start, units = "mins")
 arman_sims = max((minutes / 2) %/% single_sim, 1)
+arman_sims = 10 ^(round(log10(arman_sims),0))
 
 conf_df = mutate(rowwise(conf_df),
                  e_conf_l_3_2 = ifelse(abs(ar + ma) < tol,
@@ -718,7 +721,7 @@ fearma_beta = c(fearma_int,
                 fearma_slope,
                 fearma_x)
 fearma_alpha = .05
-minutes = 30
+minutes = 1
 ```
 
 
@@ -738,6 +741,8 @@ fearma_sim_df2 = mutate(rowwise(fearma_sim_df),
 end = Sys.time()
 single_sim = as.numeric(end - start, units = "mins")
 fearma_sims = max(minutes %/% single_sim, 1)
+fearma_sims = 10 ^(round(log10(fearma_sims),0))
+
 
 fearma_sim_df2 = mutate(rowwise(fearma_sim_df), 
                         emp_conf = arman_gls_em(sims = fearma_sims, 
@@ -861,6 +866,8 @@ are_repel = are_repel |>
 end = Sys.time()
 single_sim = as.numeric(end - start, units = "mins")
 are_sims = max(minutes %/% single_sim, 1)
+are_sims = 10 ^(round(log10(are_sims),0))
+
 are_repel = are_repel |>
   rowwise() |>
   mutate(are_mean = list(are_stability(sims = are_sims,
@@ -911,7 +918,7 @@ uar_cov = b_1
 uar_beta = c(are_int, are_slope, are_cov)
 uar_df = tibble(phi = seq(-.9,.9, by = .4))
 uar_lambda = 5
-minutes = .5
+minutes = 1
 ```
 
 ```{r}
@@ -932,6 +939,8 @@ uar_df = uar_df |>
 end = Sys.time()
 single_sim = as.numeric(end - start, units = "mins")
 uar_sims = max(1, minutes %/% single_sim)
+uar_sims = 10 ^(round(log10(uar_sims),0))
+
 uar_df = uar_df |>
   rowwise() |>
   mutate(results = (arman_gls_ms(sims = uar_sims,
@@ -999,6 +1008,8 @@ uma_df = uma_df |>
 end = Sys.time()
 single_sim = as.numeric(end - start, units = "mins")
 uma_sims = max(1, minutes %/% single_sim)
+uma_sims = 10 ^(round(log10(uma_sims),0))
+
 uma_df = uma_df |>
   rowwise() |>
   mutate(results = (arman_gls_ms(sims = uma_sims,
