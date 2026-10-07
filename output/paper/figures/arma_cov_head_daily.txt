@@ -1,5 +1,5 @@
 % latex table generated in R 4.4.2 by xtable 1.8-4 package
-% Mon Oct  5 11:51:44 2026
+% Wed Oct  7 10:16:16 2026
 \begin{tabular}{rrrr}
   \hline
 t & n & x & y \\ 

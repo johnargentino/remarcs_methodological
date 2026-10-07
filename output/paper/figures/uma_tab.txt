@@ -1,5 +1,5 @@
 % latex table generated in R 4.4.2 by xtable 1.8-4 package
-% Tue Sep  8 01:55:13 2026
+% Wed Oct  7 10:59:24 2026
 \begin{table}[ht]
 \centering
 \caption{Rates at which AR Parameter is Insignificant When True Parameter is Zero} 
@@ -8,7 +8,7 @@
   \hline
   \hline
 MA Parameter & -0.90 & -0.50 & -0.10 & 0.30 & 0.70 \\ 
-  AR Insig. Rate & 0.91 & 0.85 & 0.83 & 0.80 & 0.89 \\ 
+  AR Insig. Rate & 0.90 & 0.60 & 0.70 & 0.70 & 1.00 \\ 
    \hline
 \end{tabular}
 \end{table}

@@ -1,21 +1,21 @@
 # Fdb version 4
-["bibtex main"] 1791357069.98435 "main.aux" "main.bbl" "main" 1791357074.47854 0
+["bibtex main"] 1791357069.98435 "main.aux" "main.bbl" "main" 1791357336.71453 0
   "../mVAM_refs.bib" 1788852538.55988 60515 a2d84c18f1dd5bad0915bf6dc0d15945 ""
   "/usr/local/texlive/2026/texmf-dist/bibtex/bst/base/plain.bst" 1292289607 20613 bd3fbfa9f64872b81ac57a0dd2ed855f ""
-  "main.aux" 1791357074.03562 11024 4bef28560193560e2749917684fad4a1 "pdflatex"
+  "main.aux" 1791357335.88561 11024 4bef28560193560e2749917684fad4a1 "pdflatex"
   (generated)
   "main.bbl"
   "main.blg"
   (rewritten before read)
-["makeindex main.idx"] 1788939910.34754 "main.idx" "main.ind" "main" 1791357074.47838 0
-  "main.idx" 1791357072.16267 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
+["makeindex main.idx"] 1788939910.34754 "main.idx" "main.ind" "main" 1791357336.71428 0
+  "main.idx" 1791357333.22016 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
   (generated)
   "main.ilg"
   "main.ind"
   (rewritten before read)
-["pdflatex"] 1791357070.48882 "/Users/johnargentino/Desktop/research/mvam/are/lacey/remarcs_methodological/output/paper/main/main.tex" "main.pdf" "main" 1791357074.47868 0
-  "../figures/ar_bias.pdf" 1791190258.84574 6656 997ecfe48b5dcc348aee70b8cd841ca0 ""
-  "../figures/are.png" 1791190260.65532 1003995 a0ffb596f6adefdb50319eecc5cd9525 ""
+["pdflatex"] 1791357331.56552 "/Users/johnargentino/Desktop/research/mvam/are/lacey/remarcs_methodological/output/paper/main/main.tex" "main.pdf" "main" 1791357336.71469 0
+  "../figures/ar_bias.pdf" 1791357331.02706 6656 5d27e77ad96456512e1d32637048e0ed ""
+  "../figures/are.png" 1791357333.06147 1003995 a0ffb596f6adefdb50319eecc5cd9525 ""
   "../figures/are_tab.txt" 1788852538.54934 502 aa9af076386ada93732f78826373581d ""
   "../figures/arma_cov_df.txt" 1791190304.03133 613 dd84379db6af559ef2ea14d2ec2124cc ""
   "../figures/arma_cov_head.txt" 1791190304.04703 311 9a6846631f4c86fb1690fb743cb26b89 ""
@@ -277,10 +277,10 @@
   "/usr/local/texlive/2026/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1784616340 5573038 b99aad5e4898a9034e953632f940512b ""
   "/usr/local/texlive/2026/texmf-var/web2c/pdftex/pdflatex.fmt" 1774209607 3636776 dc5fa9b6b1453b9d196cd42edf876004 ""
   "/usr/local/texlive/2026/texmf.cnf" 1774209515 577 648cd9f92f9c0eac486f4c71c85cfbbe ""
-  "main.aux" 1791357074.03562 11024 4bef28560193560e2749917684fad4a1 "pdflatex"
+  "main.aux" 1791357335.88561 11024 4bef28560193560e2749917684fad4a1 "pdflatex"
   "main.bbl" 1791357070.47917 4008 ae1965e19619c5d52633db2c54fbe656 "bibtex main"
   "main.ind" 1788939910.43039 0 d41d8cd98f00b204e9800998ecf8427e "makeindex main.idx"
-  "main.out" 1791357074.03715 3217 8bb323413a93d2a32a90f8d3353c3be6 "pdflatex"
+  "main.out" 1791357335.88699 3217 8bb323413a93d2a32a90f8d3353c3be6 "pdflatex"
   "main.tex" 1791357066.10299 5189 e7ce6c044db595160da700eebf3255bb ""
   (generated)
   "main.aux"

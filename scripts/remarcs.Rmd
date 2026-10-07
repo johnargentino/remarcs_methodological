@@ -313,7 +313,7 @@ b_1 = .25
 beta = c(b_0,b_t, b_1)
 true_pars = c(phi, theta, beta)
 tscovalpha = .05
-minutes = 1
+minutes = 10
 ```
 
 ```{r}
@@ -595,7 +595,7 @@ arman_lambda = 5
 arman_T1 = 1000
 arman_T2 = 5000
 arman_alpha = .05
-minutes = 1
+minutes = 10
 ```
 
 ```{r}
@@ -721,7 +721,7 @@ fearma_beta = c(fearma_int,
                 fearma_slope,
                 fearma_x)
 fearma_alpha = .05
-minutes = 1
+minutes = 30
 ```
 
 
@@ -844,8 +844,8 @@ are_int = 50
 are_slope = b_t
 are_cov = b_1
 are_beta = c(are_int, are_slope, are_cov)
-are_repel = tibble(phi = seq(-9,.9, by = .4))
-minutes = 1
+are_repel = tibble(phi = seq(-.9,.9, by = .4))
+minutes = 10
 ```
 
 ```{r}
@@ -918,7 +918,7 @@ uar_cov = b_1
 uar_beta = c(are_int, are_slope, are_cov)
 uar_df = tibble(phi = seq(-.9,.9, by = .4))
 uar_lambda = 5
-minutes = 1
+minutes = 30
 ```
 
 ```{r}
@@ -987,7 +987,7 @@ uma_cov = b_1
 uma_beta = c(are_int, are_slope, are_cov)
 uma_df = tibble(theta = seq(-.9,.9, by = .4))
 uma_lambda = 5
-minutes = 1
+minutes = 30
 ```
 
 ```{r}
