@@ -29,7 +29,7 @@ f_Xt_sparse = function(n_vec){
   # Values (all ones)
   x <- rep(1, total_rows)
 
-  sparseMatrix(
+  Matrix::sparseMatrix(
     i = i,
     j = j,
     x = x,
@@ -327,10 +327,10 @@ emp_conf_l = function(phi, theta, var_eta, TT, sims, var_eps, lambda, alpha = .0
     test_u = arima.sim(model = list(ar = phi, ma = theta), n = TT, sd = sqrt(var_eta))
     eps = rnorm(n = sum(n_t), mean = 0, sd = sqrt(var_eps))
     y = rep(test_u, times = n_t) + eps
-    df = tibble(y = y, t = rep(1:TT, times = n_t))
+    df = tibble::tibble(y = y, t = rep(1:TT, times = n_t))
     df_w = df |>
-      group_by(t) |>
-      summarize(w = mean(y))
+      dplyr::group_by(t) |>
+      dplyr::summarize(w = mean(y))
     w = df_w$w
     x = y - rep(w, times = n_t)
     var_eps_hat = sum(x ^ 2) / (sum(n_t) - TT)
@@ -377,7 +377,7 @@ sim_arman_reg = function(n_t, beta, X_f, var_eps, ar, ma, veta){
   eps = rnorm(n = N, sd = sqrt(var_eps), mean = 0)
   X_t = f_Xt(n_t)
   y = as.vector(as.matrix(X_f) %*% beta + X_t %*% u + eps)
-  df = tibble(t = as.vector(X_t %*% 1:TT), y = y, u = as.vector(X_t %*% u)) %>% cbind(X_f)
+  df = tibble::tibble(t = as.vector(X_t %*% 1:TT), y = y, u = as.vector(X_t %*% u)) |> cbind(X_f)
   return(df)
 }
 
@@ -390,18 +390,18 @@ f_V = function(n_t){
     nrow = n_t[nt]
     if (nrow != 0){
       c_space = rep(1, nrow)
-      null_basis = Null((c_space))
+      null_basis = MASS::Null((c_space))
       ortho_basis <- qr.Q(qr(null_basis))
       V_list[[vlistcount]] = ortho_basis
       vlistcount = vlistcount + 1
     }
 
   }
-  V = bdiag(V_list)
+  V = Matrix::bdiag(V_list)
   VtV_list = Map(function(a, b) a %*% t(b), V_list, V_list)
-  VtV = bdiag(VtV_list)
-  VtV = Matrix(VtV, sparse = TRUE)
-  V = Matrix(V, sparse = TRUE)
+  VtV = Matrix::bdiag(VtV_list)
+  VtV = Matrix::Matrix(VtV, sparse = TRUE)
+  V = Matrix::Matrix(V, sparse = TRUE)
   return(V)
 }
 
@@ -413,10 +413,10 @@ f_u_hat_fixedn = function(n, T, residuals, Gamma, var_epsilon){
   G_eigen = eigen(Gamma)
   G_evec = G_eigen$vectors
   G_eval = G_eigen$values
-  X_t = Matrix(X_t, sparse = TRUE)
-  L = diag(G_eval) %>% Matrix(sparse = TRUE)
+  X_t = Matrix::Matrix(X_t, sparse = TRUE)
+  L = diag(G_eval) |> Matrix::Matrix(sparse = TRUE)
   D_inv = diag(1 / (n * G_eval + var_epsilon))
-  D_inv = Matrix(D_inv, sparse = TRUE)
+  D_inv = Matrix::Matrix(D_inv, sparse = TRUE)
   # VVt = V %*% t(V) / var_eps_hat
   u1 = G_evec %*% L %*% D_inv %*% t(G_evec) %*% t(X_t) %*% residuals
   # u2 = G_hat %*% t(X_t) %*% VVt %*% residuals(me) / var_eps_hat
@@ -433,8 +433,8 @@ f_u_hat = function(n_t, residuals, Gamma, var_epsilon){
 
   NGN_evec = NGN_eigen$vectors
   NGN_eval = NGN_eigen$values
-  X_t = Matrix(X_t, sparse = TRUE)
-  L = diag(NGN_eval + var_eps_hat) %>% Matrix(sparse = TRUE)
+  X_t = Matrix::Matrix(X_t, sparse = TRUE)
+  L = diag(NGN_eval + var_eps_hat) |> Matrix::Matrix(sparse = TRUE)
 
   # VVt = V %*% t(V) / var_eps_hat
   u1 = Gamma %*% sqN %*% NGN_evec %*% solve(L) %*%  t(NGN_evec) %*% sqN
@@ -442,7 +442,7 @@ f_u_hat = function(n_t, residuals, Gamma, var_epsilon){
   u1 = u1 %*%  residuals[n_t != 0]
   # u2 = G_hat %*% t(X_t) %*% VVt %*% residuals(me) / var_eps_hat
 
-  return(u1 %>% as.vector())
+  return(u1 |> as.vector())
 }
 arman_gls_em = function(sims, TT, ar, ma, veta, veps, beta, alpha = .05, lambda_n = 20){
 
@@ -472,7 +472,7 @@ arman_gls_em = function(sims, TT, ar, ma, veta, veps, beta, alpha = .05, lambda_
     var_b = fwd_est[2]
     var_a = var_eps * mean(n_t[n_t != 0]^(-1))
 
-    X_f = tibble(intercept = 1, day = as.vector(X_t %*% (1:TT)), x = rbinom(n = sum(n_t), size = 1, prob = .5))
+    X_f = tibble::tibble(intercept = 1, day = as.vector(X_t %*% (1:TT)), x = rbinom(n = sum(n_t), size = 1, prob = .5))
     X_f_m = as.matrix(X_f)
 
 
@@ -506,7 +506,7 @@ arman_gls_em = function(sims, TT, ar, ma, veta, veps, beta, alpha = .05, lambda_
     chistat = t(vec_est[1:2] - vec_true[1:2]) %*% solve(S_l_plot[1:2,1:2]) %*% (vec_est[1:2] - vec_true[1:2])
 
     xi2chi2 = chistat |> as.numeric()
-    xi2captured_track_gls = xi2captured_track_gls %>% append(xi2chi2)
+    xi2captured_track_gls = xi2captured_track_gls |> append(xi2chi2)
 
     beta_cutoff = qchisq(p = 1 - alpha, df = length(beta))
 
@@ -523,9 +523,9 @@ arman_gls_em = function(sims, TT, ar, ma, veta, veps, beta, alpha = .05, lambda_
 
     chistat_beta3 = t(beta_hat - beta) %*% solve(var_beta) %*% (beta_hat - beta)
 
-    chistat_beta3 = chistat_beta3 %>% as.numeric()
+    chistat_beta3 = chistat_beta3 |> as.numeric()
 
-    chi_beta_track3_gls = chi_beta_track3_gls %>% append(chistat_beta3)
+    chi_beta_track3_gls = chi_beta_track3_gls |> append(chistat_beta3)
 
 
     sim_end = Sys.time()
@@ -564,10 +564,10 @@ emp_exp_ar_vs_arma = function(phi, v_a, TT, sims){
     veta_mean_ar = append(veta_mean_ar, veta_hat_ar)
     veta_mean_arma = append(veta_mean_arma, veta_hat_arma)
   }
-  return(c(phi_mean_ar = phi_mean_ar %>% mean(),
-           phi_mean_arma = phi_mean_arma %>% mean(),
-           veta_mean_ar = veta_mean_ar %>% mean(),
-           veta_mean_arma = veta_mean_arma %>% mean()))
+  return(c(phi_mean_ar = phi_mean_ar |> mean(),
+           phi_mean_arma = phi_mean_arma |> mean(),
+           veta_mean_ar = veta_mean_ar |> mean(),
+           veta_mean_arma = veta_mean_arma |> mean()))
 }
 
 G_theta = function(ar, ma, veta, ma_b, v_b, veps, m_hat){
@@ -592,10 +592,10 @@ are = function(df, ff, tol = .1){
 
   df$resid = residuals(linmod)
   df_t = df |>
-    group_by(t) |>
-    summarize(mean_resid = mean(resid), n = n())
-  df_t = left_join(
-    tibble(t = 1:max(df_t$t)),
+    dplyr::group_by(t) |>
+    dplyr::summarize(mean_resid = mean(resid), n = dplyr::n())
+  df_t = dplyr::left_join(
+    tibble::tibble(t = 1:max(df_t$t)),
     df_t
   )
   u_hat = df_t$mean_resid
@@ -635,7 +635,7 @@ are = function(df, ff, tol = .1){
       chol() |>
       chol2inv()
     Oinvresid = (df$resid / var_eps_hat) - var_eps_hat ^ (-2) * (X_t %*% (Gplus_inv %*% (Matrix::t(X_t) %*% df$resid)))
-    u_hat = (G_hat %*% (Matrix::t(X_t) %*% Oinvresid)) %>% as.vector()
+    u_hat = (G_hat %*% (Matrix::t(X_t) %*% Oinvresid)) |> as.vector()
     arma = arima(u_hat, order = c(1,0,0))
     phi_hat = arma$coef["ar1"]
     var_eta_hat = arma$sigma2
@@ -848,7 +848,7 @@ are_stability = function(sims,
     var_b = fwd_est[2]
     var_a = var_eps * mean(n_t[n_t != 0]^(-1))
 
-    X_f = tibble(intercept = 1, day = as.vector(X_t %*% (1:TT)), x = rbinom(n = sum(n_t), size = 1, prob = .5))
+    X_f = tibble::tibble(intercept = 1, day = as.vector(X_t %*% (1:TT)), x = rbinom(n = sum(n_t), size = 1, prob = .5))
     X_f_m = as.matrix(X_f)
 
 
@@ -882,7 +882,7 @@ are_stability = function(sims,
     Gplus_inv <- Gplus_inv_calculated
 
     Oinvresid = (test$resid / veps) - veps ^ (-2) * (X_t %*% (Gplus_inv %*% (Matrix::t(X_t) %*% test$resid)))
-    u_hat = (G_hat %*% (Matrix::t(X_t) %*% Oinvresid)) %>% as.vector()
+    u_hat = (G_hat %*% (Matrix::t(X_t) %*% Oinvresid)) |> as.vector()
 
     # SAFE ARIMA ESTIMATION
     arma_hat <- tryCatch({
@@ -948,7 +948,7 @@ arman_gls_ms = function(sims, TT, ar, ma, veta, veps, beta, alpha = .05, lambda_
     var_b = fwd_est[2]
     var_a = var_eps * mean(n_t[n_t != 0]^(-1))
 
-    X_f = tibble(intercept = 1, day = as.vector(X_t %*% (1:TT)), x = rbinom(n = sum(n_t), size = 1, prob = .5))
+    X_f = tibble::tibble(intercept = 1, day = as.vector(X_t %*% (1:TT)), x = rbinom(n = sum(n_t), size = 1, prob = .5))
     X_f_m = as.matrix(X_f)
 
 
@@ -1012,12 +1012,12 @@ RCSfixed.fit <- function(mod, dat, resp_var, tol = 0.1, max_updates = 10)
   dat$resid = resid
 
   df_w = dat |>
-    group_by(t) |>
-    summarize(w = mean(resid), S2 = var(resid), n = n())
+    dplyr::group_by(t) |>
+    dplyr::summarize(w = mean(resid), S2 = var(resid), n = dplyr::n())
 
 
 
-  df_w = left_join(tibble(t = 1:max(df_w$t)), df_w, by = "t")
+  df_w = dplyr::left_join(tibble::tibble(t = 1:max(df_w$t)), df_w, by = "t")
   # acf(df_w$w, na.action = na.pass, main = "ACF of average residuals")
 
   #Generate initial ARMA(1,1) estimates
@@ -1027,7 +1027,7 @@ RCSfixed.fit <- function(mod, dat, resp_var, tol = 0.1, max_updates = 10)
   var_b_hat = arma_w$sigma2
 
 
-  df_w$n = replace_na(df_w$n, 0)
+  df_w$n = tidyr::replace_na(df_w$n, 0)
   df_w_initial = df_w
   T_len = nrow(df_w)
 
@@ -1045,7 +1045,7 @@ RCSfixed.fit <- function(mod, dat, resp_var, tol = 0.1, max_updates = 10)
   # T = length(n_t)
   N = diag(n_t)
   df_w_veps_est = df_w |>
-    filter(n > 1)
+    dplyr::filter(n > 1)
   var_eps_hat = sum((df_w_veps_est$n - 1) * df_w_veps_est$S2) / (sum(df_w_veps_est$n) - length(df_w_veps_est$n))
   var_a_hat = var_eps_hat * mean((n_t[n_t != 0])^{-1})
   wong_est = wong(ar_hat=phi_hat, ma_b_hat=theta_b_hat,v_b_hat=var_b_hat,v_a_hat=var_a_hat)
@@ -1060,7 +1060,7 @@ RCSfixed.fit <- function(mod, dat, resp_var, tol = 0.1, max_updates = 10)
     chol() |>
     chol2inv()
   Oinvresid = (dat$resid / var_eps_hat) - var_eps_hat ^ (-2) * (X_t %*% (Gplus_inv %*% (Matrix::t(X_t) %*% dat$resid)))
-  u_hat = (G_hat %*% (Matrix::t(X_t) %*% Oinvresid)) %>% as.vector()
+  u_hat = (G_hat %*% (Matrix::t(X_t) %*% Oinvresid)) |> as.vector()
   l2 = -T_len/2 * log(2 * pi) - T_len / 2 * log(var_eta_hat) + 1 / 2 * log(1 - phi_hat ^ 2) - 1 / 2 * t(u_hat) %*% G_inv %*% u_hat
   l_new = l2 + l1
   l_old = l_new + 2 * tol
@@ -1085,11 +1085,11 @@ RCSfixed.fit <- function(mod, dat, resp_var, tol = 0.1, max_updates = 10)
     dat$resid = as.vector(dat[[resp_var]]- X_f_m %*% beta_hat)
 
     df_w = dat |>
-      group_by(t) |>
-      summarize(w = mean(resid), S2 = var(resid), n = n())
+      dplyr::group_by(t) |>
+      dplyr::summarize(w = mean(resid), S2 = var(resid), n = dplyr::n())
 
-    df_w = left_join(tibble(t = 1:max(df_w$t)), df_w, by = "t")
-    df_w$n = replace_na(df_w$n, 0)
+    df_w = dplyr::left_join(tibble::tibble(t = 1:max(df_w$t)), df_w, by = "t")
+    df_w$n = tidyr::replace_na(df_w$n, 0)
 
     arma_w = arima(df_w$w, order = c(1,0,1), include.mean = FALSE, method = "ML")
     phi_hat = arma_w$coef["ar1"]
@@ -1098,7 +1098,7 @@ RCSfixed.fit <- function(mod, dat, resp_var, tol = 0.1, max_updates = 10)
 
 
     df_w_veps_est = df_w |>
-      filter(n > 1)
+      dplyr::filter(n > 1)
 
     var_eps_hat = sum((df_w_veps_est$n - 1) * df_w_veps_est$S2) / (sum(df_w_veps_est$n) - length(df_w_veps_est$n))
     var_a_hat = var_eps_hat * mean((n_t[n_t != 0])^{-1})
@@ -1116,7 +1116,7 @@ RCSfixed.fit <- function(mod, dat, resp_var, tol = 0.1, max_updates = 10)
       chol() |>
       chol2inv()
     Oinvresid = (dat$resid / var_eps_hat) - var_eps_hat ^ (-2) * (X_t %*% (Gplus_inv %*% (Matrix::t(X_t) %*% dat$resid)))
-    u_hat = (G_hat %*% (Matrix::t(X_t) %*% Oinvresid)) %>% as.vector()
+    u_hat = (G_hat %*% (Matrix::t(X_t) %*% Oinvresid)) |> as.vector()
 
     l2 = -T_len/2 * log(2 * pi) - T_len / 2 * log(var_eta_hat) + 1 / 2 * log(1 - phi_hat ^ 2) - 1 / 2 * t(u_hat) %*% G_inv %*% u_hat
 
@@ -1220,7 +1220,7 @@ RCSmixed.fit <- function(mod, dat, resp_var, tol = 0.1, max_updates = 10, arma_o
   y = dat[[resp_var]]
   resid <- stats::residuals(mod)
   dat$resid <- resid
-  var_re = sigma(mod)^2 * tcrossprod(getME(mod, "Lambda"))
+  var_re = sigma(mod)^2 * tcrossprod(lme4::getME(mod, "Lambda"))
 
   # --------------------------------------------------------------------------
   # Aggregate residuals
@@ -1768,8 +1768,8 @@ RCSmixed.fit <- function(mod, dat, resp_var, tol = 0.1, max_updates = 10, arma_o
   )
 
 
-  m1 <- nlevels(getME(mod, "flist")$adm1)
-  m2 <- nlevels(getME(mod, "flist")$`adm1:adm2`)
+  m1 <- nlevels(lme4::getME(mod, "flist")$adm1)
+  m2 <- nlevels(lme4::getME(mod, "flist")$`adm1:adm2`)
 
   ranef_final = ranef(mod)
   ranef_final$adm1 = b_hat[(m2 + 1):(m1 + m2)]
@@ -1797,9 +1797,9 @@ RCSmixed.fit <- function(mod, dat, resp_var, tol = 0.1, max_updates = 10, arma_o
   dat$final_resid = dat[[resp_var]] - fitted.mat[,2] - fitted.mat[,3]
   final_resid_daily = dat |>
     group_by(t) |>
-    summarize(mean_resid = mean(final_resid))
+    dplyr::summarize(mean_resid = mean(final_resid))
 
-  final_resid_daily = left_join(tibble(t = 1:max(final_resid_daily$t)), final_resid_daily)
+  final_resid_daily = dplyr::left_join(tibble::tibble(t = 1:max(final_resid_daily$t)), final_resid_daily)
 
   print(acf(final_resid_daily$mean_resid,na.action = na.pass, main = "ACF of Final Aggregated Residuals Aggregated"))
 

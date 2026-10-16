@@ -512,10 +512,11 @@ ts_cov_df = tibble(Parameter = c("phi",
                             "Intercept", 
                             "Slope",
                             "Covariate"),
-                   `True Parameter Value` = round(c(phi, theta, beta[1], beta[2], beta[3]), digits = 2),
-                   `Estimate Mean` = round(rowMeans(estimates), digits = 2), 
-                   `Rate of Estimate Significance` = round(rowMeans(2 * (1 - pnorm(abs(zscores))) < .05), digits = 2),
-                  `Rate of Parameter Capture` = round(rowMeans(captured), digits = 2)
+                   `True Parameter Value` = round(c(phi, theta, beta[1], beta[2], beta[3]), digits = 3),
+                   `Estimate Mean` = round(rowMeans(estimates), digits = 3), 
+                   `Std. Error` = round(sqrt(rowMeans((estimates - rowMeans(estimates)) ^ 2) * ncol(estimates) / (ncol(estimates) - 1)) / sqrt(ncol(estimates)),3),
+                   `Rate of Estimate Significance` = round(rowMeans(2 * (1 - pnorm(abs(zscores))) < .05), digits = 3),
+                  `Rate of Parameter Capture` = round(rowMeans(captured), digits = 3)
 )
 
 remarcs_df = tibble(Parameter = c("phi", 
@@ -523,10 +524,11 @@ remarcs_df = tibble(Parameter = c("phi",
                             "Intercept", 
                             "Slope",
                             "Covariate"),
-                   `True Parameter Value` = round(c(phi, theta, beta[1], beta[2], beta[3]), digits = 2),
-                   `Estimate Mean` = round(rowMeans(estimates_remarcs), digits = 2),
+                   `True Parameter Value` = round(c(phi, theta, beta[1], beta[2], beta[3]), digits = 3),
+                   `Estimate Mean` = round(rowMeans(estimates_remarcs), digits = 3),
+                   `Std. Error` = round(sqrt(rowMeans((estimates_remarcs - rowMeans(estimates_remarcs)) ^ 2) * ncol(estimates_remarcs) / (ncol(estimates_remarcs) - 1)) / sqrt(ncol(estimates_remarcs)),3),
                    
-                   `Rate of Estimate Significance` = round(rowMeans(2 * (1 - pnorm(abs(zscores_remarcs))) < .05), digits = 2),
+                   `Rate of Estimate Significance` = round(rowMeans(2 * (1 - pnorm(abs(zscores_remarcs))) < .05), digits = 3),
                   `Rate of Parameter Capture` = round(rowMeans(captured_remarcs), digits = 2)
 )
 
@@ -1042,7 +1044,17 @@ print(uma_tab,
       caption.placement = "top")
 ```
 #Honduras
-
+```{r}
+load("../input/Honduras_8Oct.RData")
+# me.fcs1 = lme4::lmer(formula = "FCS ~ Assist + HHEduMax + PrimaryInc + 
+#     RuralUrban + HHHSex + HHSize + RESPAge + t + (1 | ADM1_NAME)", data = hnd.fcs)
+# 
+# me.fcs2 = lme4::lmer(formula = "FCS ~ ADM1_NAME + Assist + HHEduMax + PrimaryInc + 
+#     RuralUrban + HHHSex + HHSize + RESPAge + t + (1 | ADM1_NAME:ADM2_NAME)", data = hnd.fcs)
+# anova(me.fcs1, me.fcs2)
+# mod.fcs = me.fcs2
+hnd_remarcs = RCSfixed.fit(mod = mod.fcs, dat = hnd.fcs, resp_var = "FCS")
+```
 
 
 ```{r}

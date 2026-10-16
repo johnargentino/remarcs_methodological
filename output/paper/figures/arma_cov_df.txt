@@ -1,15 +1,16 @@
 % latex table generated in R 4.4.2 by xtable 1.8-4 package
-% Wed Oct  7 10:16:16 2026
+% Thu Oct  8 17:56:42 2026
 \begin{table}[ht]
 \centering
 \begin{tabular}{rlllll}
   \hline
  & phi & theta & Intercept & Slope & Covariate \\ 
   \hline
-True Parameter Value &  0.90 &  0.00 & 43.00 &  0.00 &  0.25 \\ 
-  Estimate Mean &  0.89 & -0.59 & 43.00 &  0.00 &  0.25 \\ 
-  Rate of Estimate Significance & 1.0 & 1.0 & 1.0 & 0.2 & 0.2 \\ 
-  Rate of Parameter Capture & 1.0 & 0.0 & 0.8 & 0.9 & 1.0 \\ 
+True Parameter Value &  0.900 &  0.000 & 43.000 & -0.001 &  0.250 \\ 
+  Estimate Mean &  0.895 & -0.590 & 43.015 & -0.001 &  0.229 \\ 
+  Std. Error & 0.002 & 0.004 & 0.065 & 0.000 & 0.038 \\ 
+  Rate of Estimate Significance & 1.00 & 1.00 & 1.00 & 0.20 & 0.18 \\ 
+  Rate of Parameter Capture & 0.96 & 0.00 & 0.93 & 0.95 & 0.92 \\ 
    \hline
 \end{tabular}
 \caption{Simulation Results for Aggregating Data and Fitting as a Time Series with Covariates} 
